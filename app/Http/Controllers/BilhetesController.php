@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bilhete;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Cast\Object_;
 
-class Recibo extends Controller
+class BilhetesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $sessao, \stdClass $payload)
     {
-        //
+
+        return view('bilhetes.index')->with(['sessao' => $sessao, 'payload' => $payload]);
     }
 
     /**
@@ -19,7 +22,7 @@ class Recibo extends Controller
      */
     public function create()
     {
-        //
+        $bilhetes[] = new Bilhete();//cria o array com todos os bilhetes para o utilizador assim que ele confirma os dados de pagamento
     }
 
     /**

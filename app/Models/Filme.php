@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Lugare extends Model
+class Filme extends Model
 {
     use HasFactory;
     public $timestamps = false;
 
-    protected $fillable = ['sala_id', 'fila', 'posicao', 'custom', 'deleted_at'];
-
+    protected $fillable = ['id','titulo', 'genero_code', 'ano', 'cartaz_url', 'sumario','trailer_url','custom'];
 }
