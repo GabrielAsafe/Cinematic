@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
     <div class="container">
         <div style="border-style: solid; margin-left: 10px;">
             <iframe src="{{ $filme->trailer_url }}"></iframe>

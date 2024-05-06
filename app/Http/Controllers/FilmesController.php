@@ -41,9 +41,9 @@ class FilmesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Filme $filmes)
+    public function show(Filme $filme)
     {
-        return view('filmes.show')->with($filmes);
+        return view('filmes.show', compact('filme'));
     }
 
     /**

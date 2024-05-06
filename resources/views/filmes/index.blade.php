@@ -23,7 +23,7 @@
                         @foreach ($filmes as $filme)
                             <div class="col-sm-4">
                                 <div class="card" style="margin: 10px">
-                                    <div class="card-header sensor" style="text-align:center;"> <a href="{{ route('filmes.show', ['filme' => $filme]) }}">{{ $filme->titulo }}</a></div>
+                                    <div class="card-header sensor" style="text-align:center;"> <a href="{{ route('filmes.show', ['id' => $filme]) }}">{{ $filme->titulo }}</a></div>
 
                                     <div class="card-body" style="text-align:center;">
                                         <img src="cinematic/storage/app/public/cartazes/{{ $filme->cartaz_url }}" alt="{{ $filme->cartaz_url }}">
