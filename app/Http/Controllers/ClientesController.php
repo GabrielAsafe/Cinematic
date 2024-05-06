@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Filme;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
-class FilmeController extends Controller
+class ClientesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index() : View
+    public function index()
     {
-        $filmes = Filme::all();
-        return view('filmes.index')->with('filmes', $filmes);
+        //
     }
 
     /**
@@ -38,7 +35,7 @@ class FilmeController extends Controller
      */
     public function show(string $id)
     {
-        return "tetas";
+        //
     }
 
     /**
@@ -46,7 +43,7 @@ class FilmeController extends Controller
      */
     public function edit(string $id)
     {
-        return "mais tetas";
+        //
     }
 
     /**

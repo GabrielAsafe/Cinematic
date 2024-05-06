@@ -2,30 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Filme;
-use App\Models\Sessao;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
-use stdClass;
 
-class SessoesController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $filme) :View
+    public function index()
     {
-
-
-
-        $id =  $filme->all();
-
-        $sessoes = Sessao::where('filme_id',$id)->get();
-
-
-
-
-        return view('sessoes.index')->with(['sessoes'=> $sessoes]);
+        return view('users.index');
     }
 
     /**

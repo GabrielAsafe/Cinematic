@@ -8,7 +8,7 @@
     <title>Document</title> <!--inserir uma variável para o nome do documento {{ '$zzzzz->classname' }}-->
 </head>
 <body>
-<a href="#">cadastre-se ou faça Login</a> <!--loging do utilizador para podermos começar as validações-->
+<a href="{{route('users.index')}}">cadastre-se ou faça Login</a> <!--loging do utilizador para podermos começar as validações-->
 
 <br><br>
 <table>
