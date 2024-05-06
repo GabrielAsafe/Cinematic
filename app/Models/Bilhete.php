@@ -27,11 +27,11 @@ class Bilhete extends Model
 
     public function sessoes(): BelongsTo
     {
-        return $this->belongsTo(Sessoe::class);
+        return $this->belongsTo(Sessao::class);
     }
 
     public function lugare(): BelongsTo
     {
-        return $this->belongsTo(Lugare::class);
+        return $this->belongsTo(Lugar::class);
     }
 }

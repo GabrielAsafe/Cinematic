@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <a href="#">cadastre-se ou faça Login</a> <!--loging do utilizador para podermos começar as validações-->
+<a href="{{route('users.index')}}">cadastre-se ou faça Login</a> <!--loging do utilizador para podermos começar as validações-->
 
     <div class="container">
         <div class="row">
