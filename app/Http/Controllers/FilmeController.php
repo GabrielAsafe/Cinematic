@@ -22,7 +22,11 @@ class FilmeController extends Controller
      */
     public function create()
     {
-        //
+
+        $filme = new Filme();
+
+
+        return view('filmes.create', compact('filme'));
     }
 
     /**
@@ -38,7 +42,8 @@ class FilmeController extends Controller
      */
     public function show(string $id)
     {
-        return "tetas";
+        $filme = Filme::findOrFail($id);
+        return view('filmes.show', compact('filme'));
     }
 
     /**
