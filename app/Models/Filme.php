@@ -10,5 +10,5 @@ class Filme extends Model
     use HasFactory;
     public $timestamps = false;
 
-    protected $fillable = ['id','titulo', 'genero_code', 'ano', 'cartaz_url', 'sumario','trailer_url','custom'];
+    protected $fillable = ['titulo', 'genero_code', 'ano', 'cartaz_url', 'sumario','trailer_url'];
 }

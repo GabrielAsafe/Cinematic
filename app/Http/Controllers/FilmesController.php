@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Filme;
+use App\Models\Genero;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Log;
@@ -26,7 +27,9 @@ class FilmesController extends Controller
     public function create()
     {
         $newFilme = new Filme();
-        return view('filmes.create')->with($newFilme);
+        $generos = Genero::all();
+
+        return view('filmes.create', compact('newFilme', 'generos'));
     }
 
     /**
@@ -36,6 +39,7 @@ class FilmesController extends Controller
     {
         Filme::create($request->all());
         return redirect()->route('filmes.index');
+
     }
 
     /**
@@ -49,26 +53,27 @@ class FilmesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Filme $filmes)
+    public function edit(Filme $filme)
     {
-        return view('filmes.edit')->with($filmes);
+        $generos = Genero::all();
+        return view('filmes.edit', compact('filme', 'generos'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Filme $filmes)
+    public function update(Request $request, Filme $filme)
     {
-        $filmes->update($request->all());
+        $filme->update($request->all());
         return redirect()->route('filmes.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Filme $filmes)
+    public function destroy(Filme $filme)
     {
-        $filmes->delete();
+        $filme->delete();
         return redirect()->route('filmes.index');
     }
 }
