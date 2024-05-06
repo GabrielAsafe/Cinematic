@@ -26,10 +26,10 @@ class FilmesController extends Controller
      */
     public function create()
     {
-        $newFilme = new Filme();
+        $filme = new Filme();
         $generos = Genero::all();
 
-        return view('filmes.create', compact('newFilme', 'generos'));
+        return view('filmes.create', compact('filme', 'generos'));
     }
 
     /**
@@ -37,7 +37,16 @@ class FilmesController extends Controller
      */
     public function store(Request $request)
     {
-        Filme::create($request->all());
+        $validated = $request->validate([
+            'titulo' => 'required',
+            'genero_code' => 'required|exists:generos,code',
+            'ano' => 'required',
+            'cartaz_url' => 'required',
+            'sumario' => 'required',
+            'trailer_url' => 'required'
+            ]);
+
+        Filme::create($validated);
         return redirect()->route('filmes.index');
 
     }
