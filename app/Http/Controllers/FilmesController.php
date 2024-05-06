@@ -43,11 +43,7 @@ class FilmesController extends Controller
      */
     public function show(Filme $filmes)
     {
-<<<<<<< HEAD:app/Http/Controllers/FilmesController.php
-        //
-=======
         return view('filmes.show')->with($filmes);
->>>>>>> 5e06171652f2b4be589958b2f78351db9cddfeb7:app/Http/Controllers/FilmeController.php
     }
 
     /**
@@ -55,11 +51,7 @@ class FilmesController extends Controller
      */
     public function edit(Filme $filmes)
     {
-<<<<<<< HEAD:app/Http/Controllers/FilmesController.php
-        //
-=======
         return view('filmes.edit')->with($filmes);
->>>>>>> 5e06171652f2b4be589958b2f78351db9cddfeb7:app/Http/Controllers/FilmeController.php
     }
 
     /**
