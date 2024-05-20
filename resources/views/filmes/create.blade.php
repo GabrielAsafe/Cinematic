@@ -1,25 +1,24 @@
-<!doctype html>
-<html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
+@extends('template.layout')
 
-<body>
-    <form action="{{ route('filmes.store') }}" method="post">
+@section('titulo', 'Novo Filme')
+
+@section('subtitulo')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">Gestão</li>
+        <li class="breadcrumb-item">Curricular</li>
+        <li class="breadcrumb-item"><a href="{{ route('filmes.index') }}">Filmes</a></li>
+        <li class="breadcrumb-item active">Criar Novo</li>
+    </ol>
+@endsection
+
+@section('main')
+    <form method="POST" action="{{ route('filmes.store') }}">
         @csrf
         @include('filmes.shared')
-        <div>
-            <button type="submit" name="ok">Guardar novo curso</button>
+        <div class="my-4 d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary" name="ok">Guardar novo filme</button>
+            <a href="{{ route('filmes.index') }}" class="btn btn-secondary ms-3">Cancelar</a>
         </div>
     </form>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
-</body>
-
-</html>
+@endsection

@@ -10,193 +10,342 @@ use Illuminate\Support\Str;
 
 class UsersSeeder extends Seeder
 {
+    private $total_users_docentes_dei = 100;
+    private $total_users_docentes_outros = 20;
+    private $total_outros_users = 20;
+    private $total_users_alunos = 800;
     private $photoPath = 'public/fotos';
-
-    private $typesOfUsers =  ['A', 'F', 'C'];
-    private $numberOfUsers = [6, 15, 500];
-    private $numberOfSoftDeletedUsers = [1, 3, 45];
-    private $numberOfBloqueado = [1, 3, 30];
     private $files_M = [];
     private $files_F = [];
-    private $used_emails = [];
-    private $generos = [];
-
-    public static $allUsers = [];
-    public static $allClientes = [];
-
+    private $files_X = [];
+    private $used_emails = [
+        'marco.monteiro@ipleiria.pt',
+        'eduardo.silva@ipleiria.pt',
+        'eugenia.bernardino@ipleiria.pt',
+        'telmo.marques@ipleiria.pt'
+    ];
+    private $cursos = [];
+    private $outros_departamentos = [];
 
     public function run()
     {
-        $this->command->table(['Users table seeder notice'], [
-            ['As fotos serão armazenadas na path ' . storage_path('app/' . $this->photoPath)]
-        ]);
+        $this->command->line('--- > Criar Users');
 
-        $this->limparFicheirosFotos();
-        $this->preencherNomesFicheirosFotos();
+        DB::table('docentes_disciplinas')->truncate();
+        DB::table('alunos_disciplinas')->truncate();
+        DB::table('docentes')->truncate();
+        DB::table('alunos')->truncate();
+        DB::table('users')->truncate();
 
-        $faker = \Faker\Factory::create('pt_PT');
-
-        $variosUsers = [];
-        $totalGuardados = 0;
-        $totalParaGuardar = 0;
-        foreach ($this->typesOfUsers as $idxTipo => $tipoUser) {
-            $totalParaGuardar += $this->numberOfUsers[$idxTipo];
-        }
-        foreach ($this->typesOfUsers as $idxTipo => $tipoUser) {
-            $totalUsers = $this->numberOfUsers[$idxTipo];
-            for ($i = 0; $i < $totalUsers; $i++) {
-                $newUser = $this->newFakerUser($faker, $tipoUser);
-                $variosUsers[] = $newUser;
-                if (count($variosUsers) >= 50) {
-                    $totalGuardados += count($variosUsers);
-                    $this->command->info("Guardados $totalGuardados/$totalParaGuardar users na base de dados");
-                    DB::table('users')->insert($variosUsers);
-                    $variosUsers = [];
-                }
-            }
-        }
-        if (count($variosUsers) > 0) {
-            $totalGuardados += count($variosUsers);
-            $this->command->info("Guardados $totalGuardados/$totalParaGuardar users na base de dados");
-            DB::table('users')->insert($variosUsers);
-        }
-        UsersSeeder::$allUsers['A'] = DB::table('users')->where('tipo', 'A')->pluck('email', 'id');
-        UsersSeeder::$allUsers['F'] = DB::table('users')->where('tipo', 'F')->pluck('email', 'id');
-        UsersSeeder::$allUsers['C'] = DB::table('users')->where('tipo', 'C')->pluck('email', 'id');
-
-        $this->fillGenders(UsersSeeder::$allUsers['A']);
-        $this->fillGenders(UsersSeeder::$allUsers['F']);
-        $this->fillGenders(UsersSeeder::$allUsers['C']);
-
-        shuffle($this->files_M);
-        shuffle($this->files_F);
-
-        UsersSeeder::$allUsers['A'] = UsersSeeder::$allUsers['A']->shuffle();
-        UsersSeeder::$allUsers['F'] = UsersSeeder::$allUsers['F']->shuffle();
-        UsersSeeder::$allUsers['C'] = UsersSeeder::$allUsers['C']->shuffle();
-
-        $this->copiarFotos(UsersSeeder::$allUsers['A']);
-        $this->copiarFotos(UsersSeeder::$allUsers['F']);
-        $this->copiarFotos(UsersSeeder::$allUsers['C']);
-
-        $idsToBlock = [];
-        $idsToDelete = [];
-        foreach ($this->typesOfUsers as $idxTipo => $tipoUser) {
-            $usersToBlock = $this->numberOfBloqueado[$idxTipo];
-            $usersToDelete = $this->numberOfSoftDeletedUsers[$idxTipo];
-            foreach (UsersSeeder::$allUsers[$tipoUser] as $user) {
-                if ($usersToBlock > 0) {
-                    $idsToBlock[] = $user['id'];
-                    $usersToBlock--;
-                } elseif (($usersToBlock == 0) && ($usersToDelete > 0)) {
-                    $idsToDelete[] = $user['id'];
-                    $usersToDelete--;
-                }
-                if (($usersToBlock == 0) && ($usersToDelete == 0)) {
-                    continue;
-                }
-            }
-        }
-
-        if (count($idsToBlock) > 0) {
-            $this->command->info("Bloquear " . count($idsToBlock) . " users na base de dados");
-            DB::table('users')->whereIn('id', $idsToBlock)->update(['bloqueado' => 1]);
-        }
-        if (count($idsToDelete) > 0) {
-            $this->command->info("Soft Delete " . count($idsToDelete) . " users na base de dados");
-            DB::table('users')->whereNotIn('id', $idsToDelete)->update(['deleted_at' => null]);
-        }
-
-
-        UsersSeeder::$allClientes = DB::table('users')->where('tipo', 'C')->pluck('id', 'email');
-
-        $totalGuardados = 0;
-        $totalParaGuardar = UsersSeeder::$allClientes->count();
-        $array_clientes = [];
-        foreach (UsersSeeder::$allClientes as $email => $id_cliente) {
-            $array_clientes[] = $this->newFakerCliente($faker, $id_cliente, $email);
-            if (count($array_clientes) >= 50) {
-                $totalGuardados += count($array_clientes);
-                $this->command->info("Guardados $totalGuardados/$totalParaGuardar clientes na base de dados");
-                DB::table('clientes')->insert($array_clientes);
-                $array_clientes = [];
-            }
-        }
-        if (count($array_clientes) > 0) {
-            $totalGuardados += count($array_clientes);
-            $this->command->info("Guardados $totalGuardados/$totalParaGuardar clientes na base de dados");
-            DB::table('users')->insert($array_clientes);
-        }
-
-        $this->command->info("Atualizar timestamps dos clientes");
-        DB::update("update clientes as c inner join (
-                        select id, created_at, updated_at, deleted_at
-                        from users
-                        ) as u on c.id = u.id
-                    set c.created_at = u.created_at, c.updated_at = u.updated_at, c.deleted_at = u.deleted_at");
-
-        $this->command->info("Atualizar referencias de pagamento do Paypal");
-        DB::update("update clientes as c
-                    inner join (
-                        select id, email
-                        from users
-                        ) as u on c.id = u.id
-                    set c.ref_pagamento = u.email
-                    where c.tipo_pagamento = 'PAYPAL'");
-    }
-
-    private function fillGenders($users_array)
-    {
-        foreach ($users_array as $key => $value) {
-            $users_array[$key] = [
-                "id" => $key,
-                "email" => $value,
-                "genero" => $this->generos[$value]
-            ];
-        }
-    }
-
-    private function limparFicheirosFotos()
-    {
         Storage::deleteDirectory($this->photoPath);
         Storage::makeDirectory($this->photoPath);
-    }
 
-    private function preencherNomesFicheirosFotos()
-    {
-        // LARAVEL 7:
-        // $allFiles = collect(File::files(database_path('seeds/fotos')));
-        // LARAVEL 8:
+        // Preencher files_M com fotos de Homens e files_F com fotos de mulheres
         $allFiles = collect(File::files(database_path('seeders/fotos')));
         foreach ($allFiles as $f) {
             if (strpos($f->getPathname(), 'M_')) {
                 $this->files_M[] = $f->getPathname();
-            } else {
+            } elseif (strpos($f->getPathname(), 'W_')) {
                 $this->files_F[] = $f->getPathname();
+            } elseif (strpos($f->getPathname(), 'X_')) {
+                $this->files_X[] = $f->getPathname();
             }
         }
-    }
 
-    private function copiarFotos($arrayUsers)
-    {
-        foreach ($arrayUsers as $user) {
-            if ((count($this->files_M) == 0) && (count($this->files_F) == 0)) {
+        // Podia ir à base de dados buscar os cursos:
+        //$this->cursos = DB::table('cursos')->pluck('abreviatura');
+        // Mas vou definir à mão, para mudar probabilidades:
+        $this->cursos = [
+            'EI', 'EI', 'EI', 'EI', 'EI', 'EI', 'EI', 'EI', 'EI', 'EI', 'EI', 'EI',
+            'JDM', 'JDM', 'JDM', 'JDM', 'JDM',
+            'MEI-CM', 'MEI-CM',
+            'MCIF',
+            'TESP-DWM', 'TESP-DWM',
+            'TESP-PSI', 'TESP-PSI', 'TESP-PSI',
+            'TESP-RSI', 'TESP-RSI',
+            'TESP-TI'
+        ];
+
+        $this->outros_departamentos = DB::table('departamentos')->where('abreviatura', '<>', 'DEI')->pluck('abreviatura');
+
+
+
+        $faker = \Faker\Factory::create('pt_PT');
+
+        // Primeiro USER é sempre admin, com email sys@mail.pt
+        $newUser = $this->newFakerUser($faker, 'O');
+        $newUser['email'] = "sys@ipleiria.pt";
+        $newUser['admin'] = true;
+        $newId = DB::table('users')->insertGetId($newUser);
+
+        $docenteAInet = -1;
+        $userAInet = -1;
+        $userAInetIDs = [];
+        $docentesAInetIDs = [];
+
+        for ($i = 0; $i < $this->total_users_docentes_dei; $i++) {
+            $newIds = $this->newFakerDocente($faker, 'DEI');
+            $changedUserData = [];
+            $changedDocenteData = [];
+            switch ($i) {
+                case 0:
+                    $docenteAInet = $newIds['docente_id'];
+                    $userAInet = $newIds['user_id'];
+                    $changedUserData['name'] = 'Marco António de Oliveira Monteiro';
+                    $changedUserData['email'] = 'marco.monteiro@ipleiria.pt';
+                    $changedUserData['genero'] = 'M';
+                    $changedUserData['admin'] = true;
+                    $changedDocenteData['gabinete'] = 'G.15-12';
+                    $changedDocenteData['extensao'] = '203166';
+                    $changedDocenteData['cacifo'] = 'A069';
+                    break;
+                case 1:
+                    $docenteAInet = $newIds['docente_id'];
+                    $userAInet = $newIds['user_id'];
+                    $changedUserData['name'] = 'Eduardo Manuel Caetano da Silva';
+                    $changedUserData['email'] = 'eduardo.silva@ipleiria.pt';
+                    $changedUserData['genero'] = 'M';
+                    $changedDocenteData['gabinete'] = 'D.S.02.48';
+                    break;
+                case 2:
+                    $docenteAInet = $newIds['docente_id'];
+                    $userAInet = $newIds['user_id'];
+                    $changedUserData['name'] = 'Eugénia Moreira Bernardino';
+                    $changedUserData['email'] = 'eugenia.bernardino@ipleiria.pt';
+                    $changedUserData['genero'] = 'F';
+                    $changedDocenteData['gabinete'] = 'G.1.5.11';
+                    $changedDocenteData['extensao'] = '203167';
+                    $changedDocenteData['cacifo'] = 'A064';
+                    break;
+                case 3:
+                    $docenteAInet = $newIds['docente_id'];
+                    $userAInet = $newIds['user_id'];
+                    $changedUserData['name'] = 'Telmo Filipe Moreira Marques';
+                    $changedUserData['email'] = 'telmo.marques@ipleiria.pt';
+                    $changedUserData['genero'] = 'M';
+                    $changedDocenteData['gabinete'] = 'G.L. 2.7';
+                    $changedDocenteData['extensao'] = '203149';
+                    break;
+            }
+            if ($changedUserData) {
+                $userAInetIDs[] = $userAInet;
+                DB::table('users')->where('id', $userAInet)->update($changedUserData);
+            }
+            if ($changedDocenteData) {
+                $docentesAInetIDs[] = $docenteAInet;
+                DB::table('docentes')->where('id', $docenteAInet)->update($changedDocenteData);
+            }
+            if ($i % 10 === 0) {
+                $this->command->line('Criado docente do DEI ' . ($i + 1) . '/' . $this->total_users_docentes_dei);
+            }
+        }
+
+        for ($i = 0; $i < $this->total_users_docentes_outros; $i++) {
+            $this->newFakerDocente($faker, $faker->randomElement($this->outros_departamentos));
+            if ($i % 10 === 0) {
+                $this->command->line('Criado docente de outro departamento (<> DEI) ' . ($i + 1) . '/' . $this->total_users_docentes_outros);
+            }
+        }
+
+        for ($i = 0; $i < $this->total_outros_users; $i++) {
+            $newUser = $this->newFakerUser($faker, 'O');
+            DB::table('users')->insert($newUser);
+
+            if ($i % 10 === 0) {
+                $this->command->line('Criado outro user (não docente/não aluno) ' . ($i + 1) . '/' . $this->total_outros_users);
+            }
+        }
+
+        for ($i = 0; $i < $this->total_users_alunos; $i++) {
+            $this->newFakerAluno($faker);
+            if ($i % 10 === 0) {
+                $this->command->line('Criado aluno ' . ($i + 1) . '/' . $this->total_users_alunos);
+            }
+        }
+
+        // FOTOS:
+        //$userAInetIDs[]
+        shuffle($this->files_M);
+        shuffle($this->files_F);
+
+        $todos_users_O = DB::table('users')->where('tipo', 'O')->pluck('genero', 'id');
+        $todos_users_D = DB::table('users')->where('tipo', 'D')->whereNotIn('id', $userAInetIDs)->pluck('genero', 'id');
+        $todos_users_A = DB::table('users')->where('tipo', 'A')->pluck('genero', 'id');
+
+        // Primeiros 5 users Outros, 10 docentes, 20 alunos têm sempre foto.
+        $i = 1;
+        foreach ($todos_users_O as $user_id => $genero) {
+            $file = $genero == 'M' ? array_shift($this->files_M) : array_shift($this->files_F);
+            $this->savePhotoOfUser($user_id, $file);
+            $i++;
+            if ($i >= 5) {
                 break;
             }
-            $file = $user['genero'] == 'M' ? array_shift($this->files_M) : array_shift($this->files_F);
-            if ($file) {
-                $this->savePhotoOfUser($user['id'], $file);
+        }
+        $i = 1;
+        foreach ($todos_users_D as $user_id => $genero) {
+            $file = $genero == 'M' ? array_shift($this->files_M) : array_shift($this->files_F);
+            $this->savePhotoOfUser($user_id, $file);
+            $i++;
+            if ($i >= 10) {
+                break;
             }
+        }
+        $i = 1;
+        foreach ($todos_users_A as $user_id => $genero) {
+            $file = $genero == 'M' ? array_shift($this->files_M) : array_shift($this->files_F);
+            $this->savePhotoOfUser($user_id, $file);
+            $i++;
+            if ($i >= 20) {
+                break;
+            }
+        }
+
+        $todos_users = DB::table('users')->whereNull('url_foto')->whereNotIn('id', $userAInetIDs)->orderByRaw('RAND()')->pluck('genero', 'id');
+
+        foreach ($todos_users as $user_id => $genero) {
+            if (!($this->files_M || $this->files_F)) {
+                break;
+            }
+            $file = null;
+            if ($genero == 'M' && $this->files_M) {
+                $file = array_shift($this->files_M);
+            } elseif ($genero == 'F' && $this->files_F) {
+                $file = array_shift($this->files_F);
+            }
+            if ($file) {
+                $this->savePhotoOfUser($user_id, $file);
+            }
+        }
+
+
+        foreach ($this->files_X as $file) {
+            $prefixoIdx = strpos($file, 'X_');
+            if ($prefixoIdx) {
+                $idx = substr($file, $prefixoIdx + 2, 1);
+                $this->savePhotoOfUser($userAInetIDs[$idx], $file);
+            }
+        }
+
+
+        $ainet = DB::table('disciplinas')->where('curso', 'EI')->where('abreviatura', 'AI')->pluck('id')[0];
+
+        $i = 0;
+        foreach ($docentesAInetIDs as $docenteID) {
+            $docenteDisc = [
+                'docente_id' => $docenteID,
+                'disciplina_id' => $ainet,
+                'responsavel' => false
+            ];
+            if ($i == 0) {
+                $docenteDisc['responsavel'] = true;
+            }
+            $i++;
+            DB::table('docentes_disciplinas')->insert($docenteDisc);
+        }
+
+        $disciplinas = DB::table('disciplinas')->where('id', '<>', $ainet)->pluck('id');
+
+        $todos_docentes = DB::table('docentes')->pluck('id');
+
+        $todos_alunos = DB::table('alunos')->pluck('id');
+
+        $contadorDisc = 1;
+        $totalDisc = count($disciplinas);
+        foreach ($disciplinas as $disc) {
+            $docentesDisc = [];
+            $numDocentes = $faker->randomElement([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 5]);
+            $docentes = $faker->randomElements($todos_docentes, $numDocentes);
+            $i = 0;
+            foreach ($docentes as $docente) {
+                $docentesDisc[] = [
+                    'docente_id' => $docente,
+                    'disciplina_id' => $disc,
+                    'responsavel' => $i === 0 ? true : false
+                ];
+                $i++;
+            }
+            DB::table('docentes_disciplinas')->insert($docentesDisc);
+
+            $alunosDisc = [];
+            $alunos = $faker->randomElements($todos_alunos, random_int(4, 100));
+            foreach ($alunos as $aluno) {
+                $alunosDisc[] = [
+                    'aluno_id' => $aluno,
+                    'disciplina_id' => $disc,
+                    'repetente' => random_int(1, 4) === 2 ? true : false
+                ];
+            }
+
+            DB::table('alunos_disciplinas')->insert($alunosDisc);
+
+            $this->command->line('Criadas associações com docentes e alunos para disciplina ' . ($contadorDisc) . '/' . $totalDisc);
+            $contadorDisc++;
         }
     }
 
-    private function savePhotoOfUser($id, $file)
+    private function savePhotoOfUser($user_id, $file)
     {
         $targetDir = storage_path('app/' . $this->photoPath);
-        $newfilename = $id . "_" . uniqid() . '.jpg';
+        $newfilename = $user_id . "_" . uniqid() . '.jpg';
         File::copy($file, $targetDir . '/' . $newfilename);
-        DB::table('users')->where('id', $id)->update(['foto_url' => $newfilename]);
-        $this->command->info("Atualizada foto do user $id. Nome do ficheiro copiado = $newfilename");
+        DB::table('users')->where('id', $user_id)->update(['url_foto' => $newfilename]);
+        $this->command->info("Updated Foto of User $user_id.");
+    }
+
+    private function newFakerDocente($faker, $departamento)
+    {
+        $newUser = $this->newFakerUser($faker, 'D');
+        $newId = DB::table('users')->insertGetId($newUser);
+
+        $docente = [
+            'user_id' => $newId,
+            'departamento' => $departamento,
+            'gabinete' => 'G-' . rand(1, 3) . '.' . rand(1, 30),
+            'extensao' => '203' . str_pad(rand(1, 999), 3, '0', STR_PAD_LEFT),
+            'cacifo' => 'A' . str_pad(rand(1, 999), 3, '0', STR_PAD_LEFT)
+        ];
+
+        $newIdDocente = DB::table('docentes')->insertGetId($docente);
+        return ['user_id' => $newId, 'docente_id' => $newIdDocente];
+    }
+
+    private function newFakerAluno($faker)
+    {
+        $newUser = $this->newFakerUser($faker, 'A');
+        $newId = DB::table('users')->insertGetId($newUser);
+
+        $aluno = [
+            'user_id' => $newId,
+            'numero' => '21' . rand(5, 9) .  str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT),
+            'curso' => $faker->randomElement($this->cursos),
+        ];
+
+        $newIdAluno = DB::table('alunos')->insertGetId($aluno);
+        return ['user_id' => $newId, 'aluno_id' => $newIdAluno];
+    }
+
+    private function newFakerUser($faker, $tipo)
+    {
+        $email = "";
+        $genero = "";
+        $sufixoMail = $tipo == 'A' ? "@mail.pt" : "@ipleiria.pt";
+        $name = $this->randomName($faker, $genero, $email, $sufixoMail);
+        $createdAt = $faker->dateTimeBetween('-10 years', '-3 months');
+        $email_verified_at = $faker->dateTimeBetween($createdAt, '-2 months');
+        $updatedAt = $faker->dateTimeBetween($email_verified_at, '-1 months');
+        return [
+            'email' => $email,
+            'name' => $name,
+            'password' => bcrypt('123'),
+            'remember_token' => Str::random(10),
+            'email_verified_at' => $email_verified_at,
+            'created_at' => $createdAt,
+            'updated_at' => $updatedAt,
+            'tipo' => $tipo,
+            'admin' => false,
+            'genero' => $genero,    // This will not be saved on DB
+        ];
     }
 
     private function stripAccents($stripAccents)
@@ -220,12 +369,13 @@ class UsersSeeder extends Seeder
         $mapping = array_combine($keys[0], $values[0]);
         return strtr($str, $mapping);
     }
-    private function randomName($faker, &$gender, &$fullname, &$email)
+
+    private function randomName($faker, &$genero, &$email, $sufixoMail)
     {
-        $gender = $faker->randomElement(['male', 'female']);
-        $firstname = $faker->firstName($gender);
+        $genero = $faker->randomElement(['male', 'female']);
+        $firstname = $faker->firstName($genero);
         $lastname = $faker->lastName();
-        $secondname = $faker->numberBetween(1, 3) == 2 ? "" : " " . $faker->firstName($gender);
+        $secondname = $faker->numberBetween(1, 3) == 2 ? "" : " " . $faker->firstName($genero);
         $number_middlenames = $faker->numberBetween(1, 6);
         $number_middlenames = $number_middlenames == 1 ? 0 : ($number_middlenames >= 5 ? $number_middlenames - 3 : 1);
         $middlenames = "";
@@ -233,67 +383,15 @@ class UsersSeeder extends Seeder
             $middlenames .= " " . $faker->lastName();
         }
         $fullname = $firstname . $secondname . $middlenames . " " . $lastname;
-        $email = strtolower($this->stripAccents($firstname) . "." . $this->stripAccents($lastname) . "@mail.pt");
+
+        $email = strtolower($this->stripAccents($firstname) . "." . $this->stripAccents($lastname) . $sufixoMail);
         $i = 2;
         while (in_array($email, $this->used_emails)) {
-            $email = strtolower($this->stripAccents($firstname) . "." . $this->stripAccents($lastname) . "." . $i . "@mail.pt");
+            $email = strtolower($this->stripAccents($firstname) . "." . $this->stripAccents($lastname) . "." . $i . $sufixoMail);
             $i++;
         }
         $this->used_emails[] = $email;
-        $gender = $gender == 'male' ? 'M' : 'F';
-    }
-
-    private function newFakerUser($faker, $tipo)
-    {
-        $fullname = "";
-        $email = "";
-        $gender = "";
-        $this->randomName($faker, $gender, $fullname, $email);
-        $createdAt = $faker->dateTimeBetween('-10 years', '-3 months');
-        $email_verified_at = $faker->dateTimeBetween($createdAt, '-2 months');
-        $updatedAt = $faker->dateTimeBetween($email_verified_at, '-1 months');
-        $deletedAt = $faker->dateTimeBetween($updatedAt);
-        $this->generos[$email] = $gender;
-        return [
-            'name' => $fullname,
-            'email' => $email,
-            'email_verified_at' => $email_verified_at,
-            'password' => bcrypt('123'),
-            'remember_token' => Str::random(10),
-            'created_at' => $createdAt,
-            'updated_at' => $updatedAt,
-            'tipo' => $tipo,
-            'bloqueado' => 0,
-            'deleted_at' => $deletedAt,
-        ];
-    }
-
-
-    private function newFakerCliente($faker, $id, $email)
-    {
-        $tipoPagamento = $faker->randomElement(['VISA', 'MBWAY', 'PAYPAL', null]);
-        switch ($tipoPagamento) {
-            case 'VISA':
-                $ref_pagamento = rand(1,9) . $faker->randomNumber($nbDigits = 8, $strict = true) . $faker->randomNumber($nbDigits = 7, $strict = true);
-                break;
-            case 'MBWAY':
-                $ref_pagamento = '9' . $faker->randomNumber($nbDigits = 8, $strict = true);
-                break;
-            case 'PAYPAL':
-                $ref_pagamento = $email;
-                break;
-            default:
-                $ref_pagamento = null;
-                break;
-        }
-        return [
-            'id' => $id,
-            'nif' => rand(1,3) == 2 ? null : $faker->randomNumber($nbDigits = 9, $strict = true),
-            'tipo_pagamento' => $tipoPagamento,
-            'ref_pagamento' => $ref_pagamento,
-            'created_at' => null,
-            'updated_at' => null,
-            'deleted_at' => null
-        ];
+        $genero = $genero == 'male' ? 'M' : 'F';
+        return $fullname;
     }
 }

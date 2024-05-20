@@ -1,47 +1,65 @@
-<div>
-    <label for="inputNome">Titulo</label>
-    <input type="text" name="titulo" id="inputTitulo" value="{{old('titulo', $filme->titulo)}}">
+<div class="mb-3 form-floating">
+    <input type="text" class="form-control @error('titulo') is-invalid @enderror" name="titulo" id="inputTitulo"
+        value="{{ old('titulo', $filme->titulo) }}">
+    <label for="inputAbr" class="form-label">Titulo</label>
     @error('titulo')
-    <em>{{ $message }}</em>
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
     @enderror
 </div>
-<div>
-    <label for="inputGenero">Genero</label>
-    <select id="inputGenero" name="genero_code">
+<div class="mb-3 form-floating">
+    <select class="form-control @error('genero_code') is-invalid @enderror" name="genero_code" id="inputgenero">
         @foreach ($generos as $genero)
-            <option value="{{ $genero->code }}" {{ $filme->genero_code == $genero->code ? 'selected' : '' }}>{{ $genero->code }}</option>
+            <option {{ $genero->code == old('genero_code', $filme->genero_code) ? 'selected' : '' }}
+                value="{{ $genero->code }}">
+                {{ $genero->nome }}</option>
         @endforeach
     </select>
+    <label for="inputCurso" class="form-label">Genero</label>
     @error('genero_code')
-    <em>{{ $message }}</em>
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
     @enderror
 </div>
-<div>
-    <label for="inputAno">Ano</label>
-    <input type="text" name="ano" id="inputAno" value="{{ $filme->ano }}">
+<div class="mb-3 form-floating">
+    <input type="text" class="form-control @error('ano') is-invalid @enderror" name="ano" id="inputAno"
+        value="{{ old('ano', $filme->ano) }}">
+    <label for="inputAno" class="form-label">Ano</label>
     @error('ano')
-    <em>{{ $message }}</em>
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
     @enderror
 </div>
-<div>
-    <label for="inputCartaz">Cartaz URL</label>
-    <input type="text" name="cartaz_url" id="inputCartaz" value="{{ $filme->cartaz_url }}">
+<div class="mb-3 form-floating">
+    <input type="text" class="form-control @error('cartaz_url') is-invalid @enderror" name="cartaz_url"
+        id="inputcartaz" value="{{ old('cartaz_url', $filme->cartaz_url) }}">
+    <label for="inputcartaz" class="form-label">Cartaz URL</label>
     @error('cartaz_url')
-    <em>{{ $message }}</em>
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
     @enderror
 </div>
-<div>
-    <label for="inputSumario">Sumario</label>
-    <textarea name="sumario" id="inputSumario" rows=10>{{ $filme->sumario }}</textarea>
+<div class="mb-3 form-floating">
+    <input type="text" class="form-control @error('sumario') is-invalid @enderror" name="sumario" id="inputsumario"
+        value="{{ old('sumario', $filme->sumario) }}">
+    <label for="inputsumario" class="form-label">Sumario</label>
     @error('sumario')
-    <em>{{ $message }}</em>
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
     @enderror
 </div>
-<div>
-    <label for="inputTrailer">Trailer</label>
-    <input type="text" name="trailer_url" id="inputTrailer" value="{{ $filme->trailer_url }}">
+<div class="mb-3 form-floating">
+    <input type="text" class="form-control @error('trailer_url') is-invalid @enderror" name="trailer_url"
+        id="inputtrailer" value="{{ old('trailer_url', $filme->trailer_url) }}">
+    <label for="inputtrailer" class="form-label">Trailer URL</label>
     @error('trailer_url')
-    <em>{{ $message }}</em>
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
     @enderror
 </div>
-

@@ -1,52 +1,58 @@
-<!doctype html>
-<html lang="en">
+@extends('template.layout')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
+@section('titulo', 'filmes')
 
-<body>
-<a href="{{route('users.index')}}">cadastre-se ou faça Login</a> <!--loging do utilizador para podermos começar as validações-->
+@section('subtitulo')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">Gestão</li>
+        <li class="breadcrumb-item">Curricular</li>
+        <li class="breadcrumb-item active">Filmes</li>
+    </ol>
+@endsection
 
-    <div class="container">
-        <div class="row">
-            <div class="col-4" style="border-style: solid;">
-                <button onclick="location.href ='{{ route('filmes.create') }}'">Create new movie</button>
-            </div>
-            <div class="col-7" style="border-style: solid; margin-left: 10px;">
-                <div class="container" style="padding-top: 20px;">
-                    <div class="row">
-                        @foreach ($filmes as $filme)
-                            <div class="col-sm-4">
-                                <div class="card" style="margin: 10px">
-                                    <div class="card-header sensor" style="text-align:center;"> <a href="{{ route('filmes.show', ['filme' => $filme]) }}">{{ $filme->titulo }}</a></div>
-
-                                    <div class="card-body" style="text-align:center;">
-                                        <img src="cinematic/storage/app/public/cartazes/{{ $filme->cartaz_url }}" alt="{{ $filme->cartaz_url }}">
-                                    </div>
-
-                                    <div class="card-footer" style="text-align:center;"><a href="{{ route('filmes.edit', ['filme' => $filme]) }}">Alterar</a> |
-                                        <form action="{{ route('filmes.destroy', ['filme' => $filme->id]) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="submit" value="Delete">
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
+@section('main')
+    <p><a class="btn btn-success" href="{{ route('filmes.create') }}"><i class="fas fa-plus"></i> &nbsp;Criar novo
+            filmes</a></p>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>Cartaz</th>
+                <th>Titulo</th>
+                <th>Genero</th>
+                <th>Ano</th>
+                <th>Sumario</th>
+                <th class="button-icon-col"></th>
+                <th class="button-icon-col"></th>
+                <th class="button-icon-col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($filmes as $filme)
+                <tr>
+                    <td><img src="cinematic/storage/app/public/cartazes/{{ $filme->cartaz_url }}" alt="{{ $filme->cartaz_url }}"></td>
+                    <td>{{ $filme->titulo }}</td>
+                    <td>{{ $filme->genero_code }}</td>
+                    <td>{{ $filme->ano }}</td>
+                    <td>{{ $filme->sumario }}</td>
+                    <td class="button-icon-col"><a class="btn btn-secondary"
+                            href="{{ route('filmes.show', ['filme' => $filme]) }}">
+                            <i class="fas fa-eye"></i></a></td>
+                    <td class="button-icon-col"><a class="btn btn-dark"
+                            href="{{ route('filmes.edit', ['filme' => $filme]) }}">
+                            <i class="fas fa-edit"></i></a></td>
+                    <td class="button-icon-col">
+                        <form method="POST" action="{{ route('filmes.destroy', ['filme' => $filme]) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" name="delete" class="btn btn-danger">
+                                <i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <div>
+        {{ $filmes->links() }}
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
-</body>
-
-</html>
+@endsection

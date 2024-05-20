@@ -1,0 +1,1622 @@
+[
+    {
+        "curso": "EI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "AL ",
+        "nome": "Álgebra Linear",
+        "ECTS": 5,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "AM ",
+        "nome": "Análise Matemática",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "FA ",
+        "nome": "Física Aplicada",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "Prog I ",
+        "nome": "Programação I",
+        "ECTS": 7,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "SC ",
+        "nome": "Sistemas Computacionais",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "Est ",
+        "nome": "Estatística",
+        "ECTS": 3,
+        "horas": 45,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "Ing ",
+        "nome": "Inglês",
+        "ECTS": 2,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "MD ",
+        "nome": "Matemática Discreta",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "Prog II ",
+        "nome": "Programação II",
+        "ECTS": 7,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "SO ",
+        "nome": "Sistemas Operativos",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "TI ",
+        "nome": "Tecnologias de Internet",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "SGI",
+        "nome": "Sistemas Gráficos e Interação",
+        "ECTS": 5,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "AED",
+        "nome": "Algoritmos e Estruturas de Dados",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "BD",
+        "nome": "Bases de Dados",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "RC",
+        "nome": "Redes de Computadores",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "PA",
+        "nome": "Programação Avançada",
+        "ECTS": 7,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 2,
+        "semestre": 2,
+        "abreviatura": "AI",
+        "nome": "Aplicações para a Internet",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 2,
+        "semestre": 2,
+        "abreviatura": "ES",
+        "nome": "Engenharia de Software",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 2,
+        "semestre": 2,
+        "abreviatura": "IA",
+        "nome": "Inteligência Artificial",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 2,
+        "semestre": 2,
+        "abreviatura": "SBD",
+        "nome": "Sistemas de Bases de Dados",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 2,
+        "semestre": 2,
+        "abreviatura": "SI",
+        "nome": "Segurança da Informação",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 2,
+        "semestre": 2,
+        "abreviatura": "TV",
+        "nome": "Tecnologias de Virtualização",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 2,
+        "semestre": 2,
+        "abreviatura": "RD",
+        "nome": "Redes de Dados",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 2,
+        "semestre": 2,
+        "abreviatura": "AS",
+        "nome": "Administração de Sistemas",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 3,
+        "semestre": 1,
+        "abreviatura": "DAD",
+        "nome": "Desenvolvimento de Aplicações Distribuídas",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 3,
+        "semestre": 1,
+        "abreviatura": "IS",
+        "nome": "Integração de Sistemas",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 3,
+        "semestre": 1,
+        "abreviatura": "TAES",
+        "nome": "Tópicos Avançados de Engenharia de Software",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 3,
+        "semestre": 1,
+        "abreviatura": "DAE",
+        "nome": "Desenvolvimento de Aplicações Empresariais",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 3,
+        "semestre": 1,
+        "abreviatura": "SAD",
+        "nome": "Sistemas de Apoio à Decisão",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 3,
+        "semestre": 1,
+        "abreviatura": "CPD",
+        "nome": "Centros de Processamento de Dados",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 3,
+        "semestre": 1,
+        "abreviatura": "TAR",
+        "nome": "Tópicos Avançados de Redes",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 3,
+        "semestre": 1,
+        "abreviatura": "SS",
+        "nome": "Segurança de Sistemas",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 3,
+        "semestre": 2,
+        "abreviatura": "PI",
+        "nome": "Projeto Informático",
+        "ECTS": 14,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 3,
+        "semestre": 2,
+        "abreviatura": "Sem",
+        "nome": "Seminário",
+        "ECTS": 3,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 3,
+        "semestre": 2,
+        "abreviatura": "InE",
+        "nome": "Inovação e Empreendedorismo",
+        "ECTS": 2,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 3,
+        "semestre": 2,
+        "abreviatura": "EC",
+        "nome": "Engenharia do Conhecimento ",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 3,
+        "semestre": 2,
+        "abreviatura": "SIE",
+        "nome": "Sistemas de Informação Empresariais",
+        "ECTS": 5,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 3,
+        "semestre": 2,
+        "abreviatura": "LTI",
+        "nome": "Laboratório de Tecnologias de Informação",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "EI",
+        "ano": 3,
+        "semestre": 2,
+        "abreviatura": "ESS",
+        "nome": "Engenharia de Sistemas e Serviços",
+        "ECTS": 5,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "Draw",
+        "nome": "Desenho",
+        "ECTS": 4,
+        "horas": 45,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "GD",
+        "nome": "Game Design",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "IP",
+        "nome": "Introdução à Programação",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "PMG",
+        "nome": "Fundamentos Matemáticos para Jogos",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "DI",
+        "nome": "Imagem Digital",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "Eng",
+        "nome": "Inglês",
+        "ECTS": 2,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "GP",
+        "nome": "Programação de Jogos",
+        "ECTS": 7,
+        "horas": 90,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "2DA I",
+        "nome": "Arte 2D I",
+        "ECTS": 4,
+        "horas": 45,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "PA",
+        "nome": "Princípios da Animação",
+        "ECTS": 5,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "UID",
+        "nome": "User Interface Design",
+        "ECTS": 4,
+        "horas": 45,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "2DGP",
+        "nome": "Projeto de Jogos 2D",
+        "ECTS": 10,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "3DM",
+        "nome": "Modelação 3D",
+        "ECTS": 7,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "GE I",
+        "nome": "Motores de Jogos I",
+        "ECTS": 7,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "VFXG",
+        "nome": "Efeitos Visuais para Jogos",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "WD",
+        "nome": "Desenvolvimento Web",
+        "ECTS": 4,
+        "horas": 45,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "SD",
+        "nome": "Sound Design",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 2,
+        "semestre": 2,
+        "abreviatura": "PV",
+        "nome": "Fotografia e Vídeo",
+        "ECTS": 5,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 2,
+        "semestre": 2,
+        "abreviatura": "3DSA",
+        "nome": "Simulação e Animação 3D",
+        "ECTS": 5,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 2,
+        "semestre": 2,
+        "abreviatura": "MIT",
+        "nome": "Técnicas de Interação Multimédia",
+        "ECTS": 4,
+        "horas": 45,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 2,
+        "semestre": 2,
+        "abreviatura": "GE II",
+        "nome": "Motores de Jogos II",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": true
+    },
+    {
+        "curso": "JDM",
+        "ano": 2,
+        "semestre": 2,
+        "abreviatura": "3DP",
+        "nome": "Produção 3D",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": true
+    },
+    {
+        "curso": "JDM",
+        "ano": 2,
+        "semestre": 2,
+        "abreviatura": "3DGP",
+        "nome": "Projeto de Jogos 3D",
+        "ECTS": 10,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 3,
+        "semestre": 1,
+        "abreviatura": "Cin",
+        "nome": "Cinema",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": true
+    },
+    {
+        "curso": "JDM",
+        "ano": 3,
+        "semestre": 1,
+        "abreviatura": "2DA II",
+        "nome": "Arte 2D II",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": true
+    },
+    {
+        "curso": "JDM",
+        "ano": 3,
+        "semestre": 1,
+        "abreviatura": "VFXC",
+        "nome": "Efeitos Visuais para Cinema",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": true
+    },
+    {
+        "curso": "JDM",
+        "ano": 3,
+        "semestre": 1,
+        "abreviatura": "3DA",
+        "nome": "Arte 3D",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": true
+    },
+    {
+        "curso": "JDM",
+        "ano": 3,
+        "semestre": 1,
+        "abreviatura": "CG",
+        "nome": "Computação Gráfica",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": true
+    },
+    {
+        "curso": "JDM",
+        "ano": 3,
+        "semestre": 1,
+        "abreviatura": "ATGP",
+        "nome": "Tópicos Avançados de Programação de Jogos",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": true
+    },
+    {
+        "curso": "JDM",
+        "ano": 3,
+        "semestre": 1,
+        "abreviatura": "AIAG",
+        "nome": "Inteligência Artificial Aplicada aos Jogos",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": true
+    },
+    {
+        "curso": "JDM",
+        "ano": 3,
+        "semestre": 2,
+        "abreviatura": "EMAE",
+        "nome": "Empreendedorismo e Marketing Aplicado ao Entretenimento",
+        "ECTS": 3,
+        "horas": 45,
+        "opcional": false
+    },
+    {
+        "curso": "JDM",
+        "ano": 3,
+        "semestre": 2,
+        "abreviatura": "FP",
+        "nome": "Projeto Final",
+        "ECTS": 27,
+        "horas": 640,
+        "opcional": true
+    },
+    {
+        "curso": "JDM",
+        "ano": 3,
+        "semestre": 2,
+        "abreviatura": "Int",
+        "nome": "Estágio",
+        "ECTS": 27,
+        "horas": 640,
+        "opcional": true
+    },
+    {
+        "curso": "MEI-CM",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "DDM",
+        "nome": "Desenvolvimento para Dispositivos Móveis",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "MEI-CM",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "IAU",
+        "nome": "Interfaces para Ambientes Ubíquos",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "MEI-CM",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "TSNG",
+        "nome": "Tecnologias e Serviços de Nova Geração",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "MEI-CM",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "Cib",
+        "nome": "Cibersegurança",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "MEI-CM",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "GPI",
+        "nome": "Gestão de Projetos Informáticos",
+        "ECTS": 6,
+        "horas": 52.5,
+        "opcional": false
+    },
+    {
+        "curso": "MEI-CM",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "MSC",
+        "nome": "Mobilidade em Sistemas Computacionais",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "MEI-CM",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "SSC",
+        "nome": "Sistemas Sensíveis ao Contexto",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "MEI-CM",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "CN",
+        "nome": "Computação em Nuvem",
+        "ECTS": 6,
+        "horas": 52.5,
+        "opcional": true
+    },
+    {
+        "curso": "MEI-CM",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "DJDM",
+        "nome": "Desenvolvimento de Jogos para Dispositivos Móveis",
+        "ECTS": 6,
+        "horas": 52.5,
+        "opcional": true
+    },
+    {
+        "curso": "MEI-CM",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "AE",
+        "nome": "Arquiteturas Empresariais",
+        "ECTS": 6,
+        "horas": 52.5,
+        "opcional": true
+    },
+    {
+        "curso": "MEI-CM",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "QS",
+        "nome": "Qualidade de Software",
+        "ECTS": 6,
+        "horas": 52.5,
+        "opcional": true
+    },
+    {
+        "curso": "MEI-CM",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "SOSU",
+        "nome": "Segurança Ofensiva em Sistemas Ubíquos",
+        "ECTS": 6,
+        "horas": 52.5,
+        "opcional": true
+    },
+    {
+        "curso": "MEI-CM",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "AFDM",
+        "nome": "Análise Forense em Dispositivos Móveis",
+        "ECTS": 6,
+        "horas": 52.5,
+        "opcional": true
+    },
+    {
+        "curso": "MEI-CM",
+        "ano": 2,
+        "semestre": 0,
+        "abreviatura": "Proj",
+        "nome": "Projeto",
+        "ECTS": 60,
+        "horas": 60,
+        "opcional": true
+    },
+    {
+        "curso": "MEI-CM",
+        "ano": 2,
+        "semestre": 0,
+        "abreviatura": "Diss",
+        "nome": "Dissertação",
+        "ECTS": 60,
+        "horas": 60,
+        "opcional": true
+    },
+    {
+        "curso": "MEI-CM",
+        "ano": 2,
+        "semestre": 0,
+        "abreviatura": "Estg",
+        "nome": "Estágio",
+        "ECTS": 60,
+        "horas": 60,
+        "opcional": true
+    },
+    {
+        "curso": "MCIF",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "PARSI",
+        "nome": "Políticas e Análise de Risco na Segurança de Informação",
+        "ECTS": 6,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "MCIF",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "SRC",
+        "nome": "Segurança em Redes de Computadores",
+        "ECTS": 6,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "MCIF",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "AFD I",
+        "nome": "Análise Forense Digital I",
+        "ECTS": 6,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "MCIF",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "ASSI",
+        "nome": "Administração Segura de Sistemas Informáticos",
+        "ECTS": 6,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "MCIF",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "PS I",
+        "nome": "Projeto de Segurança I",
+        "ECTS": 6,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "MCIF",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "LTP",
+        "nome": "Laboratório de Testes de Penetração",
+        "ECTS": 6,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "MCIF",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "GARS",
+        "nome": "Gestão e Análise de Relatórios de Segurança",
+        "ECTS": 6,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "MCIF",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "TISI",
+        "nome": "Tratamento de Incidentes de Segurança Informática",
+        "ECTS": 6,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "MCIF",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "AFD II",
+        "nome": "Análise Forense Digital II",
+        "ECTS": 6,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "MCIF",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "PS II",
+        "nome": "Projeto de Segurança II",
+        "ECTS": 6,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "MCIF",
+        "ano": 2,
+        "semestre": 0,
+        "abreviatura": "Proj",
+        "nome": "Projeto",
+        "ECTS": 60,
+        "horas": 60,
+        "opcional": true
+    },
+    {
+        "curso": "MCIF",
+        "ano": 2,
+        "semestre": 0,
+        "abreviatura": "Diss",
+        "nome": "Dissertação",
+        "ECTS": 60,
+        "horas": 60,
+        "opcional": true
+    },
+    {
+        "curso": "MCIF",
+        "ano": 2,
+        "semestre": 0,
+        "abreviatura": "Estg",
+        "nome": "Estágio",
+        "ECTS": 60,
+        "horas": 60,
+        "opcional": true
+    },
+    {
+        "curso": "TESP-DWM",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "CTI",
+        "nome": "Comunicação e Tecnologias de Informação",
+        "ECTS": 2,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-DWM",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "PW",
+        "nome": "Programação para Web",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-DWM",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "Mod-PW",
+        "nome": "Módulo Aprendizagem Ativa: Introdução à Programação Web Multimédia",
+        "ECTS": 19,
+        "horas": 165,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-DWM",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "LI",
+        "nome": "Língua Inglesa",
+        "ECTS": 2,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-DWM",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "PWS",
+        "nome": "Programação Web Servidor",
+        "ECTS": 5,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-DWM",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "Mod-PWS",
+        "nome": "Módulo Aprendizagem Ativa: Programação Web Cliente-Servidor Multimédia",
+        "ECTS": 23,
+        "horas": 240,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-DWM",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "MDWS",
+        "nome": "Marketing Digital e Web Social",
+        "ECTS": 3,
+        "horas": 45,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-DWM",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "EPV",
+        "nome": "Edição e Pós-produção de Vídeo",
+        "ECTS": 3,
+        "horas": 45,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-DWM",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "Mod-DPW",
+        "nome": "Módulo Aprendizagem Ativa: Desenvolvimento de um Portal Web Multimédia",
+        "ECTS": 24,
+        "horas": 240,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-DWM",
+        "ano": 2,
+        "semestre": 2,
+        "abreviatura": "Estg",
+        "nome": "Estágio",
+        "ECTS": 30,
+        "horas": 640,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-PSI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "FM",
+        "nome": "Fundamentos de Matemática",
+        "ECTS": 5,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-PSI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "CTI",
+        "nome": "Comunicação e Tecnologias de Informação",
+        "ECTS": 4,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-PSI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "IRSO",
+        "nome": "Introdução às Redes e Sistemas Operativos",
+        "ECTS": 4,
+        "horas": 45,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-PSI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "FP",
+        "nome": "Fundamentos de Programação",
+        "ECTS": 7,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-PSI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "PW-C",
+        "nome": "Programação para a Web - Cliente",
+        "ECTS": 5,
+        "horas": 45,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-PSI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "IAPSI",
+        "nome": "Introdução à Análise e Projeto de Sistemas de Informação",
+        "ECTS": 5,
+        "horas": 45,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-PSI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "LI",
+        "nome": "Língua Inglesa",
+        "ECTS": 2,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-PSI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "CDBD",
+        "nome": "Conceção e Desenvolvimento de Bases de Dados",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-PSI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "MDS",
+        "nome": "Metodologias de Desenvolvimento de Software",
+        "ECTS": 5,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-PSI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "DA",
+        "nome": "Desenvolvimento de Aplicações",
+        "ECTS": 7,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-PSI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "PW-S",
+        "nome": "Programação para a Web - Servidor",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-PSI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "TSNG",
+        "nome": "Tópicos de Segurança",
+        "ECTS": 4,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-PSI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "IP",
+        "nome": "Integração na Profissão",
+        "ECTS": 3,
+        "horas": 45,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-PSI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "PISI",
+        "nome": "Plataformas de Sistemas de Informação",
+        "ECTS": 7,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-PSI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "SIS",
+        "nome": "Serviços e Interoperabilidade de Sistemas",
+        "ECTS": 5,
+        "horas": 45,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-PSI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "AMSI",
+        "nome": "Acesso Móvel a Sistemas de Informação",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-PSI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "PSI",
+        "nome": "Projeto em Sistemas de Informação",
+        "ECTS": 9,
+        "horas": 90,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-PSI",
+        "ano": 2,
+        "semestre": 2,
+        "abreviatura": "Estg",
+        "nome": "Estágio",
+        "ECTS": 30,
+        "horas": 640,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-RSI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "FM",
+        "nome": "Fundamentos de Matemática",
+        "ECTS": 5,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-RSI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "CTI",
+        "nome": "Comunicação e Tecnologias de Informação",
+        "ECTS": 4,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-RSI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "FP",
+        "nome": "Fundamentos de Programação",
+        "ECTS": 7,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-RSI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "FRS",
+        "nome": "Fundamentos de Redes e Sistemas",
+        "ECTS": 7,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-RSI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "SC",
+        "nome": "Sistemas Computacionais",
+        "ECTS": 7,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-RSI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "LI",
+        "nome": "Língua Inglesa",
+        "ECTS": 2,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-RSI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "PSO",
+        "nome": "Tópicos de Sistemas Operativos",
+        "ECTS": 7,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-RSI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "AGS I",
+        "nome": "Administração e Gestão de Sistemas I",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-RSI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "RST",
+        "nome": "Redes e Serviços Telemáticos",
+        "ECTS": 7,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-RSI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "LR I",
+        "nome": "Laboratório de Redes I",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-RSI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "GP",
+        "nome": "Gestão de Projetos",
+        "ECTS": 2,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-RSI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "IP",
+        "nome": "Integração na Profissão",
+        "ECTS": 3,
+        "horas": 45,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-RSI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "SRI",
+        "nome": "Segurança de Redes Informáticas",
+        "ECTS": 7,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-RSI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "LR II",
+        "nome": "Laboratório de Redes II",
+        "ECTS": 7,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-RSI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "PRSI",
+        "nome": "Planeamento de Redes e Serviços Informáticos",
+        "ECTS": 6,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-RSI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "AGS II",
+        "nome": "Administração e Gestão de Sistemas II",
+        "ECTS": 7,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-RSI",
+        "ano": 2,
+        "semestre": 2,
+        "abreviatura": "Estg",
+        "nome": "Estágio",
+        "ECTS": 30,
+        "horas": 640,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-TI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "FM",
+        "nome": "Fundamentos de Matemática",
+        "ECTS": 5,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-TI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "CTI",
+        "nome": "Comunicação e Tecnologias da Informação",
+        "ECTS": 4,
+        "horas": 60,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-TI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "LI",
+        "nome": "Língua Inglesa",
+        "ECTS": 2,
+        "horas": 30,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-TI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "FP",
+        "nome": "Fundamentos de Programação",
+        "ECTS": 7,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-TI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "FBD",
+        "nome": "Fundamentos de Bases de Dados",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-TI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "POO",
+        "nome": "Programação Orientada a Objetos",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-TI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "TE",
+        "nome": "Tecnologias Emergentes",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-TI",
+        "ano": 1,
+        "semestre": 1,
+        "abreviatura": "TM",
+        "nome": "Tecnologias de Mercado",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-TI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "RTI",
+        "nome": "Redes e Tecnologias de Internet",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-TI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "MSI",
+        "nome": "Modelação de Sistemas de Informação",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-TI",
+        "ano": 1,
+        "semestre": 2,
+        "abreviatura": "CBD",
+        "nome": "Complementos de Bases de Dados",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-TI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "AED",
+        "nome": "Algoritmia e Estruturas de Dados",
+        "ECTS": 7,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-TI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "FPN",
+        "nome": "Fundamentos de Processos de Negócio",
+        "ECTS": 7,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-TI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "PI",
+        "nome": "Programação para a Internet",
+        "ECTS": 7,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-TI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "MADS",
+        "nome": "Metodologias Ágeis de Desenvolvimento de Software",
+        "ECTS": 6,
+        "horas": 75,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-TI",
+        "ano": 2,
+        "semestre": 1,
+        "abreviatura": "IP",
+        "nome": "Integração na Profissão",
+        "ECTS": 3,
+        "horas": 45,
+        "opcional": false
+    },
+    {
+        "curso": "TESP-TI",
+        "ano": 2,
+        "semestre": 2,
+        "abreviatura": "Estg",
+        "nome": "Estágio",
+        "ECTS": 30,
+        "horas": 640,
+        "opcional": false
+    }
+]

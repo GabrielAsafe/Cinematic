@@ -1,29 +1,79 @@
-<!doctype html>
-<html lang="en">
+@extends('template.layout')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
+@section('titulo', 'Filme')
 
-<body>
+@section('subtitulo')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">Gestão</li>
+        <li class="breadcrumb-item">Curricular</li>
+        <li class="breadcrumb-item"><a href="{{ route('filmes.index') }}">Filmes</a></li>
+        <li class="breadcrumb-item"><strong>{{ $filme->titulo }}</strong></li>
+        <li class="breadcrumb-item active">Consultar</li>
+    </ol>
+@endsection
 
-    <div class="container">
-        <div style="border-style: solid; margin-left: 10px;">
-            <iframe src="{{ $filme->trailer_url }}"></iframe>
+@section('main')
+    <div>
+        <div class="mb-3 form-floating">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe src="{{ $filme->trailer_url }}" allowfullscreen></iframe>
+            </div>
+            <label for="inputtrailer" class="form-label">Trailer URL</label>
+            @error('trailer_url')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
-        <div style="border-style: solid; margin-left: 10px;">
-            <img src="cinematic/storage/app/public/cartazes/{{ $filme->cartaz_url }}" alt="{{ $filme->cartaz_url }}">
-            <H1>{{ $filme->titulo }}</H1>
-            <p>{{$filme->sumario}}</p>
+        <div class="mb-3 form-floating">
+            <input type="text" class="form-control @error('titulo') is-invalid @enderror" name="titulo" id="inputTitulo"
+                disabled value="{{ old('titulo', $filme->titulo) }}">
+            <label for="inputAbr" class="form-label">Titulo</label>
+            @error('titulo')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="mb-3 form-floating">
+            <select class="form-control @error('genero_code') is-invalid @enderror" name="genero_code" id="inputgenero"
+                disabled>
+                @foreach ($generos as $genero)
+                    <option {{ $genero->code == old('genero_code', $filme->genero_code) ? 'selected' : '' }}
+                        value="{{ $genero->code }}">
+                        {{ $genero->nome }}</option>
+                @endforeach
+            </select>
+            <label for="inputCurso" class="form-label">Genero</label>
+            @error('genero_code')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="mb-3 form-floating">
+            <input type="text" class="form-control @error('ano') is-invalid @enderror" name="ano" id="inputAno"
+                disabled value="{{ old('ano', $filme->ano) }}">
+            <label for="inputAno" class="form-label">Ano</label>
+            @error('ano')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="mb-3 form-floating">
+            <input type="text" class="form-control @error('sumario') is-invalid @enderror" name="sumario"
+                id="inputsumario" disabled value="{{ old('sumario', $filme->sumario) }}">
+            <label for="inputsumario" class="form-label">Sumario</label>
+            @error('sumario')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
-</body>
-
-</html>
+    <div class="my-4 d-flex justify-content-end">
+        <a href="{{ route('filmes.edit', ['filme' => $filme]) }}" class="btn btn-secondary ms-3">Alterar
+            Disciplina</a>
+    </div>
+@endsection
