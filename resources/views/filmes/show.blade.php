@@ -74,6 +74,15 @@
     </div>
     <div class="my-4 d-flex justify-content-end">
         <a href="{{ route('filmes.edit', ['filme' => $filme]) }}" class="btn btn-secondary ms-3">Alterar
-            Disciplina</a>
+            Filme</a>
+    </div>
+    <div>
+        <h3>Sessões</h3>
+        @include('sessoes.shared.table', [
+            'sessoes' => $filme->sessoes,
+            'showDetail' => true,
+            'showEdit' => false,
+            'showDelete' => false,
+        ])
     </div>
 @endsection

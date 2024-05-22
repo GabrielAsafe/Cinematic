@@ -86,6 +86,6 @@
         </tbody>
     </table>
     <div>
-        {{ $filmes->links() }}
+        {{ $filmes->withQueryString()->links() }}
     </div>
 @endsection
