@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\FilmeRequest;
+use Faker\Core\File;
 use Illuminate\Support\Facades\DB;
 
 class FilmesController extends Controller
@@ -15,10 +16,21 @@ class FilmesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $filmes = Filme::paginate(10);
-        return view('filmes.index', compact('filmes'));
+        $generos = Genero::all();
+        $filterByGenero = $request->genero_code ?? '';
+        $filterByTitulo = $request->titulo ?? '';
+        $filmeQuery = Filme::query();
+        if ($filterByGenero !== '') {
+            $filmeQuery->where('genero_code', $filterByGenero);
+        }
+        if ($filterByTitulo !== '') {
+            $filmeId = Filme::where('titulo', 'like', "%$filterByTitulo%")->pluck('id');
+            $filmeQuery->whereIntegerInRaw('id', $filmeId);
+        }
+        $filmes = $filmeQuery->with('generoRef')->paginate(10);
+        return view('filmes.index', compact('filmes', 'generos', 'filterByGenero', 'filterByTitulo'));
     }
 
     /**
