@@ -17,7 +17,9 @@
     <form method="POST" action="{{ route('filmes.update', ['filme' => $filme]) }}">
         @csrf
         @method('PUT')
-        @include('filmes.shared.fields')
+        @include('filmes.shared.fields', [
+            'allowUpload' => true,
+        ])
         <div class="my-4 d-flex justify-content-end">
             <button type="submit" class="btn btn-primary" name="ok">Guardar Alterações</button>
             <a href="{{ route('filmes.index', ['filme' => $filme]) }}"

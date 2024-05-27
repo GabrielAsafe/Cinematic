@@ -1,4 +1,23 @@
 <div class="mb-3 form-floating">
+    @if (isset($filme->cartaz_url))
+        <img src="cinematic/storage/app/public/cartazes/{{ $filme->cartaz_url }}" alt="{{ $filme->cartaz_url }}" class="img-thumbnail">
+    @else
+        <img src="/img/avatar_unknown.png" alt="Cartaz" class="img-thumbnail">
+    @endif
+
+    @if ($allowUpload)
+        <div class="mb-3 pt-3">
+            <input type="file" class="form-control @error('cartaz_url') is-invalid @enderror" name="cartaz_url"
+                id="inputcartaz" value="{{ old('cartaz_url', $filme->cartaz_url) }}">
+            @error('cartaz_url')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+    @endif
+</div>
+<div class="mb-3 form-floating">
     <input type="text" class="form-control @error('titulo') is-invalid @enderror" name="titulo" id="inputTitulo"
         value="{{ old('titulo', $filme->titulo) }}">
     <label for="inputAbr" class="form-label">Titulo</label>
@@ -28,16 +47,6 @@
         value="{{ old('ano', $filme->ano) }}">
     <label for="inputAno" class="form-label">Ano</label>
     @error('ano')
-        <div class="invalid-feedback">
-            {{ $message }}
-        </div>
-    @enderror
-</div>
-<div class="mb-3 form-floating">
-    <input type="text" class="form-control @error('cartaz_url') is-invalid @enderror" name="cartaz_url"
-        id="inputcartaz" value="{{ old('cartaz_url', $filme->cartaz_url) }}">
-    <label for="inputcartaz" class="form-label">Cartaz URL</label>
-    @error('cartaz_url')
         <div class="invalid-feedback">
             {{ $message }}
         </div>
