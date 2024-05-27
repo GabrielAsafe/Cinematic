@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Filme;
+use App\Models\Lugar;
 use App\Models\Sessao;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -49,7 +50,8 @@ class SessoesController extends Controller
      */
     public function show(Sessao $sesso)
     {
-        return $sesso;
+        $filme = Filme::find($sesso->filme_id);
+        return view('sessoes.show', compact('sesso', 'filme'));
     }
 
     /**

@@ -18,7 +18,6 @@
             <div class="embed-responsive embed-responsive-16by9">
                 <iframe src="{{ $filme->trailer_url }}" allowfullscreen></iframe>
             </div>
-            <label for="inputtrailer" class="form-label">Trailer URL</label>
             @error('trailer_url')
                 <div class="invalid-feedback">
                     {{ $message }}

@@ -9,8 +9,7 @@ use App\Http\Controllers\LugaresController;
 use App\Http\Controllers\RecibosController;
 use App\Http\Controllers\SalasController;
 use App\Http\Controllers\SessoesController;
-
-
+use Illuminate\Support\Facades\Auth;
 
 Route::view('/', 'home')->name('root');
 

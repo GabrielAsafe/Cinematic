@@ -10,7 +10,6 @@ class Sessao extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
     protected $table = 'sessoes';
 
     protected $fillable = ['id','filme_id', 'sala_id', 'data', 'hora_inicio', 'custom'];
@@ -19,4 +18,10 @@ class Sessao extends Model
     {
         return $this->belongsTo(Filme::class, 'filme_id', 'id');
     }
+
+    public function salaRef(): BelongsTo
+    {
+        return $this->belongsTo(Sala::class, 'sala_id', 'id');
+    }
+
 }
