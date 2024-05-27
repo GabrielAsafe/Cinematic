@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Politécnico de Leiria</title>
+    <title>Cinematic</title>
     @vite('resources/sass/app.scss')
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
@@ -77,9 +77,9 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link {{ Route::currentRouteName() == 'filmes.index' ? 'active' : '' }}" href="{{ route('filmes.index') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
-                            Dashboard
+                            Filmes
                         </a>
                         <a class="nav-link" href="#">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
