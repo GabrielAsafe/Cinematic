@@ -15,7 +15,7 @@
 @section('main')
     <form method="POST" action="{{ route('filmes.store') }}">
         @csrf
-        @include('filmes.shared')
+        @include('filmes.shared.fields')
         <div class="my-4 d-flex justify-content-end">
             <button type="submit" class="btn btn-primary" name="ok">Guardar novo filme</button>
             <a href="{{ route('filmes.create') }}" class="btn btn-secondary ms-3">Cancelar</a>
