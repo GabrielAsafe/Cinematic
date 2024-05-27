@@ -50,7 +50,7 @@ class SessoesController extends Controller
      */
     public function show(Sessao $sesso)
     {
-        $filme = Filme::find($sesso->filme_id);
+        $filme = $sesso->filmeRef;
         return view('sessoes.show', compact('sesso', 'filme'));
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lugar;
 use Illuminate\Http\Request;
 
 class LugaresController extends Controller
@@ -33,15 +34,15 @@ class LugaresController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Lugar $lugare)
     {
-        //
+        return $lugare;
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Lugar $lugare)
     {
         //
     }
@@ -57,7 +58,7 @@ class LugaresController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Lugar $lugare)
     {
         //
     }

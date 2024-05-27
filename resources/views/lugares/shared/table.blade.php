@@ -21,17 +21,17 @@
                 <td>{{ $lugar->posicao }}</td>
                 @if ($showDetail)
                     <td class="button-icon-col"><a class="btn btn-secondary"
-                            href="{{ route('sessoes.show', ['sesso' => $lugar]) }}">
+                            href="{{ route('lugares.show', ['lugare' => $lugar]) }}">
                             <i class="fas fa-eye"></i></a></td>
                 @endif
                 @if ($showEdit)
                     <td class="button-icon-col"><a class="btn btn-dark"
-                            href="{{ route('sessoes.edit', ['lugar' => $lugar]) }}">
+                            href="{{ route('lugares.edit', ['lugare' => $lugar]) }}">
                             <i class="fas fa-edit"></i></a></td>
                 @endif
                 @if ($showDelete)
                     <td class="button-icon-col">
-                        <form method="POST" action="{{ route('sessoes.destroy', ['lugar' => $lugar]) }}">
+                        <form method="POST" action="{{ route('lugares.destroy', ['lugare' => $lugar]) }}">
                             @csrf
                             @method('DELETE')
                             <button type="submit" name="delete" class="btn btn-danger">
