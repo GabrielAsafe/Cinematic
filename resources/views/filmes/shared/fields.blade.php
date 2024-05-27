@@ -1,6 +1,6 @@
 <div class="mb-3 form-floating">
     @if (isset($filme->cartaz_url))
-        <img src="cinematic/storage/app/public/cartazes/{{ $filme->cartaz_url }}" alt="{{ $filme->cartaz_url }}" class="img-thumbnail">
+        <img src="{{ $filme->fullCartazUrl }}" alt="{{ $filme->cartaz_url }}" class="img-thumbnail">
     @else
         <img src="/img/avatar_unknown.png" alt="Cartaz" class="img-thumbnail">
     @endif

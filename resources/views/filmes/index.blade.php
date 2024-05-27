@@ -20,11 +20,10 @@
                 <div class="d-flex justify-content-between">
                     <div class="flex-grow-1 mb-3 form-floating">
                         <select class="form-select" name="genero_code" id="inputGenero">
-                            <option {{ old('genero_code', $filterByGenero) === '' ? 'selected' : '' }}
-                                value="">Todos Generos </option>
+                            <option {{ old('genero_code', $filterByGenero) === '' ? 'selected' : '' }} value="">Todos
+                                Generos </option>
                             @foreach ($generos as $genero)
-                                <option
-                                    {{ old('genero_code', $filterByGenero) == $genero->code ? 'selected' : '' }}
+                                <option {{ old('genero_code', $filterByGenero) == $genero->code ? 'selected' : '' }}
                                     value="{{ $genero->code }}">{{ $genero->nome }}</option>
                             @endforeach
                         </select>
@@ -61,8 +60,12 @@
         <tbody>
             @foreach ($filmes as $filme)
                 <tr>
-                    <td><img src="cinematic/storage/app/public/cartazes/{{ $filme->cartaz_url }}"
-                            alt="{{ $filme->cartaz_url }}"></td>
+                    <td width="45">
+                        @if ($filme->cartaz_url)
+                            <img src="{{ $filme->fullCartazUrl }}" alt="{{ $filme->cartaz_url }}" width="45"
+                                height="45">
+                        @endif
+                    </td>
                     <td>{{ $filme->titulo }}</td>
                     <td>{{ $filme->generoRef->nome }}</td>
                     <td>{{ $filme->ano }}</td>
