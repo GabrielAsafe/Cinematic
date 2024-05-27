@@ -12,26 +12,26 @@ class Bilhete extends Model
     use HasFactory;
     public $timestamps = false;
 
-    protected $fillable = ['id','recibo_id', 'cliente_id', 'sessao_id', 'lugar_id', 'preco_sem_iva','estado',
+    protected $fillable = ['recibo_id', 'cliente_id', 'sessao_id', 'lugar_id', 'preco_sem_iva','estado',
         'bilhete_pdf_url', 'bilhete_qrcode_url'];
 
-    public function cliente(): BelongsTo
+    public function clienteRef(): BelongsTo
     {
-        return $this->belongsTo(Cliente::class);
+        return $this->belongsTo(Cliente::class, 'cliente_id', 'id');
     }
 
-    public function recibo(): BelongsTo
+    public function reciboRef(): BelongsTo
     {
-        return $this->belongsTo(Recibo::class);
+        return $this->belongsTo(Recibo::class, 'recibo_id', 'id');
     }
 
-    public function sessoes(): BelongsTo
+    public function sessoesRef(): BelongsTo
     {
-        return $this->belongsTo(Sessao::class);
+        return $this->belongsTo(Sessao::class, 'sessao_id', 'id');
     }
 
-    public function lugare(): BelongsTo
+    public function lugareRef(): BelongsTo
     {
-        return $this->belongsTo(Lugar::class);
+        return $this->belongsTo(Lugar::class, 'lugar_id', 'id');
     }
 }
