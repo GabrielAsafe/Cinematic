@@ -13,7 +13,7 @@
 @endsection
 
 @section('main')
-    <form method="POST" action="{{ route('filmes.store') }}">
+    <form method="POST" action="{{ route('filmes.store') }}" enctype="multipart/form-data">
         @csrf
         @include('filmes.shared.fields', [
             'allowUpload' => true,

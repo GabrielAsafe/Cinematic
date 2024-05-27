@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Requests\FilmeRequest;
 use Faker\Core\File;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class FilmesController extends Controller
 {
@@ -81,7 +82,24 @@ class FilmesController extends Controller
      */
     public function update(FilmeRequest $request, Filme $filme)
     {
-        $filme->update($request->validated());
+        $formData = $request->validated();
+        $filme = DB::transaction(function () use ($formData, $filme, $request) {
+            $filme->titulo = $formData['titulo'];
+            $filme->genero_code = $formData['genero_code'];
+            $filme->ano = $formData['ano'];
+            $filme->sumario = $formData['sumario'];
+            $filme->trailer_url = $formData['trailer_url'];
+            $filme->save();
+            if ($request->hasFile('cartaz_url')) {
+                if ($filme->cartaz_url) {
+                    Storage::delete('public/cartazes/' . $filme->cartaz_url);
+                }
+                $path = $request->cartaz_url->store('public/cartazes');
+                $filme->cartaz_url = basename($path);
+                $filme->save();
+            }
+            return $filme;
+        });
         $url = route('filmes.show', ['filme' => $filme]);
         $htmlMessage = "filme <a href='$url'>#{$filme->id}</a><strong>\"{$filme->titulo}\"</strong> foi alterada com sucesso!";
         return redirect()->route('filmes.index')

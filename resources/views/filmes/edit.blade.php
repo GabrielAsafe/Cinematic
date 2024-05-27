@@ -14,7 +14,7 @@
 @endsection
 
 @section('main')
-    <form method="POST" action="{{ route('filmes.update', ['filme' => $filme]) }}">
+    <form method="POST" action="{{ route('filmes.update', ['filme' => $filme]) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         @include('filmes.shared.fields', [

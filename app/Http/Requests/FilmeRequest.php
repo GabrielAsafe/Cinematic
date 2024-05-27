@@ -16,7 +16,7 @@ class FilmeRequest extends FormRequest
             'titulo' => 'required',
             'genero_code' => 'required|exists:generos,code',
             'ano' => 'required',
-            'cartaz_url' => 'required',
+            'cartaz_url' => 'sometimes|image|max:4096',
             'sumario' => 'required',
             'trailer_url' => 'required',
         ];
@@ -29,7 +29,8 @@ class FilmeRequest extends FormRequest
             'genero_code.exists' => 'O genero não existe na base de dados',
             'ano.required' => 'O ano é obrigatório',
             'ano.integer' => 'O ano deve ser um nº inteiro',
-            'cartaz_url.required' => 'O URL do cartaz é obrigatório',
+            'cartaz_url.image' => 'O ficheiro com a foto não é uma imagem',
+            'cartaz_url.size' => 'O tamanho do ficheiro com a foto tem que ser inferior a 4 Mb',
             'trailer_url.required' => 'O URL do trailer é obrigatório',
         ];
     }
