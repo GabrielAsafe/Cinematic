@@ -9,6 +9,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\FilmeRequest;
 use Faker\Core\File;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -49,11 +50,29 @@ class FilmesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(FilmeRequest $request)
+    public function store(FilmeRequest $request) : RedirectResponse
     {
-        $newFilme = Filme::create($request->validated());
-        $url = route('filmes.show', ['filme' => $newFilme]);
-        $htmlMessage = "Filme <a href='$url'>#{$newFilme->id}</a><strong>\"{$newFilme->titulo}\"</strong> foi criada com sucesso!";
+        $formData = $request->validated();
+        $filme = DB::transaction(function () use ($formData, $request) {
+            $newFilme = new Filme();
+            $newFilme->titulo = $formData['titulo'];
+            $newFilme->genero_code = $formData['genero_code'];
+            $newFilme->ano = $formData['ano'];
+            $newFilme->sumario = $formData['sumario'];
+            $newFilme->trailer_url = $formData['trailer_url'];
+            $newFilme->save();
+            if ($request->hasFile('cartaz_url')) {
+                if ($newFilme->cartaz_url) {
+                    Storage::delete('public/cartazes/' . $newFilme->cartaz_url);
+                }
+                $path = $request->cartaz_url->store('public/cartazes');
+                $newFilme->cartaz_url = basename($path);
+                $newFilme->save();
+            }
+            return $newFilme;
+        });
+        $url = route('filmes.show', ['filme' => $filme]);
+        $htmlMessage = "Filme <a href='$url'>#{$filme->id}</a><strong>\"{$filme->titulo}\"</strong> foi criada com sucesso!";
         return redirect()->route('filmes.index')
             ->with('alert-msg', $htmlMessage)
             ->with('alert-type', 'success');

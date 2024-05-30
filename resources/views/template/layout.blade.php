@@ -47,13 +47,14 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="/img/avatar_unknown.png" alt="Avatar" class="bg-dark rounded-circle" width="45"
-                            height="45">
+                        <img src="{{ Auth::user()->fullPhotoUrl }}" alt="Avatar" class="bg-dark rounded-circle"
+                            width="45" height="45">
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Perfil</a></li>
-                        <li><a class="dropdown-item" href="#">Alterar Senha</a></li>
+                        <li><a class="dropdown-item"
+                                href="{{ route('clientes.show', ['cliente' => Auth::user()->cliente]) }}">Perfil</a></li>
+                        <li><a class="dropdown-item" href="{{route('password.change.show')}}">Alterar Senha</a></li>
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
@@ -77,7 +78,8 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <a class="nav-link {{ Route::currentRouteName() == 'filmes.index' ? 'active' : '' }}" href="{{ route('filmes.index') }}">
+                        <a class="nav-link {{ Route::currentRouteName() == 'filmes.index' ? 'active' : '' }}"
+                            href="{{ route('filmes.index') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                             Filmes
                         </a>
@@ -102,6 +104,8 @@
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link {{ Route::currentRouteName() == 'filmes.index' ? 'active' : '' }}"
                                     href="{{ route('filmes.index') }}">Filmes</a>
+                                    <a class="nav-link {{ Route::currentRouteName() == 'clientes.index' ? 'active' : '' }}"
+                                    href="{{ route('clientes.index') }}">Clientes</a>
                             </nav>
                         </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"

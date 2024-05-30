@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\BilhetesController;
@@ -23,7 +24,9 @@ Route::resource('salas', SalasController::class);//tem todos os comandos de crud
 
 Route::resource('sessoes', SessoesController::class);//tem todos os comandos de crud associados
 
-
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/password/change', [ChangePasswordController::class, 'show'])->name('password.change.show');
+Route::post('/password/change', [ChangePasswordController::class, 'store'])->name('password.change.store');
