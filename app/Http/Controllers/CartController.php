@@ -47,26 +47,8 @@ class CartController extends Controller
                     $htmlMessage = "sesso <a href='$url'>#{$lugar->id}</a>
                          <strong>\"{$lugar->nome}\"</strong> já foi adicionado ao carrinho!";
                 } else {
-
-
-
-
-
-
-
-
-
                     //incluir aqui os parms que quero no store
                     $cart[$lugar->id] = $lugar;
-
-
-
-
-
-
-
-
-
                     // We can access session with a request function
                     $request->session()->put('cart', $cart);
                     $alertType = 'success';
