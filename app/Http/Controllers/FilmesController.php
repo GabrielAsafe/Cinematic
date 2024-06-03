@@ -24,6 +24,11 @@ class FilmesController extends Controller
         $filterByGenero = $request->genero_code ?? '';
         $filterByTitulo = $request->titulo ?? '';
         $filmeQuery = Filme::query();
+
+        $filmeQuery->whereHas('sessoes', function ($query) {
+            $query->whereDate('data', '>=', now()->toDateString());
+        });
+
         if ($filterByGenero !== '') {
             $filmeQuery->where('genero_code', $filterByGenero);
         }
