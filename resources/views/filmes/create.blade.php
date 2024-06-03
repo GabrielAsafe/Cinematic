@@ -21,6 +21,11 @@
                     'generos' => $generos,
                     'readonlyData' => false,
                 ])
+
+                <div class="my-1 d-flex justify-content-start">
+                    <button type="submit" class="btn btn-primary" name="ok">Guardar novo filme</button>
+                    <a href="{{ route('filmes.create') }}" class="btn btn-secondary ms-3">Cancelar</a>
+                </div>
             </div>
 
             <div class="ps-2 mt-5 mt-md-1 d-flex mx-auto flex-column align-items-center justify-content-between"
@@ -31,10 +36,6 @@
                     'allowDelete' => true,
                 ])
             </div>
-        </div>
-        <div class="my-4 d-flex justify-content-start">
-            <button type="submit" class="btn btn-primary" name="ok">Guardar novo filme</button>
-            <a href="{{ route('filmes.create') }}" class="btn btn-secondary ms-3">Cancelar</a>
         </div>
     </form>
 @endsection

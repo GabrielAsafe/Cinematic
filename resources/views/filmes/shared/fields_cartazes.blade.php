@@ -1,14 +1,10 @@
-@if (isset($filme->cartaz_url))
-    <img src="{{ $filme->fullCartazUrl }}" alt="{{ $filme->cartaz_url }}" class="img-thumbnail">
-@else
-    <img src="/img/avatar_unknown.png" alt="Cartaz" class="img-thumbnail">
-@endif
+<img src="{{ $filme->fullCartazUrl }}" alt="Avatar" class="img-thumbnail">
 
 @if ($allowUpload)
     <div class="mb-3 pt-3">
-        <input type="file" class="form-control @error('cartaz_url') is-invalid @enderror" name="cartaz_url"
-            id="inputcartaz" value="{{ old('cartaz_url', $filme->cartaz_url) }}">
-        @error('cartaz_url')
+        <input type="file" class="form-control @error('file_cartaz') is-invalid @enderror" name="file_cartaz"
+            id="inputcartaz">
+        @error('file_cartaz')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
