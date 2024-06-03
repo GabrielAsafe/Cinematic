@@ -113,7 +113,7 @@ class ClientesController extends Controller
             $cliente->user->foto_url = null;
             $cliente->user->save();
         }
-        return redirect()->route('Clientes.edit', ['Cliente' => $cliente])
+        return redirect()->route('clientes.edit', ['cliente' => $cliente])
             ->with('alert-msg', 'Foto do Cliente "' . $cliente->user->name . '" foi removida!')
             ->with('alert-type', 'success');
     }
