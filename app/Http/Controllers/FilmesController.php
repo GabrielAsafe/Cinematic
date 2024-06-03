@@ -135,6 +135,8 @@ class FilmesController extends Controller
             $totalSessoes = DB::scalar('select count(*)
             from sessoes where filme_id = ?', [$filme->id]);
             if ($totalSessoes == 0) {
+                $this->destroy_cartaz($filme);
+
                 $filme->delete();
                 $alertType = 'success';
                 $htmlMessage = "Filme #{$filme->id}
@@ -163,5 +165,17 @@ class FilmesController extends Controller
         return redirect()->route('filmes.index')
             ->with('alert-msg', $htmlMessage)
             ->with('alert-type', $alertType);
+    }
+
+    public function destroy_cartaz(Filme $filme): RedirectResponse
+    {
+        if ($filme->cartaz_url) {
+            Storage::delete('public/cartazes/' . $filme->cartaz_url);
+            $filme->cartaz_url = null;
+            $filme->save();
+        }
+        return redirect()->route('filmes.edit', ['filme' => $filme])
+            ->with('alert-msg', 'Cartaz do filme "' . $filme->titulo . '" foi removido!')
+            ->with('alert-type', 'success');
     }
 }
