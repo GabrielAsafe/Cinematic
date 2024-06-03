@@ -16,7 +16,7 @@ class ClientesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request) : View
+    public function index(Request $request): View
     {
         $filterByNome = $request->name ?? '';
         $clienteQuery = Cliente::query();
@@ -84,14 +84,33 @@ class ClientesController extends Controller
     //  */
     public function destroy(Cliente $cliente): RedirectResponse
     {
-        return 0;
+        try {
+            $user = $cliente->user;
+            DB::transaction(function () use ($cliente, $user) {
+                $cliente->delete();
+                $user->delete();
+            });
+            $htmlMessage = "cliente #{$cliente->id}
+                        <strong>\"{$user->name}\"</strong> foi apagado com sucesso!";
+            return redirect()->route('clientes.index')
+                ->with('alert-msg', $htmlMessage)
+                ->with('alert-type', 'success');
+        } catch (\Exception $error) {
+            $url = route('clientes.show', ['cliente' => $cliente]);
+            $htmlMessage = "Não foi possível apagar o cliente <a href='$url'>#{$cliente->id}</a>
+                        <strong>\"{$user->name}\"</strong> porque ocorreu um erro!";
+            $alertType = 'danger';
+        }
+        return back()
+            ->with('alert-msg', $htmlMessage)
+            ->with('alert-type', $alertType);
     }
 
     public function destroy_foto(Cliente $cliente): RedirectResponse
     {
-        if ($cliente->user->url_foto) {
-            Storage::delete('public/fotos/' . $cliente->user->url_foto);
-            $cliente->user->url_foto = null;
+        if ($cliente->user->foto_url) {
+            Storage::delete('public/fotos/' . $cliente->user->foto_url);
+            $cliente->user->foto_url = null;
             $cliente->user->save();
         }
         return redirect()->route('Clientes.edit', ['Cliente' => $cliente])
