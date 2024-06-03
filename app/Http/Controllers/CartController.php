@@ -58,7 +58,7 @@ class CartController extends Controller
 
                     //incluir aqui os parms que quero no store
                     $cart[$lugar->id] = $lugar;
-                    $cart[$v_filme] = $v_filme;
+                    //$cart[$v_filme] = $v_filme;
 
 
 
