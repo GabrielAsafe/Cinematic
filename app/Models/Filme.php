@@ -21,7 +21,7 @@ class Filme extends Model
 
     public function sessoes(): HasMany
     {
-        return $this->hasMany(Sessao::class, 'filme_id', 'id');
+        return $this->hasMany(Sessao::class, 'filme_id', 'id')->whereDate('data', '>=', now()->toDateString());;
     }
 
     protected function fullCartazUrl(): Attribute

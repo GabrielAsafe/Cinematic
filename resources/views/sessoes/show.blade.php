@@ -30,3 +30,8 @@
     ])
 </div>
 @endsection
+
+<?php
+session()->put('v_filme', $filme);
+session()->put('v_sessao', $sesso);
+?>

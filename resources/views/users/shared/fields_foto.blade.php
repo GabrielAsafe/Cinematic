@@ -10,7 +10,7 @@
         @enderror
     </div>
 @endif
-@if (($allowDelete ?? false) && $user->url_foto)
+@if (($allowDelete ?? false) && $user->foto_url)
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmationModal">
         Apagar Foto
     </button>

@@ -54,6 +54,25 @@ class SessoesController extends Controller
         return view('sessoes.show', compact('sesso', 'filme'));
     }
 
+
+
+    public function getLugaresVazios($sessaoId)
+    {
+        // Use a query builder para construir a query desejada
+        $lugaresVazios = Lugar::select('lugares.sala_id', 'lugares.fila', 'lugares.posicao')
+            ->join('salas', 'lugares.sala_id', '=', 'salas.id')
+            ->join('sessoes', 'salas.id', '=', 'sessoes.sala_id')
+            ->leftJoin('bilhetes', function($join) use ($sessaoId) {
+                $join->on('bilhetes.lugar_id', '=', 'lugares.id')
+                    ->where('bilhetes.sessao_id', '=', $sessaoId);
+            })
+            ->where('sessoes.id', $sessaoId)
+            ->whereNull('bilhetes.lugar_id')
+            ->get();
+
+        return response()->json($lugaresVazios);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

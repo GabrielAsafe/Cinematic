@@ -23,13 +23,4 @@
             <a href="{{ route('filmes.create') }}" class="btn btn-secondary ms-3">Cancelar</a>
         </div>
     </form>
-    @include('shared.confirmationDialog', [
-        'title' => 'Quer realmente apagar o cartaz?',
-        'msgLine1' => 'As alterações efetuadas ao dados do filme vão ser perdidas!',
-        'msgLine2' => 'Clique no botão "Apagar" para confirmar a operação.',
-        'confirmationButton' => 'Apagar',
-        'formActionRoute' => 'filmes.cartaz.destroy',
-        'formActionRouteParameters' => ['filme' => $filme],
-        'formMethod' => 'DELETE',
-    ])
 @endsection

@@ -36,5 +36,14 @@
                 ])
             </div>
         </div>
-    </form>
+    </form>´
+    @include('shared.confirmationDialog', [
+        'title' => 'Quer realmente apagar a foto?',
+        'msgLine1' => 'As alterações efetuadas ao dados do docente vão ser perdidas!',
+        'msgLine2' => 'Clique no botão "Apagar" para confirmar a operação.',
+        'confirmationButton' => 'Apagar',
+        'formActionRoute' => 'clientes.foto.destroy',
+        'formActionRouteParameters' => ['cliente' => $cliente],
+        'formMethod' => 'DELETE',
+    ])
 @endsection

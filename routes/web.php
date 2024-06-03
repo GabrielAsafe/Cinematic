@@ -17,6 +17,7 @@ Route::view('/', 'home')->name('root');
 
 Route::resource('bilhetes', BilhetesController::class);//tem todos os comandos de crud associados
 Route::resource('clientes', ClientesController::class);//tem todos os comandos de crud associados
+Route::delete('clientes/{cliente}/foto', [ClientesController::class, 'destroy_foto'])->name('clientes.foto.destroy');
 
 Route::resource('filmes', FilmesController::class);//tem todos os comandos de crud associados
 Route::delete('filmes/{filme}/cartaz', [FilmesController::class, 'destroy_cartaz'])->name('filmes.cartaz.destroy');

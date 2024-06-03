@@ -50,11 +50,7 @@
 
                 @if ($showAddCart ?? false)
                     <td class="button-icon-col">
-                        <form method="POST" action="{{ route('cart.add',[
-                                                                            'lugar' => $lugar,
-                                                                            'v_filme' => $v_filme,
-                                                                            'v_sessao' =>$v_sessao,
-                                                                        ])  }}"><!--alterei essa e a cena de baixo-->
+                        <form method="POST" action="{{ route('cart.add',['lugar' => $lugar])  }}"><!--alterei essa e a cena de baixo-->
                             @csrf
                             <button type="submit" name="addToCart" class="btn btn-success">
                                 <i class="fas fa-plus"></i></button>

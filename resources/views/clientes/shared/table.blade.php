@@ -51,3 +51,15 @@
         @endforeach
     </tbody>
 </table>
+
+@if ($showDelete)
+    @include('shared.confirmationDialog', [
+        'title' => 'Quer realmente apagar o cliente?',
+        'msgLine1' => 'Clique no botão "Apagar" para confirmar a operação',
+        'msgLine2' => '',
+        'confirmationButton' => 'Apagar',
+        'formActionRoute' => 'clientes.destroy',
+        'formActionRouteParameters' => ['cliente' => $cliente],
+        'formMethod' => 'DELETE',
+    ])
+@endif

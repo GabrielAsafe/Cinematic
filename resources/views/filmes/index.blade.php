@@ -78,17 +78,25 @@
                             href="{{ route('filmes.edit', ['filme' => $filme]) }}">
                             <i class="fas fa-edit"></i></a></td>
                     <td class="button-icon-col">
-                        <form method="POST" action="{{ route('filmes.destroy', ['filme' => $filme]) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" name="delete" class="btn btn-danger">
-                                <i class="fas fa-trash"></i></button>
-                        </form>
+                        <button type="button" name="delete" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#confirmationModal">
+                            <i class="fas fa-trash"></i></button>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
+    @include('shared.confirmationDialog', [
+        'title' => 'Quer realmente apagar o filme?',
+        'msgLine1' => 'Clique no botão "Apagar" para confirmar a operação',
+        'msgLine2' => '',
+        'confirmationButton' => 'Apagar',
+        'formActionRoute' => 'filmes.destroy',
+        'formActionRouteParameters' => ['filme' => $filme],
+        'formMethod' => 'DELETE',
+    ])
+
     <div>
         {{ $filmes->withQueryString()->links() }}
     </div>

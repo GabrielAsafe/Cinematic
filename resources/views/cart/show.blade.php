@@ -14,10 +14,6 @@
     @if ($cart)
         @include('lugares.shared.table', [
             'lugares' => $cart,
-
-
-
-
             'showDetail' => false,
             'showEdit' => false,
             'showDelete' => false,
