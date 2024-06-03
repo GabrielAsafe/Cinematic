@@ -24,6 +24,11 @@ class FilmesController extends Controller
         $filterByGenero = $request->genero_code ?? '';
         $filterByTitulo = $request->titulo ?? '';
         $filmeQuery = Filme::query();
+
+        $filmeQuery->whereHas('sessoes', function ($query) {
+            $query->whereDate('data', '>=', now()->toDateString());
+        });
+
         if ($filterByGenero !== '') {
             $filmeQuery->where('genero_code', $filterByGenero);
         }
@@ -50,29 +55,19 @@ class FilmesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(FilmeRequest $request) : RedirectResponse
+    public function store(FilmeRequest $request): RedirectResponse
     {
-        $formData = $request->validated();
-        $filme = DB::transaction(function () use ($formData, $request) {
-            $newFilme = new Filme();
-            $newFilme->titulo = $formData['titulo'];
-            $newFilme->genero_code = $formData['genero_code'];
-            $newFilme->ano = $formData['ano'];
-            $newFilme->sumario = $formData['sumario'];
-            $newFilme->trailer_url = $formData['trailer_url'];
+        $newFilme = Filme::create($request->validated());
+
+        if ($request->hasFile('file_cartaz')) {
+
+            $path = $request->file_cartaz->store('public/cartazes');
+            $newFilme->cartaz_url = basename($path);
             $newFilme->save();
-            if ($request->hasFile('cartaz_url')) {
-                if ($newFilme->cartaz_url) {
-                    Storage::delete('public/cartazes/' . $newFilme->cartaz_url);
-                }
-                $path = $request->cartaz_url->store('public/cartazes');
-                $newFilme->cartaz_url = basename($path);
-                $newFilme->save();
-            }
-            return $newFilme;
-        });
-        $url = route('filmes.show', ['filme' => $filme]);
-        $htmlMessage = "Filme <a href='$url'>#{$filme->id}</a><strong>\"{$filme->titulo}\"</strong> foi criada com sucesso!";
+        }
+
+        $url = route('filmes.show', ['filme' => $newFilme]);
+        $htmlMessage = "Filme <a href='$url'>#{$newFilme->id}</a><strong>\"{$newFilme->titulo}\"</strong> foi criada com sucesso!";
         return redirect()->route('filmes.index')
             ->with('alert-msg', $htmlMessage)
             ->with('alert-type', 'success');
@@ -101,24 +96,19 @@ class FilmesController extends Controller
      */
     public function update(FilmeRequest $request, Filme $filme)
     {
-        $formData = $request->validated();
-        $filme = DB::transaction(function () use ($formData, $filme, $request) {
-            $filme->titulo = $formData['titulo'];
-            $filme->genero_code = $formData['genero_code'];
-            $filme->ano = $formData['ano'];
-            $filme->sumario = $formData['sumario'];
-            $filme->trailer_url = $formData['trailer_url'];
-            $filme->save();
-            if ($request->hasFile('cartaz_url')) {
-                if ($filme->cartaz_url) {
-                    Storage::delete('public/cartazes/' . $filme->cartaz_url);
-                }
-                $path = $request->cartaz_url->store('public/cartazes');
-                $filme->cartaz_url = basename($path);
-                $filme->save();
+        $filme->update($request->validated());
+
+        if ($request->hasFile('file_cartaz')) {
+
+            if ($filme->cartaz_url) {
+                Storage::delete('public/cartazes/' . $filme->cartaz_url);
             }
-            return $filme;
-        });
+
+            $path = $request->file_cartaz->store('public/cartazes');
+            $filme->cartaz_url = basename($path);
+            $filme->save();
+        }
+
         $url = route('filmes.show', ['filme' => $filme]);
         $htmlMessage = "filme <a href='$url'>#{$filme->id}</a><strong>\"{$filme->titulo}\"</strong> foi alterada com sucesso!";
         return redirect()->route('filmes.index')

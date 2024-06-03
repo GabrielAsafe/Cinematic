@@ -87,15 +87,17 @@
         </tbody>
     </table>
 
-    @include('shared.confirmationDialog', [
-        'title' => 'Quer realmente apagar o filme?',
-        'msgLine1' => 'Clique no botão "Apagar" para confirmar a operação',
-        'msgLine2' => '',
-        'confirmationButton' => 'Apagar',
-        'formActionRoute' => 'filmes.destroy',
-        'formActionRouteParameters' => ['filme' => $filme],
-        'formMethod' => 'DELETE',
-    ])
+    @if (isset($filme))
+        @include('shared.confirmationDialog', [
+            'title' => 'Quer realmente apagar o filme?',
+            'msgLine1' => 'Clique no botão "Apagar" para confirmar a operação',
+            'msgLine2' => '',
+            'confirmationButton' => 'Apagar',
+            'formActionRoute' => 'filmes.destroy',
+            'formActionRouteParameters' => ['filme' => $filme],
+            'formMethod' => 'DELETE',
+        ])
+    @endif
 
     <div>
         {{ $filmes->withQueryString()->links() }}
