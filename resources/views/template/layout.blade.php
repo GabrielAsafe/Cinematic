@@ -52,9 +52,12 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item"
-                                href="{{ route('clientes.show', ['cliente' => Auth::user()->cliente]) }}">Perfil</a></li>
-                        <li><a class="dropdown-item" href="{{route('password.change.show')}}">Alterar Senha</a></li>
+                        @if ((Auth::user()->tipo ?? '') == 'C')
+                            <li><a class="dropdown-item"
+                                    href="{{ route('clientes.show', ['cliente' => Auth::user()->cliente]) }}">Perfil</a>
+                            </li>
+                        @endif
+                        <li><a class="dropdown-item" href="{{ route('password.change.show') }}">Alterar Senha</a></li>
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
@@ -106,7 +109,7 @@
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link {{ Route::currentRouteName() == 'filmes.index' ? 'active' : '' }}"
                                     href="{{ route('filmes.index') }}">Filmes</a>
-                                    <a class="nav-link {{ Route::currentRouteName() == 'clientes.index' ? 'active' : '' }}"
+                                <a class="nav-link {{ Route::currentRouteName() == 'clientes.index' ? 'active' : '' }}"
                                     href="{{ route('clientes.index') }}">Clientes</a>
                             </nav>
                         </div>
@@ -140,15 +143,16 @@
                         <!-- essa parte deveria aparecer para todos-->
                         <div class="sb-sidenav-menu-heading">Espaço Privado</div>
                         <a class="nav-link {{ Route::currentRouteName() == 'bilhetes.index' ? 'active' : '' }}"
-                           href="{{route('bilhetes.index')}}">
+                            href="{{ route('bilhetes.index') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-file-text"></i></div>
                             Meus Bilhetes
                         </a>
 
 
                         <a class="nav-link {{ Route::currentRouteName() == 'cart.show' ? 'active' : '' }}"
-                           href="{{ route('cart.show') }}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>Carrinho </a>
+                            href="{{ route('cart.show') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>Carrinho
+                        </a>
                     </div>
                 </div>
             </nav>
