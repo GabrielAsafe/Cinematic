@@ -14,10 +14,6 @@
     @if ($cart)
         @include('lugares.shared.table', [
             'lugares' => $cart,
-
-
-
-
             'showDetail' => false,
             'showEdit' => false,
             'showDelete' => false,
@@ -26,16 +22,11 @@
         ])
         <div class="my-4 d-flex justify-content-end">
             <button type="submit" class="btn btn-primary" name="ok" form="formStore">
-                Confirmar Inscrições</button>
+               Efetuar Pagamento</button>
             <button type="submit" class="btn btn-danger ms-3" name="clear" form="formClear">
                 Limpar Carrinho</button>
         </div>
-        <form id="formStore" method="POST" action="{{ route('cart.store',
-                                                                        ['lugar'=>$cart
-
-
-
-                                                                                        ]) }}" class="d-none">
+        <form id="formStore" method="POST" action="{{ route('cart.validatePayment') }}" class="d-none">
             @csrf
         </form>
         <form id="formClear" method="POST" action="{{ route('cart.destroy') }}" class="d-none">
@@ -44,3 +35,8 @@
         </form>
     @endif
 @endsection
+
+
+<?php
+session()->put('cart', $cart);
+?>

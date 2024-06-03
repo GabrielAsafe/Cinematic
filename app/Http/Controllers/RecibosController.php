@@ -6,6 +6,15 @@ use Illuminate\Http\Request;
 
 class RecibosController extends Controller
 {
+
+    protected $fillable = [
+        // Outros campos preenchíveis em massa...
+        'iva'
+    ];
+
+    protected $attributes = [
+        'iva' => 0 // Defina o valor padrão para 'iva' aqui
+    ];
     /**
      * Display a listing of the resource.
      */

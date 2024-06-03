@@ -12,11 +12,18 @@ class BilhetesController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+
+    public $timestamps = true;
+
+
+    protected $fillable = ['recibo_id','cliente_id','sessao_id','lugar_id','preco_total_sem_iva','estado'];
+
+
     public function index()
     {
-        $user = Auth::user();
-        $clientId = $user->client_id; // Assuming the User model has a client_id field
-        $bilhetes = Bilhete::where('cliente_id', $clientId)->get();
+        $userId = Auth::id(); // Get the currently authenticated user's ID
+        $bilhetes = Bilhete::where('cliente_id', $userId)->orderBy('id','DESC')->paginate(5); // Fetch all bilhetes for this user
 
         return view('bilhetes.index', compact('bilhetes'));
     }
@@ -28,48 +35,5 @@ class BilhetesController extends Controller
         return view('bilhetes.show', compact('bilhete'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $bilhetes = new Bilhete();//cria o array com todos os bilhetes para o utilizador assim que ele confirma os dados de pagamento
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

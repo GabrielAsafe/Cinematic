@@ -16,13 +16,10 @@
 @endsection
 
 @section('main')
-
-
 <div>
     @include('lugares.shared.table', [
         'lugares' => $sesso->salaRef->lugares,
-        'v_filme' => $filme,
-        'v_sessao' =>$sesso,
+        'lugaresVazios' =>$lugaresVazios,
         'showDetail' => false,
         'showEdit' => false,
         'showDelete' => false,
@@ -30,3 +27,8 @@
     ])
 </div>
 @endsection
+
+<?php
+session()->put('v_filme', $filme);
+session()->put('v_sessao', $sesso);
+?>

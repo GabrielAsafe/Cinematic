@@ -8,8 +8,12 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Cinematic</title>
+
+
     @vite('resources/sass/app.scss')
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+
+
 </head>
 
 <body class="sb-nav-fixed">
@@ -87,7 +91,7 @@
                             Filmes
                         </a>
 
-                        <!-- essa parte deveria aparecer para funcionários/administração-->
+                        <!-- essa parte deveria aparecer para funcionários/administração
                         <a class="nav-link" href="#">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Planos Curriculares
@@ -96,6 +100,7 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-graduation-cap"></i></div>
                             Alunos
                         </a>
+
                         <div class="sb-sidenav-menu-heading">Gestão</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseCurricular" aria-expanded="false"
@@ -113,7 +118,7 @@
                                     href="{{ route('clientes.index') }}">Clientes</a>
                             </nav>
                         </div>
-
+                        -->
                         <!--
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseRecursosHumanos" aria-expanded="false"
@@ -141,6 +146,7 @@
                          -->
 
                         <!-- essa parte deveria aparecer para todos-->
+
                         <div class="sb-sidenav-menu-heading">Espaço Privado</div>
                         <a class="nav-link {{ Route::currentRouteName() == 'bilhetes.index' ? 'active' : '' }}"
                             href="{{ route('bilhetes.index') }}">
@@ -182,6 +188,7 @@
             </footer>
         </div>
     </div> <!-- merdas da barra lateral -->
+
     @vite('resources/js/app.js')
 </body>
 

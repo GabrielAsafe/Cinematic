@@ -3,18 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bilhete;
-use App\Models\Filme;
+use App\Models\Cliente;
+use App\Models\Configuracao;
 use App\Models\Lugar;
-
-use App\Models\Sessao;
+use App\Models\Recibo;
+use App\Models\Sala;
+use App\Services\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
+
+    public $timestamps = true;
+
+
     public function show(): View
     {
         $cart = session('cart', []);
@@ -22,7 +29,7 @@ class CartController extends Controller
 
     }
 
-    public function addToCart(Request $request, Lugar $lugar, Filme $v_filme, Sessao $v_sessao): RedirectResponse
+    public function addToCart(Request $request, Lugar $lugar): RedirectResponse
     {
         try {
 
@@ -47,26 +54,8 @@ class CartController extends Controller
                     $htmlMessage = "sesso <a href='$url'>#{$lugar->id}</a>
                          <strong>\"{$lugar->nome}\"</strong> já foi adicionado ao carrinho!";
                 } else {
-
-
-
-
-
-
-
-
-
                     //incluir aqui os parms que quero no store
                     $cart[$lugar->id] = $lugar;
-                    //$cart[$v_filme] = $v_filme;
-
-
-
-
-
-
-
-
                     // We can access session with a request function
                     $request->session()->put('cart', $cart);
                     $alertType = 'success';
@@ -120,8 +109,101 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-       return $request->all();
+        $dadosPagamento = (object) $request->session()->get('pagamento');
+        $dadosSessao = (object) $request->session()->get('v_sessao');
+        $lugar =  $dadosPagamento->Bilhetes;
 
+
+        if ($dadosPagamento->TipoPagamento == 'PAYPAL') {
+            $valor = Payment::payWithPaypal($dadosPagamento->ReferênciaPagamento);
+        }
+        if ($dadosPagamento->TipoPagamento == 'MBWAY') {
+            $valor =  Payment::payWithMBway($dadosPagamento->ReferênciaPagamento);
+        }
+        if ($dadosPagamento->TipoPagamento == 'VISA') {
+            $valor =  Payment::payWithVisa($dadosPagamento->ReferênciaPagamento,000);
+        }
+
+
+
+        if($valor== 1){
+            //cria recibo
+            $recibo = new Recibo();
+            $recibo->cliente_id = Auth::id();
+            $recibo->data= date('Y-m-d H:i:s', strtotime($dadosPagamento->DataCompra)); // Converter a data para o formato adequado
+            $recibo->preco_total_sem_iva = $dadosPagamento->TotalsIVA;
+            $recibo->iva = $dadosPagamento->IVA;
+            $recibo->preco_total_com_iva = $dadosPagamento->TotalIVA;
+            $recibo->nif = $dadosPagamento->NIF;
+            $recibo->nome_cliente = $dadosPagamento->NomeCliente;
+            $recibo->tipo_pagamento = $dadosPagamento->TipoPagamento;
+            $recibo->ref_pagamento = $dadosPagamento->ReferênciaPagamento;
+            $recibo->save();
+            //pega o id do recibo gerado
+            $reciboId = $recibo->id;
+            //cria bilhete
+            $bilhete = new Bilhete();
+            $bilhete->recibo_id = $reciboId;
+            $bilhete->cliente_id = Auth::id();
+            $bilhete->sessao_id = $dadosSessao->id;
+            $bilhete->lugar_id =$lugar[0]['ID'];
+            $bilhete->preco_sem_iva = $dadosPagamento->TotalsIVA;
+            $bilhete->estado = 'não usado';
+            $bilhete->save();
+            //esvazia o cart
+            $request->session()->forget('cart');
+            return redirect()->route('bilhetes.index');
+
+        }else {
+            $htmlMessage = "Não foi possível terminar a compra";
+            return redirect()->route('cart.validatePayment')
+                ->with('alert-msg', $htmlMessage)
+                ->with('alert-type', 'success');
+        }
+    }
+
+
+
+    public function validatePayment(Request $request){
+        $valor = $request->session()->get("v_sessao");
+        $salaNome = Sala::find($valor->sala_id)->nome;
+        $dadosCliente = Cliente::find(Auth::id());
+        $config = Configuracao::find(1);
+        $c_name = Auth::user()->name;
+
+        $totalSemIVA = $config->preco_bilhete_sem_iva;
+        $percentagemIVA = $config->percentagem_iva;
+        $totalComIVA = ($percentagemIVA / 100) * $totalSemIVA + $totalSemIVA;
+
+        $sessionData = [
+            'DataCompra' => now()->format('d/m/Y H:i:s'),
+            'NomeCliente' =>  $c_name,
+            'NIF' => $dadosCliente->nif ?? 'N/A',
+            'ReferênciaPagamento' => $dadosCliente->ref_pagamento ?? 'null',
+            'TipoPagamento' => $dadosCliente->tipo_pagamento ?? 'N/A',
+            'TotalsIVA' => $totalSemIVA,
+            'IVA' => $percentagemIVA,
+            'TotalIVA' => $totalComIVA,
+        ];
+
+        foreach (session('cart') as $lugar) {
+            $sessionData['Bilhetes'][] = [
+                'ID' => $lugar['id'],
+                'Filme' => session('v_filme')->titulo,
+                'Sala' => $salaNome,
+                'Data' => session('v_sessao')->data,
+                'Hora' => session('v_sessao')->horario_inicio,
+                'Lugar' => 'Fila ' . $lugar['fila'] . ', Posição ' . $lugar['posicao'],
+                'Preço' => $totalComIVA,
+                'Cliente' => $c_name,
+            ];
+        }
+
+        // Armazenando os dados na sessão
+        $request->session()->put('pagamento', $sessionData);
+
+
+        return view('cart.validatePayment', ['sessionData' => $sessionData]);
     }
 
     public function destroy(Request $request): RedirectResponse
@@ -132,6 +214,9 @@ class CartController extends Controller
             ->with('alert-msg', $htmlMessage)
             ->with('alert-type', 'success');
     }
+
+
+
 
 
 }
