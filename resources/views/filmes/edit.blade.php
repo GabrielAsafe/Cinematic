@@ -13,7 +13,7 @@
 @endsection
 
 @section('main')
-    <form method="POST" action="{{ route('filmes.update', ['filme' => $filme]) }}" enctype="multipart/form-data">
+    <form id="form_filme" novalidate class="needs-validation" method="POST" action="{{ route('filmes.update', ['filme' => $filme]) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="d-flex flex-column flex-sm-row justify-content-start align-items-start">
@@ -23,6 +23,11 @@
                     'generos' => $generos,
                     'readonlyData' => false,
                 ])
+
+                <div class="my-1 d-flex justify-content-start">
+                    <button type="submit" class="btn btn-primary" name="ok" id="form_filme">Guardar Alterações</button>
+                    <a href="{{ route('filmes.index', ['filme' => $filme]) }}" class="btn btn-secondary ms-3">Cancelar</a>
+                </div>
             </div>
             <div class="ps-2 mt-5 mt-md-1 d-flex mx-auto flex-column align-items-center justify-content-between"
                 style="min-width:260px; max-width:260px;">
@@ -32,11 +37,6 @@
                     'allowDelete' => true,
                 ])
             </div>
-
-        </div>
-        <div class="my-4 d-flex justify-content-start">
-            <button type="submit" class="btn btn-primary" name="ok">Guardar Alterações</button>
-            <a href="{{ route('filmes.index', ['filme' => $filme]) }}" class="btn btn-secondary ms-3">Cancelar</a>
         </div>
     </form>
     @include('shared.confirmationDialog', [
