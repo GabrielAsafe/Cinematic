@@ -70,18 +70,22 @@
                 </div>
             @enderror
         </div>
-    </div>
+    </div> <!--Dados que veem da página anterior-->
+
     <div class="my-4 d-flex justify-content-end">
-        <a href="{{ route('filmes.edit', ['filme' => $filme]) }}" class="btn btn-secondary ms-3">Alterar
-            Filme</a>
-    </div>
+        <a href="{{ route('filmes.edit', ['filme' => $filme]) }}" class="btn btn-secondary ms-3">Alterar Filme</a>
+
+    </div> <!--botão de alterar filme-->
+
+
+
     <div>
         <h3>Sessões</h3>
         @include('sessoes.shared.table', [
             'sessoes' => $filme->sessoes,
+            'v_filme' => $filme,
             'showDetail' => true,
             'showEdit' => false,
             'showDelete' => false,
         ])
-    </div>
 @endsection

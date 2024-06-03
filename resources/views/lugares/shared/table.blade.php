@@ -12,6 +12,14 @@
             @if ($showDelete)
                 <th class="button-icon-col"></th>
             @endif
+
+
+            @if ($showAddCart ?? false)
+                <th class="button-icon-col"></th>
+            @endif
+            @if ($showRemoveCart ?? false)
+                <th class="button-icon-col"></th>
+            @endif
         </tr>
     </thead>
     <tbody>
@@ -36,6 +44,30 @@
                             @method('DELETE')
                             <button type="submit" name="delete" class="btn btn-danger">
                                 <i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
+                @endif
+
+                @if ($showAddCart ?? false)
+                    <td class="button-icon-col">
+                        <form method="POST" action="{{ route('cart.add',[
+                                                                            'lugar' => $lugar,
+                                                                            'v_filme' => $v_filme,
+                                                                            'v_sessao' =>$v_sessao,
+                                                                        ])  }}"><!--alterei essa e a cena de baixo-->
+                            @csrf
+                            <button type="submit" name="addToCart" class="btn btn-success">
+                                <i class="fas fa-plus"></i></button>
+                        </form>
+                    </td>
+                @endif
+                @if ($showRemoveCart ?? false)
+                    <td class="button-icon-col">
+                        <form method="POST" action="{{ route('cart.remove',  ['lugar' => $lugar])  }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" name="removeFromCart" class="btn btn-danger">
+                                <i class="fas fa-remove"></i></button>
                         </form>
                     </td>
                 @endif

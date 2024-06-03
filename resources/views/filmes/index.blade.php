@@ -70,6 +70,7 @@
                     <td>{{ $filme->generoRef->nome }}</td>
                     <td>{{ $filme->ano }}</td>
                     <td>{{ $filme->sumario }}</td>
+
                     <td class="button-icon-col"><a class="btn btn-secondary"
                             href="{{ route('filmes.show', ['filme' => $filme]) }}">
                             <i class="fas fa-eye"></i></a></td>

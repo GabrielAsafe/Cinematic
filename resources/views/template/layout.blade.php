@@ -72,7 +72,7 @@
                 </li>
             </ul>
         @endguest
-    </nav>
+    </nav> <!-- merdas do loging-->
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -83,6 +83,8 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                             Filmes
                         </a>
+
+                        <!-- essa parte deveria aparecer para funcionários/administração-->
                         <a class="nav-link" href="#">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Planos Curriculares
@@ -108,6 +110,8 @@
                                     href="{{ route('clientes.index') }}">Clientes</a>
                             </nav>
                         </div>
+
+                        <!--
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseRecursosHumanos" aria-expanded="false"
                             aria-controls="collapseRecursosHumanos">
@@ -131,11 +135,20 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
                             Candidaturas
                         </a>
+                         -->
+
+                        <!-- essa parte deveria aparecer para todos-->
                         <div class="sb-sidenav-menu-heading">Espaço Privado</div>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link {{ Route::currentRouteName() == 'bilhetes.index' ? 'active' : '' }}"
+                           href="{{route('bilhetes.index')}}">
                             <div class="sb-nav-link-icon"><i class="fas fa-file-text"></i></div>
-                            Minhas disciplinas
+                            Meus Bilhetes
                         </a>
+
+
+                        <a class="nav-link {{ Route::currentRouteName() == 'cart.show' ? 'active' : '' }}"
+                           href="{{ route('cart.show') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>Carrinho </a>
                     </div>
                 </div>
             </nav>
@@ -164,7 +177,7 @@
                 </div>
             </footer>
         </div>
-    </div>
+    </div> <!-- merdas da barra lateral -->
     @vite('resources/js/app.js')
 </body>
 

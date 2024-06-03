@@ -6,18 +6,23 @@
         <li class="breadcrumb-item active">Carrinho</li>
     </ol>
 @endsection
+
 @section('main')
     <div>
-        <h3>assentos no carrinho</h3>
+        <h3>Assentos no carrinho</h3>
     </div>
     @if ($cart)
         @include('lugares.shared.table', [
-        'disciplinas' => $cart,
-        'showCurso' => true,
-        'showDetail' => true,
-        'showEdit' => false,
-        'showDelete' => false,
-        'showRemoveCart' => true,
+            'lugares' => $cart,
+
+
+
+
+            'showDetail' => false,
+            'showEdit' => false,
+            'showDelete' => false,
+            'showAddCart' => false,
+            'showRemoveCart' => true,
         ])
         <div class="my-4 d-flex justify-content-end">
             <button type="submit" class="btn btn-primary" name="ok" form="formStore">
@@ -25,7 +30,12 @@
             <button type="submit" class="btn btn-danger ms-3" name="clear" form="formClear">
                 Limpar Carrinho</button>
         </div>
-        <form id="formStore" method="POST" action="{{ route('cart.store') }}" class="d-none">
+        <form id="formStore" method="POST" action="{{ route('cart.store',
+                                                                        ['lugar'=>$cart
+
+
+
+                                                                                        ]) }}" class="d-none">
             @csrf
         </form>
         <form id="formClear" method="POST" action="{{ route('cart.destroy') }}" class="d-none">

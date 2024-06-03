@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\BilhetesController;
@@ -11,13 +12,14 @@ use App\Http\Controllers\RecibosController;
 use App\Http\Controllers\SalasController;
 use App\Http\Controllers\SessoesController;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\CartController;
 
 Route::view('/', 'home')->name('root');
 
 Route::resource('bilhetes', BilhetesController::class);//tem todos os comandos de crud associados
 Route::resource('clientes', ClientesController::class);//tem todos os comandos de crud associados
+
 Route::resource('filmes', FilmesController::class);//tem todos os comandos de crud associados
+
 Route::resource('lugares', LugaresController::class);//tem todos os comandos de crud associados
 Route::resource('recibos', RecibosController::class);//tem todos os comandos de crud associados
 Route::resource('salas', SalasController::class);//tem todos os comandos de crud associados

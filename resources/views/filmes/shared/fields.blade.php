@@ -16,6 +16,12 @@
             @enderror
         </div>
     @endif
+
+    @if (($allowDelete ?? false) && $filme->cartaz_url)
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmationModal">
+            Apagar Cartaz
+        </button>
+    @endif
 </div>
 <div class="mb-3 form-floating">
     <input type="text" class="form-control @error('titulo') is-invalid @enderror" name="titulo" id="inputTitulo"

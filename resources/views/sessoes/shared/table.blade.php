@@ -14,13 +14,15 @@
                 <th class="button-icon-col"></th>
             @endif
         </tr>
+
     </thead>
     <tbody>
-        @foreach ($sessoes as $sessao)
+       @foreach ($sessoes as $sessao)
             <tr>
                 <td>{{ $sessao->sala_id }}</td>
                 <td>{{ $sessao->data }}</td>
                 <td>{{ $sessao->horario_inicio }}</td>
+
                 @if ($showDetail)
                     <td class="button-icon-col"><a class="btn btn-secondary"
                             href="{{ route('sessoes.show', ['sesso' => $sessao]) }}">
@@ -30,7 +32,7 @@
                     <td class="button-icon-col"><a class="btn btn-dark"
                             href="{{ route('sessoes.edit', ['sessao' => $sessao]) }}">
                             <i class="fas fa-edit"></i></a></td>
-                @endif
+                @endif <!--essa linha não vai ser executara pois em filmes.show essa variável está a false-->
                 @if ($showDelete)
                     <td class="button-icon-col">
                         <form method="POST" action="{{ route('sessoes.destroy', ['sessao' => $sessao]) }}">
@@ -40,7 +42,8 @@
                                 <i class="fas fa-trash"></i></button>
                         </form>
                     </td>
-                @endif
+                @endif <!--essa linha não vai ser executara pois em filmes.show essa variável está a false-->
+
             </tr>
         @endforeach
     </tbody>
