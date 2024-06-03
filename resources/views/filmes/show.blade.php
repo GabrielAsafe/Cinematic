@@ -76,7 +76,9 @@
         <a href="{{ route('filmes.edit', ['filme' => $filme]) }}" class="btn btn-secondary ms-3">Alterar Filme</a>
 
     </div> <!--botão de alterar filme-->
-
+    <div class="btn btn-success">
+        <a href="{{ route('filmes.sessao.create', ['filme' => $filme]) }}" class="btn btn-secondary ms-3">Criar sessao</a>
+    </div> 
 
 
     <div>

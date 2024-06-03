@@ -20,7 +20,7 @@
         ])
         <div class="my-4 d-flex justify-content-end">
             <button type="submit" class="btn btn-primary" name="ok">Guardar novo filme</button>
-            <a href="{{ route('filmes.create') }}" class="btn btn-secondary ms-3">Cancelar</a>
+            <a href="{{ route('filmes.show') }}" class="btn btn-secondary ms-3">Cancelar</a>
         </div>
     </form>
 @endsection
