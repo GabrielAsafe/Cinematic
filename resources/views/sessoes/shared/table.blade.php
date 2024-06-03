@@ -25,7 +25,8 @@
 
                 @if ($showDetail)
                     <td class="button-icon-col"><a class="btn btn-secondary"
-                            href="{{ route('sessoes.show', ['sesso' => $sessao]) }}">
+
+                            href="{{ route('sessoes.getLugaresVazios', ['sessaoId' => $sessao]) }}">
                             <i class="fas fa-eye"></i></a></td>
                 @endif
                 @if ($showEdit)

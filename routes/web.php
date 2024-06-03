@@ -22,6 +22,26 @@ Route::delete('clientes/{cliente}/foto', [ClientesController::class, 'destroy_fo
 Route::resource('filmes', FilmesController::class);//tem todos os comandos de crud associados
 Route::delete('filmes/{filme}/cartaz', [FilmesController::class, 'destroy_cartaz'])->name('filmes.cartaz.destroy');
 
+
+
+
+
+
+Route::get('/sessoes/{sessaoId}/lugares-vazios', [SessoesController::class, 'getLugaresVazios'])->name('sessoes.getLugaresVazios');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::resource('lugares', LugaresController::class);//tem todos os comandos de crud associados
 Route::resource('recibos', RecibosController::class);//tem todos os comandos de crud associados
 Route::resource('salas', SalasController::class);//tem todos os comandos de crud associados
@@ -37,7 +57,7 @@ Route::post('/password/change', [ChangePasswordController::class, 'store'])->nam
 
 
 // Add a "lugares" to the cart:
-Route::post('cart/{lugar}/{v_filme}/{v_sessao}', [CartController::class, 'addToCart'])
+Route::post('cart/{lugar}', [CartController::class, 'addToCart'])
     ->name('cart.add');
 // Remove a "lugar" from the cart:
 Route::delete('cart/{lugar}', [CartController::class, 'removeFromCart'])

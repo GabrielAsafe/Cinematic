@@ -22,7 +22,7 @@ class CartController extends Controller
 
     }
 
-    public function addToCart(Request $request, Lugar $lugar, Filme $v_filme, Sessao $v_sessao): RedirectResponse
+    public function addToCart(Request $request, Lugar $lugar): RedirectResponse
     {
         try {
 
@@ -47,26 +47,8 @@ class CartController extends Controller
                     $htmlMessage = "sesso <a href='$url'>#{$lugar->id}</a>
                          <strong>\"{$lugar->nome}\"</strong> já foi adicionado ao carrinho!";
                 } else {
-
-
-
-
-
-
-
-
-
                     //incluir aqui os parms que quero no store
                     $cart[$lugar->id] = $lugar;
-                    //$cart[$v_filme] = $v_filme;
-
-
-
-
-
-
-
-
                     // We can access session with a request function
                     $request->session()->put('cart', $cart);
                     $alertType = 'success';
@@ -120,7 +102,9 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-       return $request->all();
+
+
+       return $request->session()->all();
 
     }
 
