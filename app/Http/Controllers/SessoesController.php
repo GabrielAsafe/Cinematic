@@ -30,15 +30,17 @@ class SessoesController extends Controller
     public function store(Filme $filme, SessaoRequest $request)
     {
 
-        $formData = $request->validated();
-        array_push($formData, $filme->id);
-        print_r($formData);
-        die();
-        Sessao::create($formData);
+        //$formData = $request->validated();
+        //array_push($formData, $filme->id);
+        $newSessao = Sessao::create(array_merge($request->validated(), ['filme_id' =>$filme->id]));
+        //print_r($formData);
+        //die();
+        //Sessao::create($formData);
         
         $url = route('filmes.show', ['filme' => $filme]);
-        $htmlMessage = "Sessão <a href='$url'>#{$sessao->id}</a><strong>\"{$filme->titulo}\"</strong> foi criada com sucesso!";
-        return redirect()->route('filmes.show')
+        $htmlMessage = "Sessão <a href='$url'>#{$newSessao->id}</a><strong>\"{$filme->titulo}\"</strong> foi criada com sucesso!";
+        return redirect()->route('filmes.show', ['filme' => $filme])
+            ->with('filme', $filme)
             ->with('alert-msg', $htmlMessage)
             ->with('alert-type', 'success');
     }
@@ -74,19 +76,10 @@ class SessoesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Sessao $sessao)
-    {
-        return view('sessao.edit')->withSessao($sessao);
-    }
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Sessao $sessao)
-    {
-        $sessao->update($request->all());
-        return redirect()->route('sessao.index');
-    }
+
 
     /**
      * Remove the specified resource from storage.
