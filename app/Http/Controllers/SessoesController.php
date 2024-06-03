@@ -50,7 +50,10 @@ class SessoesController extends Controller
      */
     public function show(Sessao $sesso)
     {
+
         $filme = $sesso->filmeRef;
+
+
         return view('sessoes.show', compact('sesso', 'filme'));
     }
 

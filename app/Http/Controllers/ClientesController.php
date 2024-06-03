@@ -16,7 +16,7 @@ class ClientesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request) : View
+    public function index(Request $request): View
     {
         $filterByNome = $request->name ?? '';
         $clienteQuery = Cliente::query();
@@ -108,12 +108,12 @@ class ClientesController extends Controller
 
     public function destroy_foto(Cliente $cliente): RedirectResponse
     {
-        if ($cliente->user->url_foto) {
-            Storage::delete('public/fotos/' . $cliente->user->url_foto);
-            $cliente->user->url_foto = null;
+        if ($cliente->user->foto_url) {
+            Storage::delete('public/fotos/' . $cliente->user->foto_url);
+            $cliente->user->foto_url = null;
             $cliente->user->save();
         }
-        return redirect()->route('Clientes.edit', ['Cliente' => $cliente])
+        return redirect()->route('clientes.edit', ['cliente' => $cliente])
             ->with('alert-msg', 'Foto do Cliente "' . $cliente->user->name . '" foi removida!')
             ->with('alert-type', 'success');
     }
