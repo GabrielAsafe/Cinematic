@@ -164,6 +164,7 @@ class CartController extends Controller
 
 
 
+
     public function validatePayment(Request $request){
         $valor = $request->session()->get("v_sessao");
         $salaNome = Sala::find($valor->sala_id)->nome;
