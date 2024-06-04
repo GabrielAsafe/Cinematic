@@ -18,11 +18,13 @@ class FilmesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request): View
+    public function index(Request $request)
+
     {
         $generos = Genero::all();
         $filterByGenero = $request->genero_code ?? '';
         $filterByTitulo = $request->titulo ?? '';
+        $filterbySumario = $request->sumario ?? '';
         $filmeQuery = Filme::query();
 
         $filmeQuery->whereHas('sessoes', function ($query) {
@@ -34,10 +36,17 @@ class FilmesController extends Controller
         }
         if ($filterByTitulo !== '') {
             $filmeId = Filme::where('titulo', 'like', "%$filterByTitulo%")->pluck('id');
+            //$filmeId = $filterByTitulo ? Filme::where('titulo', 'like', "%$filterByTitulo%")->pluck('id') : Filme::where('sumario', 'like', "%$filterByTitulo%")->pluck('id');
+            //return $filmeId;
             $filmeQuery->whereIntegerInRaw('id', $filmeId);
         }
+        if($filterbySumario !== ''){
+            $filmeId = Filme::where('sumario', 'like', "%$filterbySumario%")->pluck('id');
+            $filmeQuery->whereIntegerInRaw('id', $filmeId);
+        }
+
         $filmes = $filmeQuery->with('generoRef')->paginate(10);
-        return view('filmes.index', compact('filmes', 'generos', 'filterByGenero', 'filterByTitulo'));
+        return view('filmes.index', compact('filmes', 'generos', 'filterByGenero', 'filterByTitulo', 'filterbySumario'));
     }
 
     /**
@@ -78,6 +87,9 @@ class FilmesController extends Controller
      */
     public function show(Filme $filme)
     {
+
+
+
         $generos = Genero::all();
         return view('filmes.show', compact('filme', 'generos'));
     }

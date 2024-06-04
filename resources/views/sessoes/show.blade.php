@@ -18,7 +18,7 @@
 @section('main')
 <div>
     @include('lugares.shared.table', [
-        'lugares' => $sesso->salaRef->lugares,
+        'lugares' => $lugaresVazios,
         'lugaresVazios' =>$lugaresVazios,
         'showDetail' => false,
         'showEdit' => false,

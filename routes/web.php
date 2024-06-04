@@ -13,6 +13,9 @@ use App\Http\Controllers\SalasController;
 use App\Http\Controllers\SessoesController;
 use Illuminate\Support\Facades\Auth;
 
+use App\Mail\MyTestEmail;
+use Illuminate\Support\Facades\Mail;
+
 Route::view('/', 'home')->name('root');
 
 Route::resource('bilhetes', BilhetesController::class);//tem todos os comandos de crud associados
@@ -24,25 +27,7 @@ Route::delete('filmes/{filme}/cartaz', [FilmesController::class, 'destroy_cartaz
 Route::get('filmes/{filme}/novaSessao', [SessoesController::class, 'create'])->name('filmes.sessao.create');
 Route::post('filmes/{filme}/novaSessao', [SessoesController::class, 'store'])->name('filmes.sessao.store');
 
-
-
-
-
-
 Route::get('/sessoes/{sessaoId}/lugares-vazios', [SessoesController::class, 'getLugaresVazios'])->name('sessoes.getLugaresVazios');
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Route::resource('lugares', LugaresController::class);//tem todos os comandos de crud associados
 Route::resource('recibos', RecibosController::class);//tem todos os comandos de crud associados
@@ -75,6 +60,13 @@ Route::delete('cart', [CartController::class, 'destroy'])->name('cart.destroy');
 
 Route::post('validatePayment', [CartController::class, 'validatePayment'])->name('cart.validatePayment');
 
+
 Route::get('cart', [CartController::class, 'show'])->name('cart.show');
+
+
+
+
+
+Route::get('bilhetes/createPDF/{bilhete}', [BilhetesController::class, 'createPDF'])->name('createPDF');
 
 

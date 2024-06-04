@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bilhete;
+use App\Models\Recibo;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\Cast\Object_;
-use Illuminate\Support\Facades\Auth; // Add this line
+use Illuminate\Support\Facades\Auth;
+use function Symfony\Component\String\b;
+
+// Add this line
 
 class BilhetesController extends Controller
 {
@@ -33,6 +38,27 @@ class BilhetesController extends Controller
         $bilhete = Bilhete::findOrFail($id);
 
         return view('bilhetes.show', compact('bilhete'));
+    }
+
+
+// Generate PDF
+    public static function createPDF(Bilhete $bilhete) {
+
+        $recibo =  Bilhete::find($bilhete->id);
+
+
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml(Recibo::find($recibo->recibo_id));
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream();
     }
 
 

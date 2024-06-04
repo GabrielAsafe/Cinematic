@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SessaoRequest;
+use App\Models\Bilhete;
 use App\Models\Filme;
 use App\Models\Lugar;
 use App\Models\Sessao;
@@ -13,7 +14,7 @@ use stdClass;
 
 class SessoesController extends Controller
 {
-        
+
     /**
      * Show the form for creating a new resource.
      */
@@ -36,7 +37,7 @@ class SessoesController extends Controller
         //print_r($formData);
         //die();
         //Sessao::create($formData);
-        
+
         $url = route('filmes.show', ['filme' => $filme]);
         $htmlMessage = "Sessão <a href='$url'>#{$newSessao->id}</a><strong>\"{$filme->titulo}\"</strong> foi criada com sucesso!";
         return redirect()->route('filmes.show', ['filme' => $filme])
@@ -58,25 +59,23 @@ class SessoesController extends Controller
 
     public function getLugaresVazios($sessaoId)
     {
-
         $sessao = Sessao::find($sessaoId);
         $filme = $sessao->filmeRef;
-        // Use a query builder para construir a query desejada
-        $lugaresVazios = Lugar::select('lugares.sala_id', 'lugares.fila', 'lugares.posicao')
-            ->join('salas', 'lugares.sala_id', '=', 'salas.id')
-            ->join('sessoes', 'salas.id', '=', 'sessoes.sala_id')
-            ->leftJoin('bilhetes', function($join) use ($sessaoId) {
-                $join->on('bilhetes.lugar_id', '=', 'lugares.id')
-                    ->where('bilhetes.sessao_id', '=', $sessaoId);
-            })
-            ->where('sessoes.id', $sessaoId)
-            ->whereNull('bilhetes.lugar_id')
-            ->get();
+
+        $lugares = Lugar::where('sala_id', $sessao->sala_id)->get();
+
+        // Obter os IDs dos lugares ocupados na sessão
+        $ocupados = Bilhete::where('sessao_id', $sessaoId)->pluck('lugar_id');
+
+        $lugaresVazios = $lugares->filter(function ($lugar) use ($ocupados) {
+            return !$ocupados->contains($lugar->id);
+        });
 
 
-         return view('sessoes.show', ['lugaresVazios' => $lugaresVazios,'filme'=>$filme, 'sesso'=>$sessao]);
 
-        //return $lugaresVazios;
+       return view('sessoes.show', ['lugaresVazios' => $lugaresVazios,'filme'=>$filme, 'sesso'=>$sessao]);
+
+        return $lugaresVazios;
     }
 
     /**

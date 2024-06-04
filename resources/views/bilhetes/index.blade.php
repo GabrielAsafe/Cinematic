@@ -34,7 +34,14 @@
                         <a class="btn btn-secondary"
                            href="{{ route('bilhetes.show',['bilhete'=>$bilhete]) }}">
                             <i class="fas fa-eye"></i></a>
+
+                        <div>
+                            <a class="btn btn-secondary"
+                               href="{{ route('createPDF',['bilhete'=>$bilhete]) }}">
+                                <i class="fas fa-file"></i></a>
+                        </div>
                     </div>
+
                 </div>
         @endforeach
         {!! $bilhetes->withQueryString()->links('pagination::bootstrap-5') !!}
