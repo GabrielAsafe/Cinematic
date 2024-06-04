@@ -21,6 +21,8 @@ Route::delete('clientes/{cliente}/foto', [ClientesController::class, 'destroy_fo
 
 Route::resource('filmes', FilmesController::class);//tem todos os comandos de crud associados
 Route::delete('filmes/{filme}/cartaz', [FilmesController::class, 'destroy_cartaz'])->name('filmes.cartaz.destroy');
+Route::get('filmes/{filme}/novaSessao', [SessoesController::class, 'create'])->name('filmes.sessao.create');
+Route::post('filmes/{filme}/novaSessao', [SessoesController::class, 'store'])->name('filmes.sessao.store');
 
 
 
@@ -47,6 +49,7 @@ Route::resource('recibos', RecibosController::class);//tem todos os comandos de 
 Route::resource('salas', SalasController::class);//tem todos os comandos de crud associados
 
 Route::resource('sessoes', SessoesController::class);//tem todos os comandos de crud associados
+
 
 Auth::routes(['verify' => true]);
 

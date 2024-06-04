@@ -170,6 +170,7 @@
                         @include('partials.messages')
                     @endif
                     @if ($errors->any())
+                    @dump($errors)
                         @include('shared.alertValidation')
                     @endif
                     <h1 class="mt-4">@yield('titulo', 'Politécnico de Leiria')</h1>

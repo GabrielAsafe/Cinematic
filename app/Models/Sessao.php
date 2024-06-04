@@ -12,7 +12,7 @@ class Sessao extends Model
 
     protected $table = 'sessoes';
 
-    protected $fillable = ['id','filme_id', 'sala_id', 'data', 'hora_inicio', 'custom'];
+    protected $fillable = ['id','filme_id', 'sala_id', 'data', 'horario_inicio', 'custom'];
 
     public function filmeRef(): BelongsTo
     {
