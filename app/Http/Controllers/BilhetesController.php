@@ -44,12 +44,15 @@ class BilhetesController extends Controller
 // Generate PDF
     public static function createPDF(Bilhete $bilhete) {
 
-        $recibo =  Bilhete::find($bilhete->id);
+        $recibo = Recibo::find($bilhete->recibo_id);
+
+
+        $html = view('mail.mail', ['recibo' => $recibo])->render();
 
 
 
         $dompdf = new Dompdf();
-        $dompdf->loadHtml(Recibo::find($recibo->recibo_id));
+        $dompdf->loadHtml($html);
 
         // (Optional) Setup the paper size and orientation
         $dompdf->setPaper('A4', 'landscape');
