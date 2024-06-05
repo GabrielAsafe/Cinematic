@@ -11,13 +11,13 @@
 
 @section('main')
     <div class="container">
-
-
             @foreach ($bilhetes as $bilhete)
                 <div class="card">
                     <div class="card-body">
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <h3>Bilhete ID: {{ $bilhete->id }}</h3>
+
+                            <!--
                             <p><strong>Recibo ID:</strong> {{ $bilhete->recibo_id }}</p>
                             <p><strong>Cliente ID:</strong> {{ $bilhete->cliente_id }}</p>
                             <p><strong>Sessão ID:</strong> {{ $bilhete->sessao_id }}</p>
@@ -30,16 +30,19 @@
                         <div class="col-md-4">
                             <p><strong>Criado em:</strong> {{ $bilhete->created_at }}</p>
                             <p><strong>Atualizado em:</strong> {{ $bilhete->updated_at }}</p>
+                            -->
                         </div>
-                        <a class="btn btn-secondary"
-                           href="{{ route('bilhetes.show',['bilhete'=>$bilhete]) }}">
-                            <i class="fas fa-eye"></i></a>
+                        <div class="col-md-6">
 
-                        <div>
+                            <a class="btn btn-secondary"
+                               href="{{ route('bilhetes.show',['bilhete'=>$bilhete]) }}">
+                                <i class="fas fa-eye"></i></a>
+
                             <a class="btn btn-secondary"
                                href="{{ route('createPDF',['bilhete'=>$bilhete]) }}">
                                 <i class="fas fa-file"></i></a>
                         </div>
+
                     </div>
 
                 </div>

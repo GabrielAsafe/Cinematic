@@ -115,6 +115,14 @@ class CartController extends Controller
         $dadosSessao = (object) $request->session()->get('v_sessao');
         $lugar =  $dadosPagamento->Bilhetes;
 
+        $dados= [
+            'dadosPagamento' => $dadosPagamento,
+            'dadosSessao' => $dadosSessao,
+            'lugar' => $lugar
+            ];
+
+        //return $dados;
+
 
         if ($dadosPagamento->TipoPagamento == 'PAYPAL') {
             $valor = Payment::payWithPaypal($dadosPagamento->ReferênciaPagamento);
@@ -146,25 +154,30 @@ class CartController extends Controller
                 $recibo->save();
                 //pega o id do recibo gerado
                 $reciboId = $recibo->id;
+
+
                 //cria bilhete
-                $bilhete = new Bilhete();
-                $bilhete->recibo_id = $reciboId;
-                $bilhete->cliente_id = Auth::id();
-                $bilhete->sessao_id = $dadosSessao->id;
-                $bilhete->lugar_id = $lugar[0]['ID'];
-                $bilhete->preco_sem_iva = $dadosPagamento->TotalsIVA;
-                $bilhete->estado = 'não usado';
-                $bilhete->save();
+                $bilhetes = array();
+                array_push($bilhetes,$recibo);
+                foreach ($lugar as $x) {
+                    $pc = (object) $x;//preciso fazer um cast de {} para objeto
+                    $bilhete = new Bilhete();
+                    $bilhete->recibo_id = $reciboId;
+                    $bilhete->cliente_id = Auth::id();
+                    $bilhete->sessao_id = $dadosSessao->id;
+                    $bilhete->lugar_id = $pc->ID;
+                    $bilhete->preco_sem_iva = $dadosPagamento->TotalsIVA;
+                    $bilhete->estado = 'não usado';
+                    array_push($bilhetes,$bilhete);
+                    $bilhete->save();
+                }
+
                 //esvazia o cart
-                $request->session()->forget('cart');
-
-
+               $request->session()->forget('cart');
 
                 //envia recibo para o cliente
-                Mail::to(Auth::user()->email)->send(new MyTestEmail($recibo));
+                Mail::to(Auth::user()->email)->send(new MyTestEmail($bilhetes));
 
-                //gerar pdf
-                //BilhetesController::createPDF($recibo);
                 return redirect()->route('bilhetes.index');
 
             } else {
@@ -196,7 +209,9 @@ class CartController extends Controller
             $config = Configuracao::find(1);
             $c_name = Auth::user()->name;
 
-            $totalSemIVA = $config->preco_bilhete_sem_iva;
+
+
+            $totalSemIVA = $config->preco_bilhete_sem_iva * sizeof($request->session()->all()['cart']); //TODO multiplicar pela quantidade de lugares
             $percentagemIVA = $config->percentagem_iva;
             $totalComIVA = ($percentagemIVA / 100) * $totalSemIVA + $totalSemIVA;
 
@@ -219,7 +234,7 @@ class CartController extends Controller
                     'Data' => session('v_sessao')->data,
                     'Hora' => session('v_sessao')->horario_inicio,
                     'Lugar' => 'Fila ' . $lugar['fila'] . ', Posição ' . $lugar['posicao'],
-                    'Preço' => $totalComIVA,
+                    'Preço' => ($percentagemIVA / 100) * $config->preco_bilhete_sem_iva + $config->preco_bilhete_sem_iva,
                     'Cliente' => $c_name,
                 ];
             }

@@ -34,7 +34,7 @@
     <h2>Bilhetes</h2>
     @foreach (session('pagamento')['Bilhetes'] as $bilhete)
         <div>
-            <h3>Bilhete ID: {{ $bilhete['ID'] }}</h3>
+            <h3>Assento ID: {{ $bilhete['ID'] }}</h3>
             <ul>
                 <li><strong>Filme:</strong> {{ $bilhete['Filme'] }}</li>
                 <li><strong>Sala:</strong> {{ $bilhete['Sala'] }}</li>

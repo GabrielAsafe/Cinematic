@@ -18,7 +18,7 @@ class MyTestEmail extends Mailable
      *
      * @return void
      */
-    public function __construct(private $recibo)
+    public function __construct(private $bilhetes)
     {
         //
     }
@@ -44,7 +44,7 @@ class MyTestEmail extends Mailable
     {
         return new Content(
             view: 'mail.mail',
-            with: ['recibo' => $this->recibo],
+            with: ['bilhetes' => $this->bilhetes],
         );
     }
 }

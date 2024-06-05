@@ -8,23 +8,36 @@
 @endsection
 
 @section('main')
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <div class="col-md-12">
-                <h3>Bilhete ID: {{ $bilhete->id }}</h3>
-                <p><strong>Recibo ID:</strong> {{ $bilhete->recibo_id }}</p>
-                <p><strong>Cliente ID:</strong> {{ $bilhete->cliente_id }}</p>
-                <p><strong>Sessão ID:</strong> {{ $bilhete->sessao_id }}</p>
-            </div>
-            <div class="col-md-12">
-                <p><strong>Lugar ID:</strong> {{ $bilhete->lugar_id }}</p>
-                <p><strong>Preço sem IVA:</strong> {{ $bilhete->preco_sem_iva }}</p>
-                <p><strong>Estado:</strong> {{ $bilhete->estado }}</p>
-            </div>
-            <div class="col-md-12">
-                <p><strong>Criado em:</strong> {{ $bilhete->created_at }}</p>
-                <p><strong>Atualizado em:</strong> {{ $bilhete->updated_at }}</p>
-            </div>
+
+    <div class="ticket">
+
+        <div class="ticket-header">
+            <h2>Recibo da Compra</h2>
+        </div>
+        <div class="ticket-details">
+            <p><strong>Recibo ID:</strong> {{$recibo->id}}</p>
+            <p><strong>Preço com IVA:</strong> {{$recibo->preco_total_sem_iva}}</p>
+            <p><strong>IVA:</strong> {{$recibo->iva}}</p>
+            <p><strong>Total com IVA:</strong> {{$recibo->preco_total_com_iva}}</p>
+            <p><strong>NIF:</strong> {{$recibo->nif}}</p>
+            <p><strong>Nome:</strong> {{$recibo->nome_cliente}}</p>
+            <p><strong>Data:</strong> {{$recibo->data}}</p>
+            <p><strong>Tipo de Pagamento:</strong> {{$recibo->tipo_pagamento}}</p>
+            <p><strong>Referência de Pagamento:</strong> {{$recibo->ref_pagamento}}</p>
+        </div>
+        <h2>Bilhetes</h2>
+        <div>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Bilhete:</strong> {{$bilhete->id}}</li>
+                <li class="list-group-item"><strong>Fila:</strong> {{$fila}}</li>
+                <li class="list-group-item"><strong>Posição:</strong> {{$posicao}}</li>
+                <li class="list-group-item"><strong>Nome da Sala:</strong> {{$nome_sala}}</li>
+                <li class="list-group-item"><strong>Filme:</strong> {{$titulo}}</li>
+                <li class="list-group-item"><strong>Hora de Início:</strong> {{$sessao->horario_inicio}}</li>
+                <li class="list-group-item"><strong>Estado:</strong> {{$bilhete->estado}}</li>
+            </ul>
         </div>
     </div>
 @endsection
+
+
