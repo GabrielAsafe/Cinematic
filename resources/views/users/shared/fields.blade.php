@@ -23,30 +23,13 @@
         </div>
     @enderror
 </div>
-
-<div class="mb-3 form-floating">
-    <select class="form-select @error('genero') is-invalid @enderror" name="genero" id="inputGenero"
-        {{ $disabledStr }}>
-        <option {{ old('genero', $user->genero) == 'M' ? 'selected' : '' }} value="M">Masculino
-        </option>
-        <option {{ old('genero', $user->genero) == 'F' ? 'selected' : '' }} value="F">Feminino
-        </option>
-    </select>
-    <label for="inputGenero" class="form-label">Gênero</label>
-    @error('genero')
-        <div class="invalid-feedback">
-            {{ $message }}
-        </div>
-    @enderror
-</div>
-
 <div class="mb-3">
     <div class="form-check form-switch" {{ $disabledStr }}>
-        <input type="hidden" name="admin" value="0">
-        <input type="checkbox" class="form-check-input @error('admin') is-invalid @enderror" name="admin"
-            id="inputOpcional" {{ $disabledStr }} {{ old('admin', $user->admin) ? 'checked' : '' }} value="1">
-        <label for="inputOpcional" class="form-check-label">Administrador</label>
-        @error('admin')
+        <input type="hidden" name="bloqueado" value="0">
+        <input type="checkbox" class="form-check-input @error('bloqueado') is-invalid @enderror" name="bloqueado"
+            id="inputOpcional" {{ $disabledStr }} {{ old('bloqueado', $cliente->user->bloqueado) ? 'checked' : '' }} value="1">
+        <label for="inputOpcional" class="form-check-label">Bloqueado</label>
+        @error('bloqueado')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
