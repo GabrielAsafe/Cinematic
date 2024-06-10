@@ -91,60 +91,27 @@
                             Filmes
                         </a>
 
-                        <!-- essa parte deveria aparecer para funcionários/administração
-                        <a class="nav-link" href="#">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Planos Curriculares
-                        </a>
-                        <a class="nav-link" href="#">
-                            <div class="sb-nav-link-icon"><i class="fas fa-graduation-cap"></i></div>
-                            Alunos
-                        </a>
+                        <!-- essa parte deveria aparecer para funcionários/administração -->
+
+                        @if(Auth::check() && Auth::user()->tipo == 'A')
 
                         <div class="sb-sidenav-menu-heading">Gestão</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseCurricular" aria-expanded="false"
                             aria-controls="collapseCurricular">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Curricular
+                            Gerir
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseCurricular" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link {{ Route::currentRouteName() == 'filmes.index' ? 'active' : '' }}"
-                                    href="{{ route('filmes.index') }}">Filmes</a>
+
                                 <a class="nav-link {{ Route::currentRouteName() == 'clientes.index' ? 'active' : '' }}"
                                     href="{{ route('clientes.index') }}">Clientes</a>
                             </nav>
                         </div>
-                        -->
-                        <!--
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapseRecursosHumanos" aria-expanded="false"
-                            aria-controls="collapseRecursosHumanos">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                            Recursos Humanos
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseRecursosHumanos" aria-labelledby="headingTwo"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="#">Departamentos</a>
-                                <a class="nav-link" href="#">Docentes</a>
-                            </nav>
-                        </div>
-                        <div class="sb-sidenav-menu-heading">Candidaturas</div>
-                        <a class="nav-link" href="#">
-                            <div class="sb-nav-link-icon"><i class="fas fa-upload"></i></div>
-                            Enviar candidatura
-                        </a>
-                        <a class="nav-link" href="#">
-                            <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
-                            Candidaturas
-                        </a>
-                         -->
-
+                        @endif
                         <!-- essa parte deveria aparecer para todos-->
 
                         <div class="sb-sidenav-menu-heading">Espaço Privado</div>
