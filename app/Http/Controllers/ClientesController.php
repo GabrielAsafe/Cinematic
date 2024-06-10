@@ -19,7 +19,7 @@ class ClientesController extends Controller
     public function index(Request $request): View
     {
         $filterByNome = $request->name ?? '';
-        $filterByEstado = $request->estado;
+        $filterByEstado = $request->estado ?? '0';
 
         $clienteQuery = Cliente::query();
 
