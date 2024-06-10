@@ -66,6 +66,8 @@ class FuncionariosController extends Controller
             $newFuncionario->save();
         }
 
+        $newFuncionario->sendEmailVerificationNotification();
+
         $url = route('funcionarios.show', ['funcionario' => $newFuncionario]);
         $htmlMessage = "Funcionario <a href='$url'>#{$newFuncionario->id}</a><strong>\"{$newFuncionario->name}\"</strong> foi criada com sucesso! Password: " . $defaultPassword;
         return redirect()->route('funcionarios.index')

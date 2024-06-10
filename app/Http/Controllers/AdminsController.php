@@ -68,6 +68,8 @@ class adminsController extends Controller
             $newadmin->save();
         }
 
+        $newadmin->sendEmailVerificationNotification();
+
         $url = route('admins.show', ['admin' => $newadmin]);
         $htmlMessage = "admin <a href='$url'>#{$newadmin->id}</a><strong>\"{$newadmin->name}\"</strong> foi criada com sucesso! Password: " . $defaultPassword;
         return redirect()->route('admins.index')

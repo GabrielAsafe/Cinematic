@@ -14,6 +14,7 @@
             @if ($showDelete)
                 <th class="button-icon-col"></th>
             @endif
+            <th class="button-icon-col"></th>
         </tr>
     </thead>
     <tbody>
