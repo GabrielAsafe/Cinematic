@@ -28,8 +28,16 @@ Route::get('filmes/{filme}/novaSessao', [SessoesController::class, 'create'])->n
 Route::post('filmes/{filme}/novaSessao', [SessoesController::class, 'store'])->name('filmes.sessao.store');
 
 Route::get('/sessoes/{sessaoId}/lugares-vazios', [SessoesController::class, 'getLugaresVazios'])->name('sessoes.getLugaresVazios');
+Route::get('/sessoes/validarBilhetes/{sessao}', [SessoesController::class, 'validarBilhetes'])->name('sessoes.validarBilhetes');
+Route::get('/sessoes/validarCliente/{bilhetes}', [SessoesController::class, 'validarCliente'])->name('sessoes.validarCliente');
+Route::get('/sessoes/permitirEntrada/{bilhete}', [SessoesController::class, 'permitirEntrada'])->name('sessoes.permitirEntrada');
+
+
 
 Route::resource('lugares', LugaresController::class);//tem todos os comandos de crud associados
+
+
+
 Route::resource('recibos', RecibosController::class);//tem todos os comandos de crud associados
 Route::resource('salas', SalasController::class);//tem todos os comandos de crud associados
 
@@ -68,5 +76,4 @@ Route::get('cart', [CartController::class, 'show'])->name('cart.show');
 
 
 Route::get('bilhetes/createPDF/{bilhete}', [BilhetesController::class, 'createPDF'])->name('createPDF');
-
 

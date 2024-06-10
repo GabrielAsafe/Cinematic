@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SessaoRequest;
 use App\Models\Bilhete;
+use App\Models\Cliente;
 use App\Models\Filme;
 use App\Models\Lugar;
 use App\Models\Sessao;
 use App\Models\Sala;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use stdClass;
@@ -33,7 +35,7 @@ class SessoesController extends Controller
 
         //$formData = $request->validated();
         //array_push($formData, $filme->id);
-        $newSessao = Sessao::create(array_merge($request->validated(), ['filme_id' =>$filme->id]));
+        $newSessao = Sessao::create(array_merge($request->validated(), ['filme_id' => $filme->id]));
         //print_r($formData);
         //die();
         //Sessao::create($formData);
@@ -56,7 +58,6 @@ class SessoesController extends Controller
     }
 
 
-
     public function getLugaresVazios($sessaoId)
     {
         $sessao = Sessao::find($sessaoId);
@@ -72,19 +73,71 @@ class SessoesController extends Controller
         });
 
 
+        return view('sessoes.show', ['lugaresVazios' => $lugaresVazios, 'filme' => $filme, 'sesso' => $sessao]);
 
-       return view('sessoes.show', ['lugaresVazios' => $lugaresVazios,'filme'=>$filme, 'sesso'=>$sessao]);
 
-        return $lugaresVazios;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    /**
-     * Update the specified resource in storage.
-     */
 
+    public function validarBilhetes(int $sessao, Request $request)
+    {
+        $filterByBilheteId = $request->bilhete_id;
+        $request->session()->put('valorSessao', $sessao);
+
+
+        $bilhetes = Bilhete::where('sessao_id', $sessao)
+           ->get();
+
+        if ($filterByBilheteId !== null && $filterByBilheteId !== '') {
+
+            $alvo = Bilhete::where('id', $filterByBilheteId)
+                ->where('sessao_id', $request->session()->get('valorSessao'))
+                ->get();
+
+            if ($alvo->isNotEmpty()) {
+                return view('sessoes.validarBilhetes', ['sessao' => $alvo, 'filterByBilheteId' => $filterByBilheteId]);
+            } else {
+                 $htmlMessage = "Não foi possível encontrar bilhete";
+                return redirect()->route('sessoes.validarBilhetes', ['sessao' =>$sessao])
+                    ->with('alert-msg', $htmlMessage)
+                    ->with('alert-type', 'danger');
+            }
+
+        }
+
+            return view('sessoes.validarBilhetes', ['sessao' => $bilhetes, 'filterByBilheteId' => $filterByBilheteId]);
+
+    }
+
+    public function permitirEntrada(Bilhete $bilhete)
+    {
+
+
+        // Verificar se o usuário foi encontrado
+        if ($bilhete) {
+            $bilhete->update(['estado' => 'usado']);
+
+            $mensagem= "Campo atualizado com sucesso";
+        } else {
+            $mensagem= "Usuário não encontrado.";
+        }
+
+
+
+        return redirect()->route('sessoes.validarBilhetes', [
+            'sessao' => $bilhete->sessao_id
+        ])
+            ->with('alert-msg', $mensagem)
+            ->with('alert-type', 'success');
+
+    }
+
+
+    public function validarCliente(Bilhete $bilhetes)
+    {
+        $user = User::find($bilhetes->cliente_id);
+        return view('sessoes.validarCliente', ['bilhetes' => $bilhetes, 'user' => $user]);
+    }
 
     /**
      * Remove the specified resource from storage.

@@ -13,6 +13,11 @@
             @if ($showDelete)
                 <th class="button-icon-col"></th>
             @endif
+
+
+            @if ($showMenageSession ?? false)
+                <th class="button-icon-col"></th>
+            @endif
         </tr>
 
     </thead>
@@ -29,6 +34,14 @@
                             href="{{ route('sessoes.getLugaresVazios', ['sessaoId' => $sessao]) }}">
                             <i class="fas fa-eye"></i></a></td>
                 @endif
+
+
+                @if ($showMenageSession)
+                    <td class="button-icon-col"><a class="btn btn-dark"
+                            href="{{ route('sessoes.validarBilhetes', ['sessao' => $sessao->id]) }}">
+                            <i class="fa fa-address-card"></i></a></td>
+                @endif
+
                 @if ($showEdit)
                     <td class="button-icon-col"><a class="btn btn-dark"
                             href="{{ route('sessoes.edit', ['sessao' => $sessao]) }}">
