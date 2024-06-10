@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\adminsController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
@@ -7,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BilhetesController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\FilmesController;
+use App\Http\Controllers\FuncionariosController;
 use App\Http\Controllers\LugaresController;
 use App\Http\Controllers\RecibosController;
 use App\Http\Controllers\SalasController;
@@ -19,8 +21,19 @@ use Illuminate\Support\Facades\Mail;
 Route::view('/', 'home')->name('root');
 
 Route::resource('bilhetes', BilhetesController::class);//tem todos os comandos de crud associados
+
 Route::resource('clientes', ClientesController::class);//tem todos os comandos de crud associados
 Route::delete('clientes/{cliente}/foto', [ClientesController::class, 'destroy_foto'])->name('clientes.foto.destroy');
+Route::put('clientes/{cliente}/bloquear', [ClientesController::class, 'block_cliente'])->name('clientes.cliente.block');
+
+Route::resource('funcionarios', FuncionariosController::class);//tem todos os comandos de crud associados
+Route::delete('funcionarios/{funcionario}/foto', [FuncionariosController::class, 'destroy_foto'])->name('funcionarios.foto.destroy');
+Route::put('funcionarios/{funcionario}/bloquear', [FuncionariosController::class, 'block_funcionario'])->name('funcionarios.funcionario.block');
+
+Route::resource('admins', AdminsController::class);//tem todos os comandos de crud associados
+Route::delete('admins/{admin}/foto', [AdminsController::class, 'destroy_foto'])->name('admins.foto.destroy');
+Route::put('admins/{admin}/bloquear', [AdminsController::class, 'block_admin'])->name('admins.admin.block');
+
 
 Route::resource('filmes', FilmesController::class);//tem todos os comandos de crud associados
 Route::delete('filmes/{filme}/cartaz', [FilmesController::class, 'destroy_cartaz'])->name('filmes.cartaz.destroy');

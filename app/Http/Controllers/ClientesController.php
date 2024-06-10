@@ -19,13 +19,20 @@ class ClientesController extends Controller
     public function index(Request $request): View
     {
         $filterByNome = $request->name ?? '';
+        $filterByEstado = $request->estado;
+
         $clienteQuery = Cliente::query();
+
+        $userIds = User::where('bloqueado', $filterByEstado)->pluck('id');
+        $clienteQuery->whereIntegerInRaw('id', $userIds);
+
+
         if ($filterByNome !== '') {
             $userIds = User::where('name', 'like', "%$filterByNome%")->pluck('id');
             $clienteQuery->whereIntegerInRaw('id', $userIds);
         }
         $clientes = $clienteQuery->with('user')->paginate(10);
-        return view('Clientes.index', compact('clientes', 'filterByNome'));
+        return view('Clientes.index', compact('clientes', 'filterByNome', 'filterByEstado'));
     }
 
     // /**
@@ -90,6 +97,7 @@ class ClientesController extends Controller
                 $cliente->delete();
                 $user->delete();
             });
+            $this->destroy_foto($cliente);
             $htmlMessage = "cliente #{$cliente->id}
                         <strong>\"{$user->name}\"</strong> foi apagado com sucesso!";
             return redirect()->route('clientes.index')
@@ -115,6 +123,16 @@ class ClientesController extends Controller
         }
         return redirect()->route('clientes.edit', ['cliente' => $cliente])
             ->with('alert-msg', 'Foto do Cliente "' . $cliente->user->name . '" foi removida!')
+            ->with('alert-type', 'success');
+    }
+
+    public function block_cliente(Cliente $cliente): RedirectResponse
+    {
+        $cliente->user->bloqueado = 1;
+        $cliente->user->save();
+
+        return redirect()->route('clientes.index', ['cliente' => $cliente])
+            ->with('alert-msg', 'Cliente "' . $cliente->user->name . '" foi bloqueado!')
             ->with('alert-type', 'success');
     }
 }

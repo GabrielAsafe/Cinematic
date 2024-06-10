@@ -4,9 +4,11 @@
             @if ($showFoto)
                 <th></th>
             @endif
-            <th>Nif</th>
             <th>Nome</th>
             @if ($showDetail)
+                <th class="button-icon-col"></th>
+            @endif
+            @if ($showEdit)
                 <th class="button-icon-col"></th>
             @endif
             @if ($showDelete)
@@ -15,35 +17,39 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($clientes as $cliente)
+        @foreach ($admins as $admin)
             <tr>
                 @if ($showFoto)
                     <td width="45">
-                        @if ($cliente->user->fullPhotoUrl)
-                            <img src="{{ $cliente->user->fullPhotoUrl }}" alt="Avatar" class="bg-dark rounded-circle"
+                        @if ($admin->fullPhotoUrl)
+                            <img src="{{ $admin->fullPhotoUrl }}" alt="Avatar" class="bg-dark rounded-circle"
                                 width="45" height="45">
                         @endif
                     </td>
                 @endif
-                <td>{{ $cliente->nif }}</td>
-                <td>{{ $cliente->user->name }}</td>
+                <td>{{ $admin->name }}</td>
                 @if ($showDetail)
                     <td class="button-icon-col"><a class="btn btn-secondary"
-                            href="{{ route('clientes.show', ['cliente' => $cliente]) }}">
+                            href="{{ route('admins.show', ['admin' => $admin]) }}">
                             <i class="fas fa-eye"></i></a></td>
                 @endif
+                @if ($showEdit)
+                    <td class="button-icon-col"><a class="btn btn-dark"
+                            href="{{ route('admins.edit', ['admin' => $admin]) }}">
+                            <i class="fas fa-edit"></i></a></td>
+                @endif
                 @if ($showDelete)
-                    <td class="button-icon-col">
-                        <form method="POST" action="{{ route('clientes.destroy', ['cliente' => $cliente]) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" name="delete" class="btn btn-danger">
-                                <i class="fas fa-trash"></i></button>
-                        </form>
-                    </td>
+                <td class="button-icon-col">
+                    <form method="POST" action="{{ route('admins.destroy', ['admin' => $admin]) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" name="delete" class="btn btn-danger">
+                            <i class="fas fa-trash"></i></button>
+                    </form>
+                </td>
                 @endif
                 <td class="button-icon-col">
-                    <form method="POST" action="{{ route('clientes.cliente.block', ['cliente' => $cliente]) }}">
+                    <form method="POST" action="{{ route('admins.admin.block', ['admin' => $admin]) }}">
                         @csrf
                         @method('PUT')
                         <button type="submit" name="block" class="btn btn-warning">
@@ -55,3 +61,5 @@
         @endforeach
     </tbody>
 </table>
+
+

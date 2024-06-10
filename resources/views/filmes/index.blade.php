@@ -41,7 +41,7 @@
                 <div class="d-flex justify-content-between">
                     <div class="mb-3 me-2 flex-grow-1 form-floating">
                         <input type="text" class="form-control" name="sumario" id="inputSumario"
-                               value="{{ old('sumario', $filterbySumario) }}">
+                            value="{{ old('sumario', $filterbySumario) }}">
                         <label for="sumario" class="form-label">Sumário</label>
                     </div>
                 </div>
@@ -86,27 +86,17 @@
                             href="{{ route('filmes.edit', ['filme' => $filme]) }}">
                             <i class="fas fa-edit"></i></a></td>
                     <td class="button-icon-col">
-                        <button type="button" name="delete" class="btn btn-danger" data-bs-toggle="modal"
-                            data-bs-target="#confirmationModal">
-                            <i class="fas fa-trash"></i></button>
+                        <form method="POST" action="{{ route('filmes.destroy', ['filme' => $filme]) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" name="delete" class="btn btn-danger">
+                                <i class="fas fa-trash"></i></button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-
-    @if (isset($filme))
-        @include('shared.confirmationDialog', [
-            'title' => 'Quer realmente apagar o filme?',
-            'msgLine1' => 'Clique no botão "Apagar" para confirmar a operação',
-            'msgLine2' => '',
-            'confirmationButton' => 'Apagar',
-            'formActionRoute' => 'filmes.destroy',
-            'formActionRouteParameters' => ['filme' => $filme],
-            'formMethod' => 'DELETE',
-        ])
-    @endif
-
     <div>
         {{ $filmes->withQueryString()->links() }}
     </div>

@@ -1,15 +1,15 @@
 @extends('template.layout')
 
-@section('titulo', 'Clientes')
+@section('titulo', 'admins')
 
 @section('subtitulo')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Clientes</li>
+        <li class="breadcrumb-item active">admins</li>
     </ol>
 @endsection
 
 @section('main')
-    <form method="GET" action="{{ route('clientes.index') }}">
+    <form method="GET" action="{{ route('admins.index') }}">
         <div class="d-flex justify-content-between">
             <div class="flex-grow-1 pe-2">
                 <div class="d-flex justify-content-between">
@@ -33,17 +33,21 @@
             </div>
             <div class="flex-shrink-1 d-flex flex-column justify-content-between">
                 <button type="submit" class="btn btn-primary mb-3 px-4 flex-grow-1" name="filtrar">Filtrar</button>
-                <a href="{{ route('clientes.index') }}" class="btn btn-secondary mb-3 py-3 px-4 flex-shrink-1">Limpar</a>
+                <a href="{{ route('admins.index') }}"
+                    class="btn btn-secondary mb-3 py-3 px-4 flex-shrink-1">Limpar</a>
             </div>
         </div>
     </form>
-    @include('clientes.shared.table', [
-        'clientes' => $clientes,
+    <p><a class="btn btn-success" href="{{ route('admins.create') }}"><i class="fas fa-plus"></i> &nbsp;Criar novo
+            administrador</a></p>
+    @include('admins.shared.table', [
+        'admins' => $admins,
         'showFoto' => true,
         'showDetail' => true,
+        'showEdit' => true,
         'showDelete' => true,
     ])
     <div>
-        {{ $clientes->withQueryString()->links() }}
+        {{ $admins->withQueryString()->links() }}
     </div>
 @endsection
