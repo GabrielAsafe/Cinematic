@@ -86,7 +86,7 @@ class SessoesController extends Controller
 
 
         $bilhetes = Bilhete::where('sessao_id', $sessao)
-           ->get();
+            ->get();
 
         if ($filterByBilheteId !== null && $filterByBilheteId !== '') {
 
@@ -97,15 +97,15 @@ class SessoesController extends Controller
             if ($alvo->isNotEmpty()) {
                 return view('sessoes.validarBilhetes', ['sessao' => $alvo, 'filterByBilheteId' => $filterByBilheteId]);
             } else {
-                 $htmlMessage = "Não foi possível encontrar bilhete";
-                return redirect()->route('sessoes.validarBilhetes', ['sessao' =>$sessao])
+                $htmlMessage = "Não foi possível encontrar bilhete";
+                return redirect()->route('sessoes.validarBilhetes', ['sessao' => $sessao])
                     ->with('alert-msg', $htmlMessage)
                     ->with('alert-type', 'danger');
             }
 
         }
 
-            return view('sessoes.validarBilhetes', ['sessao' => $bilhetes, 'filterByBilheteId' => $filterByBilheteId]);
+        return view('sessoes.validarBilhetes', ['sessao' => $bilhetes, 'filterByBilheteId' => $filterByBilheteId]);
 
     }
 
@@ -115,20 +115,26 @@ class SessoesController extends Controller
 
         // Verificar se o usuário foi encontrado
         if ($bilhete) {
-            $bilhete->update(['estado' => 'usado']);
+            if ($bilhete->estado !== 'usado') {
+                $bilhete->update(['estado' => 'usado']);
+                $mensagem = "Campo atualizado com sucesso";
+                $tipo = 'success';
+            } else {
+                $mensagem = "O estado de um bilhete usado não pode ser alterado";
+                $tipo = 'danger';
+            }
 
-            $mensagem= "Campo atualizado com sucesso";
         } else {
-            $mensagem= "Usuário não encontrado.";
+            $mensagem = "Bilhete não existe";
+            $tipo = 'danger';
         }
-
 
 
         return redirect()->route('sessoes.validarBilhetes', [
             'sessao' => $bilhete->sessao_id
         ])
             ->with('alert-msg', $mensagem)
-            ->with('alert-type', 'success');
+            ->with('alert-type', $tipo);
 
     }
 
