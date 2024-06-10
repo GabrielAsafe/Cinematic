@@ -80,6 +80,13 @@
         <a href="{{ route('filmes.sessao.create', ['filme' => $filme]) }}" class="btn btn-secondary ms-3">Criar sessao</a>
     </div>
 
+    @php
+        $showMenageSession = false;
+        {{if (Auth::check() && Auth::user()->tipo == 'A') {
+            $showMenageSession = true;
+        }}}
+
+    @endphp
 
     <div>
         <h3>Sessões</h3>
@@ -89,5 +96,10 @@
             'showDetail' => true,
             'showEdit' => false,
             'showDelete' => false,
+           'showMenageSession' => $showMenageSession
+
         ])
+
+
 @endsection
+

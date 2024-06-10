@@ -21,7 +21,7 @@
             <p><strong>Total com IVA:</strong> {{$recibo->preco_total_com_iva}}</p>
             <p><strong>NIF:</strong> {{$recibo->nif}}</p>
             <p><strong>Nome:</strong> {{$recibo->nome_cliente}}</p>
-            <p><strong>Data:</strong> {{$recibo->data}}</p>
+            <p><strong>Data:</strong> {{$sessao->data}}</p>
             <p><strong>Tipo de Pagamento:</strong> {{$recibo->tipo_pagamento}}</p>
             <p><strong>Referência de Pagamento:</strong> {{$recibo->ref_pagamento}}</p>
         </div>

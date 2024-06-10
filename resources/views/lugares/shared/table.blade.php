@@ -12,14 +12,15 @@
             @if ($showDelete)
                 <th class="button-icon-col"></th>
             @endif
-
-
             @if ($showAddCart ?? false)
                 <th class="button-icon-col"></th>
             @endif
             @if ($showRemoveCart ?? false)
                 <th class="button-icon-col"></th>
             @endif
+
+
+
         </tr>
     </thead>
     <tbody>
@@ -67,6 +68,8 @@
                         </form>
                     </td>
                 @endif
+
+
             </tr>
         @endforeach
 </table>
