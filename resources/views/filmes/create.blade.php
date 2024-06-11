@@ -22,7 +22,7 @@
 
                 <div class="my-1 d-flex justify-content-start">
                     <button type="submit" class="btn btn-primary" name="ok">Guardar novo filme</button>
-                    <a href="{{ route('filmes.create') }}" class="btn btn-secondary ms-3">Cancelar</a>
+                    <a href="{{ route('filmes.index') }}" class="btn btn-secondary ms-3">Cancelar</a>
                 </div>
             </div>
 

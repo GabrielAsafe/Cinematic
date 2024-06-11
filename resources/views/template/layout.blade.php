@@ -113,6 +113,11 @@
                                         href="{{ route('admins.index') }}">Admins</a>
                                 </nav>
                             </div>
+                            <a class="nav-link {{ Route::currentRouteName() == 'salas.index' ? 'active' : '' }}"
+                                href="{{ route('salas.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-house"></i></div>
+                                Salas
+                            </a>
                         @endif
                         <!-- essa parte deveria aparecer para todos-->
 
@@ -141,7 +146,7 @@
                     @if ($errors->any())
                         @include('shared.alertValidation')
                     @endif
-                    <h1 class="mt-4">@yield('titulo', 'Politécnico de Leiria')</h1>
+                    <h1 class="mt-4">@yield('titulo', 'Cinematic')</h1>
                     @yield('subtitulo')
                     <div class="mt-4">
                         @yield('main')
@@ -151,7 +156,7 @@
             <footer class="py-2 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy;Politécnico de Leiria 2023</div>
+                        <div class="text-muted">Copyright &copy;Cinematic</div>
                     </div>
                 </div>
             </footer>

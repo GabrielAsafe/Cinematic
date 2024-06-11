@@ -19,7 +19,7 @@ class ClienteRequest extends FormRequest
                 'email',
                 Rule::unique('users', 'email')->ignore($this->id),
             ],
-            'nif' => 'sometimes',
+            'nif' => 'sometimes|digits:9',
             'tipo_pagamento' => 'sometimes',
             'ref_pagamento' => function ($attribute, $value, $fail) {
                 $tipoPagamento = $this->input('tipo_pagamento');
@@ -38,7 +38,7 @@ class ClienteRequest extends FormRequest
                     }
                 } elseif ($tipoPagamento === null) {
                     if ($value !== null) {
-                        $fail('A referência de pagamento não deve ser preenchida se o tipo de pagamento for nulo.');
+                        $fail('A referência de pagamento não deve ser preenchida se o tipo de pagamento não for selecionado.');
                     }
                 }
             },
@@ -59,6 +59,7 @@ class ClienteRequest extends FormRequest
             'email.required' => 'O email é obrigatório',
             'email.email' =>    'O formato do email é inválido',
             'email.unique' =>   'O email tem que ser único',
+            'nif.digits' => 'O NIF tem de ter 9 digitos',
             'bloqueado.boolean' =>  'O campo "bloqueado" tem que ser um booleano',
             'file_foto.image' => 'O ficheiro com a foto não é uma imagem',
             'file_foto.size' => 'O tamanho do ficheiro com a foto tem que ser inferior a 4 Mb'

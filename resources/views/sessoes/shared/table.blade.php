@@ -24,7 +24,7 @@
     <tbody>
        @foreach ($sessoes as $sessao)
             <tr>
-                <td>{{ $sessao->sala_id }}</td>
+                <td>{{ $sessao->salaRef->nome }}</td>
                 <td>{{ $sessao->data }}</td>
                 <td>{{ $sessao->horario_inicio }}</td>
 

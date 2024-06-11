@@ -20,7 +20,7 @@
                 {{ $genero->nome }}</option>
         @endforeach
     </select>
-    <label for="inputCurso" class="form-label">Genero</label>
+    <label for="inputgenero" class="form-label">Genero</label>
     @error('genero_code')
         <div class="invalid-feedback">
             {{ $message }}

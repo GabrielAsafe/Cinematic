@@ -25,7 +25,7 @@
         <div class="mb-3 form-floating">
             <input type="text" class="form-control @error('titulo') is-invalid @enderror" name="titulo" id="inputTitulo"
                 disabled value="{{ old('titulo', $filme->titulo) }}">
-            <label for="inputAbr" class="form-label">Titulo</label>
+            <label for="inputTitulo" class="form-label">Titulo</label>
             @error('titulo')
                 <div class="invalid-feedback">
                     {{ $message }}

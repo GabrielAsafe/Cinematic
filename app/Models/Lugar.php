@@ -10,10 +10,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Lugar extends Model
 {
     use HasFactory;
-    public $table = 'lugares';
     public $timestamps = false;
+    public $table = 'lugares';
 
-    protected $fillable = ['sala_id', 'fila', 'posicao', 'custom', 'deleted_at'];
+    protected $fillable = ['sala_id', 'fila', 'posicao'];
 
     public function salaRef(): BelongsTo
     {

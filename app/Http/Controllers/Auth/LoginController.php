@@ -54,7 +54,7 @@ class LoginController extends Controller
 
         if ($user = User::where('email', $request->input('email'))->first()) {
             if ($user->bloqueado == 1) {
-                $errors = [$this->username() => 'A tua conta está bloqueada porfavor contacte o suporte.'];
+                $errors = [$this->username() => 'A sua conta está bloqueada, por favor contacte o suporte.'];
             }
         }
 

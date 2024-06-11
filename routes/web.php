@@ -49,7 +49,7 @@ Route::get('/sessoes/permitirEntrada/{bilhete}', [SessoesController::class, 'per
 
 Route::resource('lugares', LugaresController::class);//tem todos os comandos de crud associados
 
-
+Route::resource('salas', SalasController::class);//tem todos os comandos de crud associados
 
 Route::resource('recibos', RecibosController::class);//tem todos os comandos de crud associados
 Route::resource('salas', SalasController::class);//tem todos os comandos de crud associados

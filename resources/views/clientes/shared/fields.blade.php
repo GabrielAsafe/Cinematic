@@ -20,7 +20,7 @@
         <option {{ "VISA" == old('tipo_pagamento', $cliente->tipo_pagamento) ? 'selected' : '' }} {{ $disabledStr }}    value="VISA">VISA</option>
         <option {{ "MBWAY" == old('tipo_pagamento', $cliente->tipo_pagamento) ? 'selected' : '' }} {{ $disabledStr }}    value="MBWAY">MBWAY</option>
         <option {{ "PAYPAL" == old('tipo_pagamento', $cliente->tipo_pagamento) ? 'selected' : '' }} {{ $disabledStr }}    value="PAYPAL" >PAYPAL</option>
-        <option {{ "" == old('tipo_pagamento', $cliente->tipo_pagamento) ? 'selected' : '' }} {{ $disabledStr }}    value="" ></option>
+        <option {{ "" == old('tipo_pagamento', $cliente->tipo_pagamento) ? 'selected' : '' }} {{ $disabledStr }}    value="" >Não Selecionado</option>
     </select>
     <label for="input_tipo_pagamento" class="form-label">Tipo de pagamento</label>
     @error('tipo_pagamento')

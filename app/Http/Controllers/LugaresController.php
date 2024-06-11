@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LugarRequest;
 use App\Models\Lugar;
+use App\Models\Sala;
 use Illuminate\Http\Request;
+
 
 class LugaresController extends Controller
 {
@@ -18,17 +21,26 @@ class LugaresController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $lugar = new lugar();
+        $sala_id = $request['sala_id'];
+
+        return view('lugares.create', compact('lugar', 'sala_id'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(LugarRequest $request)
     {
-        //
+        $newLugar = Lugar::create(array_merge($request->validated(), ['sala_id' => $request['sala_id']]));
+        $sala = Sala::find($request['sala_id']);
+
+        $htmlMessage = "Lugar <strong>\"{$newLugar->fila}{$newLugar->posicao}\"</strong> foi criado com sucesso!";
+        return redirect()->route('salas.edit',['sala' => $sala])
+            ->with('alert-msg', $htmlMessage)
+            ->with('alert-type', 'success');
     }
 
     /**
