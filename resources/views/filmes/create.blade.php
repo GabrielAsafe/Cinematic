@@ -4,8 +4,6 @@
 
 @section('subtitulo')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item">Gestão</li>
-        <li class="breadcrumb-item">Curricular</li>
         <li class="breadcrumb-item"><a href="{{ route('filmes.index') }}">Filmes</a></li>
         <li class="breadcrumb-item active">Criar Novo</li>
     </ol>

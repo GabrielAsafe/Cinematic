@@ -155,7 +155,12 @@ class FuncionariosController extends Controller
 
     public function block_funcionario(User $funcionario): RedirectResponse
     {
-        $funcionario->bloqueado = 1;
+        if ($funcionario->bloqueado == 1) {
+            $funcionario->bloqueado = 0;
+        } else {
+            $funcionario->bloqueado = 1;
+        }
+
         $funcionario->save();
 
         return redirect()->route('funcionarios.index', ['funcionario' => $funcionario])

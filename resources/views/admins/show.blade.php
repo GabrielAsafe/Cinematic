@@ -1,10 +1,11 @@
 @extends('template.layout')
 
-@section('titulo', 'admin')
+@section('titulo', 'Admin')
 
 @section('subtitulo')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('admins.index') }}">admins</a></li>
+        <li class="breadcrumb-item">Usuários</li>
+        <li class="breadcrumb-item"><a href="{{ route('admins.index') }}">Admins</a></li>
         <li class="breadcrumb-item"><strong>{{ $admin->name }}</strong></li>
         <li class="breadcrumb-item active">Consultar</li>
     </ol>

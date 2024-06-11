@@ -93,24 +93,26 @@
 
                         <!-- essa parte deveria aparecer para funcionários/administração -->
 
-                        @if(Auth::check() && Auth::user()->tipo == 'A')
-
-                        <div class="sb-sidenav-menu-heading">Gestão</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapseCurricular" aria-expanded="false"
-                            aria-controls="collapseCurricular">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Gerir
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseCurricular" aria-labelledby="headingOne"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-
-                                <a class="nav-link {{ Route::currentRouteName() == 'clientes.index' ? 'active' : '' }}"
-                                    href="{{ route('clientes.index') }}">Clientes</a>
-                            </nav>
-                        </div>
+                        @if (Auth::check() && Auth::user()->tipo == 'A')
+                            <div class="sb-sidenav-menu-heading">Gestão</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                data-bs-target="#collapseCurricular" aria-expanded="false"
+                                aria-controls="collapseCurricular">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Usuários
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseCurricular" aria-labelledby="headingOne"
+                                data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link {{ Route::currentRouteName() == 'clientes.index' ? 'active' : '' }}"
+                                        href="{{ route('clientes.index') }}">Clientes</a>
+                                    <a class="nav-link {{ Route::currentRouteName() == 'clientes.index' ? 'active' : '' }}"
+                                        href="{{ route('funcionarios.index') }}">Funcionários</a>
+                                    <a class="nav-link {{ Route::currentRouteName() == 'clientes.index' ? 'active' : '' }}"
+                                        href="{{ route('admins.index') }}">Admins</a>
+                                </nav>
+                            </div>
                         @endif
                         <!-- essa parte deveria aparecer para todos-->
 
@@ -137,7 +139,6 @@
                         @include('partials.messages')
                     @endif
                     @if ($errors->any())
-                    @dump($errors)
                         @include('shared.alertValidation')
                     @endif
                     <h1 class="mt-4">@yield('titulo', 'Politécnico de Leiria')</h1>

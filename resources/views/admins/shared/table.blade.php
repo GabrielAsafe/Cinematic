@@ -14,7 +14,9 @@
             @if ($showDelete)
                 <th class="button-icon-col"></th>
             @endif
-            <th class="button-icon-col"></th>
+            @if ($showBlock)
+                <th class="button-icon-col"></th>
+            @endif
         </tr>
     </thead>
     <tbody>
@@ -40,27 +42,33 @@
                             <i class="fas fa-edit"></i></a></td>
                 @endif
                 @if ($showDelete)
-                <td class="button-icon-col">
-                    <form method="POST" action="{{ route('admins.destroy', ['admin' => $admin]) }}">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" name="delete" class="btn btn-danger">
-                            <i class="fas fa-trash"></i></button>
-                    </form>
-                </td>
+                    <td class="button-icon-col">
+                        <form method="POST" action="{{ route('admins.destroy', ['admin' => $admin]) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" name="delete" class="btn btn-danger">
+                                <i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
                 @endif
-                <td class="button-icon-col">
-                    <form method="POST" action="{{ route('admins.admin.block', ['admin' => $admin]) }}">
-                        @csrf
-                        @method('PUT')
-                        <button type="submit" name="block" class="btn btn-warning">
-                            <i class="fas fa-ban"></i>
-                        </button>
-                    </form>
-                </td>
+                @if ($showBlock)
+                    <td class="button-icon-col">
+                        <form method="POST" action="{{ route('admins.admin.block', ['admin' => $admin]) }}">
+                            @csrf
+                            @method('PUT')
+                            @if ($admin->bloqueado == 0)
+                                <button type="submit" name="block" class="btn btn-warning">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                            @else
+                                <button type="submit" name="block" class="btn btn-success">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                            @endif
+                        </form>
+                    </td>
+                @endif
             </tr>
         @endforeach
     </tbody>
 </table>
-
-

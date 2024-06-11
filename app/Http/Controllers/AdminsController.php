@@ -157,7 +157,11 @@ class adminsController extends Controller
 
     public function block_admin(User $admin): RedirectResponse
     {
-        $admin->bloqueado = 1;
+        if ($admin->bloqueado == 1) {
+            $admin->bloqueado = 0;
+        } else {
+            $admin->bloqueado = 1;
+        }
         $admin->save();
 
         return redirect()->route('admins.index', ['admin' => $admin])

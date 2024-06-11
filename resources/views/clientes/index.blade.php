@@ -4,6 +4,7 @@
 
 @section('subtitulo')
     <ol class="breadcrumb">
+        <li class="breadcrumb-item">Usuários</li>
         <li class="breadcrumb-item active">Clientes</li>
     </ol>
 @endsection
@@ -41,7 +42,9 @@
         'clientes' => $clientes,
         'showFoto' => true,
         'showDetail' => true,
+        'showEdit' => false,
         'showDelete' => true,
+        'showBlock' => true,
     ])
     <div>
         {{ $clientes->withQueryString()->links() }}

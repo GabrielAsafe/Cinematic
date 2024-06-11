@@ -128,7 +128,11 @@ class ClientesController extends Controller
 
     public function block_cliente(Cliente $cliente): RedirectResponse
     {
-        $cliente->user->bloqueado = 1;
+        if ($cliente->user->bloqueado == 1) {
+            $cliente->user->bloqueado = 0;
+        } else {
+            $cliente->user->bloqueado = 1;
+        }
         $cliente->user->save();
 
         return redirect()->route('clientes.index', ['cliente' => $cliente])

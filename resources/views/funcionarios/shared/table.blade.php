@@ -14,7 +14,9 @@
             @if ($showDelete)
                 <th class="button-icon-col"></th>
             @endif
-            <th class="button-icon-col"></th>
+            @if ($showBlock)
+                <th class="button-icon-col"></th>
+            @endif
         </tr>
     </thead>
     <tbody>
@@ -40,27 +42,33 @@
                             <i class="fas fa-edit"></i></a></td>
                 @endif
                 @if ($showDelete)
-                <td class="button-icon-col">
-                    <form method="POST" action="{{ route('funcionarios.destroy', ['funcionario' => $funcionario]) }}">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" name="delete" class="btn btn-danger">
-                            <i class="fas fa-trash"></i></button>
-                    </form>
-                </td>
+                    <td class="button-icon-col">
+                        <form method="POST" action="{{ route('funcionarios.destroy', ['funcionario' => $funcionario]) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" name="delete" class="btn btn-danger">
+                                <i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
                 @endif
-                <td class="button-icon-col">
-                    <form method="POST" action="{{ route('funcionarios.funcionario.block', ['funcionario' => $funcionario]) }}">
-                        @csrf
-                        @method('PUT')
-                        <button type="submit" name="block" class="btn btn-warning">
-                            <i class="fas fa-ban"></i>
-                        </button>
-                    </form>
-                </td>
+                @if ($showBlock)
+                    <td class="button-icon-col">
+                        <form method="POST" action="{{ route('funcionarios.funcionario.block', ['funcionario' => $funcionario]) }}">
+                            @csrf
+                            @method('PUT')
+                            @if ($funcionario->bloqueado == 0)
+                                <button type="submit" name="block" class="btn btn-warning">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                            @else
+                                <button type="submit" name="block" class="btn btn-success">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                            @endif
+                        </form>
+                    </td>
+                @endif
             </tr>
         @endforeach
     </tbody>
 </table>
-
-

@@ -1,10 +1,11 @@
 @extends('template.layout')
 
-@section('titulo', 'Funcionarios')
+@section('titulo', 'Funcionários')
 
 @section('subtitulo')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Funcionarios</li>
+        <li class="breadcrumb-item">Usuários</li>
+        <li class="breadcrumb-item active">Funcionários</li>
     </ol>
 @endsection
 
@@ -46,6 +47,7 @@
         'showDetail' => true,
         'showEdit' => true,
         'showDelete' => true,
+        'showBlock' => true,
     ])
     <div>
         {{ $funcionarios->withQueryString()->links() }}

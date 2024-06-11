@@ -1,10 +1,11 @@
 @extends('template.layout')
 
-@section('titulo', 'admins')
+@section('titulo', 'Admins')
 
 @section('subtitulo')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item active">admins</li>
+        <li class="breadcrumb-item">Usuários</li>
+        <li class="breadcrumb-item active">Admins</li>
     </ol>
 @endsection
 
@@ -41,11 +42,13 @@
     <p><a class="btn btn-success" href="{{ route('admins.create') }}"><i class="fas fa-plus"></i> &nbsp;Criar novo
             administrador</a></p>
     @include('admins.shared.table', [
-        'admins' => $admins,
+        'users' => $admins,
         'showFoto' => true,
         'showDetail' => true,
         'showEdit' => true,
         'showDelete' => true,
+        'showDelete' => true,
+        'showBlock' => true,
     ])
     <div>
         {{ $admins->withQueryString()->links() }}
