@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -124,6 +125,9 @@ class adminsController extends Controller
     //  */
     public function destroy(User $admin): RedirectResponse
     {
+        if ($admin->id === Auth::user()->id) {
+            return redirect()->route('admins.index')->with('alert-msg', 'Não é possível eliminar-se a si mesmo.')->with('alert-type', 'warning');
+        }
         try {
             $admin->delete();
             $this->destroy_foto($admin);
@@ -157,6 +161,9 @@ class adminsController extends Controller
 
     public function block_admin(User $admin): RedirectResponse
     {
+        if ($admin->id === Auth::user()->id) {
+            return redirect()->route('admins.index')->with('alert-msg', 'Não é possível bloquear-se a si mesmo.')->with('alert-type', 'warning');
+        }
         if ($admin->bloqueado == 1) {
             $admin->bloqueado = 0;
         } else {
