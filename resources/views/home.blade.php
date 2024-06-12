@@ -1,6 +1,6 @@
 @extends('template.layout')
 @section('subtitulo')
-    <p>Aplicação de Gestão Curricular, Recursos Humanos e Alunos</p>
+    <p>Aplicação de Cinema</p>
 @endsection
 @section('main')
     <div class="container">
