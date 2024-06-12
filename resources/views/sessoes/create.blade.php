@@ -15,11 +15,12 @@
 @include('sessoes.shared.table', [
             'sessoes' => $filme->sessoes,
             'v_filme' => $filme,
-            'showDetail' => true,
+            'showDetail' => false,
             'showEdit' => false,
             'showDelete' => false,
             'showMenageSession' => false,
-            'showEsgotada' => false
+            'showEsgotada' => false,
+            'showSelect' => true
         ])
     <form method="POST" action="{{ route('filmes.sessao.store', ['filme' => $filme]) }}" enctype="multipart/form-data">
         @csrf

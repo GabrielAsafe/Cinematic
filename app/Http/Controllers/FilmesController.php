@@ -12,6 +12,8 @@ use Faker\Core\File;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Sala;
+use App\Models\Sessao;
 
 class FilmesController extends Controller
 {
@@ -78,6 +80,8 @@ class FilmesController extends Controller
             $newFilme->save();
         }
 
+        $this->criarSessoes($newFilme);
+
         $url = route('filmes.show', ['filme' => $newFilme]);
         $htmlMessage = "Filme <a href='$url'>#{$newFilme->id}</a><strong>\"{$newFilme->titulo}\"</strong> foi criada com sucesso!";
         return redirect()->route('filmes.index')
@@ -127,6 +131,50 @@ class FilmesController extends Controller
         return redirect()->route('filmes.index')
             ->with('alert-msg', $htmlMessage)
             ->with('alert-type', 'success');
+    }
+
+    public function criarSessoes(Filme $filme){
+        {
+            $sessao = new Sessao();
+            // Busca todas as salas disponíveis
+            $salas = Sala::all();
+        
+            // Define o número máximo de dias após a criação do filme
+            $diasMaximos = 10;
+        
+            // Quantidade de sessões a criar
+            $quantidadeSessoes = 5;
+        
+            // Array para armazenar as mensagens de feedback
+            $mensagens = [];
+        
+            // Loop para criar as sessões
+            for ($i = 0; $i < $quantidadeSessoes; $i++) {
+                // Escolhe uma sala aleatoriamente
+                $sala = $salas->random();
+        
+                // Calcula uma data aleatória até 5 dias após a criação do filme
+                $dataAleatoria = $filme->created_at->addDays(rand(1, $diasMaximos));
+        
+                // Gera um horário de início aleatório entre 12:00:00 e 23:59:59
+                $horarioAleatorio = sprintf('%02d:%02d:%02d', rand(12, 23), rand(0, 59), rand(0, 59));
+        
+                // Cria a sessão
+                
+                $sessao = new Sessao();
+                $sessao->filme_id = $filme->id;
+                $sessao->sala_id = $sala->id;
+                $sessao->data = $dataAleatoria;
+                $sessao->horario_inicio = $horarioAleatorio;
+                $sessao->save();
+        
+                // Adiciona uma mensagem de feedback
+                $mensagens[] = "Sessão criada para o filme {$filme->titulo}: Sala {$sala->nome}, Data {$dataAleatoria->format('Y-m-d')}, Horário {$horarioAleatorio}";
+            }
+        
+            // Retorna as mensagens de feedback
+            return $mensagens;
+        }
     }
 
     /**

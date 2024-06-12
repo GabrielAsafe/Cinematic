@@ -29,8 +29,9 @@
                 'readonlyData' => true,
             ])
             <div class="my-4 d-flex justify-content-end">
-                <a href="{{ route('filmes.edit', ['filme' => $filme]) }}" class="btn btn-secondary ms-3">Alterar Filme</a>
-            </div> <!--botão de alterar filme-->
+                <a href="{{ route('filmes.edit', ['filme' => $filme]) }}" class="btn btn-primary ms-3">Alterar Filme</a>
+                <!--botão de alterar filme-->
+            </div> 
         </div>
         <div class="ps-2 mt-5 mt-md-1 d-flex mx-auto flex-column align-items-center justify-content-between"
             style="min-width:260px; max-width:260px;">
@@ -41,10 +42,6 @@
             ])
         </div>
     </div> <!--Dados que veem da página anterior-->
-
-    <div class="btn btn-success">
-        <a href="{{ route('filmes.sessao.create', ['filme' => $filme]) }}" class="btn btn-secondary ms-3">Criar sessao</a>
-    </div>
 
     @php
         $showMenageSession = false;
@@ -60,11 +57,12 @@
             'sessoes' => $filme->sessoes,
             'v_filme' => $filme,
             'showDetail' => true,
-            'showEdit' => false,
-            'showDelete' => false,
+            'showEdit' => true,
+            'showDelete' => true,
             'showMenageSession' => $showMenageSession,
-            'showEsgotada' => true
+            'showEsgotada' => true,
+            'showSelect' => false
         ])
-
+        </div>
 
     @endsection

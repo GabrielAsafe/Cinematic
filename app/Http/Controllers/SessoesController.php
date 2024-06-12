@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use stdClass;
+use Illuminate\Support\Facades\DB;
 
 class SessoesController extends Controller
 {
@@ -40,8 +41,36 @@ class SessoesController extends Controller
         //die();
         //Sessao::create($formData);
 
+        $this->criarLugares($newSala, $quantidade);
+
         $url = route('filmes.show', ['filme' => $filme]);
         $htmlMessage = "Sessão <a href='$url'>#{$newSessao->id}</a><strong>\"{$filme->titulo}\"</strong> foi criada com sucesso!";
+        return redirect()->route('filmes.show', ['filme' => $filme])
+            ->with('filme', $filme)
+            ->with('alert-msg', $htmlMessage)
+            ->with('alert-type', 'success');
+    }
+
+    public function edit(Filme $filme)
+    {
+        $sessao = Sessao::find($filme->id);
+        $salas = Sala::all();
+        return view('sessoes.edit', compact('filme', 'sessao', 'salas'));
+    }
+
+
+    public function update(SessaoRequest $request, Filme $filme, Sessao $sessao)
+    {
+
+        //dd($request->all());
+        //$sessao->update($request->validated());
+
+        $sessao = Sessao::find($request['sessao_id']);
+        
+        $sessao->update($request->validated());
+
+        $url = route('filmes.show', ['filme' => $filme]);
+        $htmlMessage = "Sessão <a href='$url'>#{$sessao->id}</a><strong>\"{$filme->titulo}\"</strong> foi editada com sucesso!";
         return redirect()->route('filmes.show', ['filme' => $filme])
             ->with('filme', $filme)
             ->with('alert-msg', $htmlMessage)
@@ -148,9 +177,39 @@ class SessoesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Sessao $sessao)
+    public function destroy(Filme $filme, Sessao $sessao)
     {
-        $sessao->delete();
-        return redirect()->route('sessao.index');
+        try {
+            $totalBilhetes = DB::scalar('select count(*)
+            from bilhetes where sessao_id = ?', [$sessao->id]);
+            if ($totalBilhetes == 0) {
+                $sessao->delete();
+                $alertType = 'success';
+                $htmlMessage = "Sessão #{$sessao->id}
+            <strong>\"{$filme->titulo}\"</strong> foi apagado com sucesso!";
+            } else {
+                $url = route('filmes.show', ['filme' => $filme]);
+                $alertType = 'warning';
+                $sessoesSTR = $totalBilhetes > 0 ?
+                    ($totalBilhetes == 1 ?
+                        "1 sessão relacionada ao filme" :
+                        "$totalBilhetes Bilhetes relacionados à Sessão") :
+                    "";
+
+                $htmlMessage = "Sessão <a href='$url'>#{$sessao->id}</a>
+            <strong>\"{$filme->titulo}\"</strong>
+            não pode ser apagada porque há $sessoesSTR!
+            ";
+            }
+        } catch (\Exception $error) {
+            $url = route('filmes.show', ['filme' => $filme]);
+            $htmlMessage = "Não foi possível apagar a Sessão
+            <a href='$url'>#{$sessao->id}</a>
+            <strong>\"{$filme->titulo}\"</strong> porque ocorreu um erro!";
+            $alertType = 'danger';
+        }
+        return redirect()->route('filmes.index')
+            ->with('alert-msg', $htmlMessage)
+            ->with('alert-type', $alertType);
     }
 }
