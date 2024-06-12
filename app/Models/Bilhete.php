@@ -30,7 +30,7 @@ class Bilhete extends Model
         return $this->belongsTo(Sessao::class, 'sessao_id', 'id');
     }
 
-    public function lugareRef(): BelongsTo
+    public function lugarRef(): BelongsTo
     {
         return $this->belongsTo(Lugar::class, 'lugar_id', 'id');
     }

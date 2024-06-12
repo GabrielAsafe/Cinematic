@@ -25,7 +25,7 @@
                 @if ($showFoto)
                     <td width="45">
                         @if ($admin->fullPhotoUrl)
-                            <img src="{{ $admin->fullPhotoUrl }}" alt="Avatar" class="bg-dark rounded-circle"
+                            <img src="{{ $admin->fullPhotoUrl }}" alt="Avatar" class="rounded-circle"
                                 width="45" height="45">
                         @endif
                     </td>

@@ -59,7 +59,7 @@
                         <li><strong>Recibo ID:</strong> {{$bilhetes[$i]->recibo_id}}</li>
                         <li><strong>Cliente ID:</strong> {{$bilhetes[$i]->cliente_id}}</li>
                         <li><strong>Sessão ID:</strong> {{$bilhetes[$i]->sessao_id}}</li>
-                        <li><strong>Lugar ID:</strong> {{$bilhetes[$i]->lugar_id}}</li>
+                        <li><strong>Lugar:</strong> {{$bilhetes[$i]->lugarRef->fila . $bilhetes[$i]->lugarRef->posicao }}</li>
                         <li><strong>Preço sem IVA:</strong> {{$bilhetes[$i]->preco_sem_iva}}</li>
                         <li><strong>Estado:</strong> {{$bilhetes[$i]->estado}}</li>
                         <li><strong>Bilhete ID:</strong> {{$bilhetes[$i]->id}}</li>
