@@ -98,7 +98,7 @@ class CartController extends Controller
         $url = route('sessoes.show', ['sesso' => $lugar]); #TODO como a shared table dos lugares está toda esquizofrênica, eu estou mandando sesso, que é a variável cagada que não consigo mudar sem ter trabalho, mas com o lugar que quero remover
 
 
-        $htmlMessage = "Lugar <a href='$url'>#{$lugar->id}</a> <strong>\"{$lugar->nome}\"</strong> foi removida do carrinho!";
+        $htmlMessage = "Lugar <strong>\"{$lugar->fila}{$lugar->posicao}\"</strong> foi removida do carrinho!";
         return back()
             ->with('alert-msg', $htmlMessage)
             ->with('alert-type', 'success');
