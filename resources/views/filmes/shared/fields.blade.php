@@ -39,7 +39,7 @@
 </div>
 <div class="mb-3 form-floating">
     <input type="text" class="form-control @error('sumario') is-invalid @enderror" name="sumario" id="inputsumario"
-    {{ $disabledStr }}value="{{ old('sumario', $filme->sumario) }}">
+    {{ $disabledStr }} value="{{ old('sumario', $filme->sumario) }}">
     <label for="inputsumario" class="form-label">Sumario</label>
     @error('sumario')
         <div class="invalid-feedback">
@@ -49,7 +49,7 @@
 </div>
 <div class="mb-3 form-floating">
     <input type="text" class="form-control @error('trailer_url') is-invalid @enderror" name="trailer_url"
-        id="inputtrailer" {{ $disabledStr }}value="{{ old('trailer_url', $filme->trailer_url) }}">
+        id="inputtrailer" {{ $disabledStr }} value="{{ old('trailer_url', $filme->trailer_url) }}">
     <label for="inputtrailer" class="form-label">Trailer URL</label>
     @error('trailer_url')
         <div class="invalid-feedback">
