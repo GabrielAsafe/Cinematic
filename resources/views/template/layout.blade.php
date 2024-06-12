@@ -17,10 +17,10 @@
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary">
         <!-- Navbar Brand-->
         <a class="navbar-brand " href="{{ route('home') }}">
-            <img src="/img/logo.svg" alt="Logo" class="bg-dark" width="140" height="52">
+            <img src="/img/logo.png" alt="Logo" class="bg-primary" width="140" height="52">
         </a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-3 me-lg-0" id="sidebarToggle" href="#"><i
@@ -51,7 +51,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ Auth::user()->fullPhotoUrl }}" alt="Avatar" class="bg-dark rounded-circle"
+                        <img src="{{ Auth::user()->fullPhotoUrl }}" alt="Avatar" class="rounded-circle"
                             width="45" height="45">
                     </a>
 
@@ -82,7 +82,7 @@
     </nav> <!-- merdas do loging-->
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <nav class="sb-sidenav accordion sb-sidenav-dark bg-primary" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <a class="nav-link {{ Route::currentRouteName() == 'filmes.index' ? 'active' : '' }}"
@@ -121,7 +121,7 @@
                         @endif
                         <!-- essa parte deveria aparecer para todos-->
 
-                        <div class="sb-sidenav-menu-heading">Espaço Privado</div>
+                        <div class="sb-sidenav-menu-heading font-weight-bold">Espaço Privado</div>
                         <a class="nav-link {{ Route::currentRouteName() == 'bilhetes.index' ? 'active' : '' }}"
                             href="{{ route('bilhetes.index') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-file-text"></i></div>

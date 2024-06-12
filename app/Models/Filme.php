@@ -28,7 +28,7 @@ class Filme extends Model
     {
         return Attribute::make(
             get: function () {
-                return $this->cartaz_url ? asset('storage/cartazes/' . $this->cartaz_url) : asset('/img/avatar_unknown.png');
+                return $this->cartaz_url ? asset('storage/cartazes/' . $this->cartaz_url) : asset('/img/cartaz_unknown.png');
             },
         );
     }
