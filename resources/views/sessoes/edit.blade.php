@@ -1,6 +1,6 @@
 @extends('template.layout')
 
-@section('titulo', 'Nova sessão')
+@section('titulo', 'Editar sessão')
 
 @section('subtitulo')
     <ol class="breadcrumb">
@@ -25,7 +25,7 @@
         @csrf
         @include('sessoes.shared.fields')
         <div class="my-4 d-flex justify-content-end">
-            <button type="submit" class="btn btn-primary" name="ok">Guardar nova sessão</button>
+            <button type="submit" class="btn btn-primary" name="ok">Editar sessão</button>
             <a href="{{ route('filmes.show', ['filme' => $filme]) }}" class="btn btn-secondary ms-3">Cancelar</a>
         </div>
     </form>

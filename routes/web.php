@@ -39,6 +39,7 @@ Route::resource('filmes', FilmesController::class);//tem todos os comandos de cr
 Route::delete('filmes/{filme}/cartaz', [FilmesController::class, 'destroy_cartaz'])->name('filmes.cartaz.destroy');
 Route::get('filmes/{filme}/novaSessao', [SessoesController::class, 'create'])->name('filmes.sessao.create');
 Route::post('filmes/{filme}/novaSessao', [SessoesController::class, 'store'])->name('filmes.sessao.store');
+Route::post('filmes/{filme}/editarSessao', [SessoesController::class, 'update'])->name('filmes.sessao.update');
 
 Route::get('/sessoes/{sessaoId}/lugares-vazios', [SessoesController::class, 'getLugaresVazios'])->name('sessoes.getLugaresVazios');
 Route::get('/sessoes/validarBilhetes/{sessao}', [SessoesController::class, 'validarBilhetes'])->name('sessoes.validarBilhetes');

@@ -63,6 +63,7 @@
             'showEdit' => false,
             'showDelete' => false,
             'showMenageSession' => $showMenageSession,
+            'showEsgotada' => true
         ])
 
 

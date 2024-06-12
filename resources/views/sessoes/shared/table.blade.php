@@ -4,7 +4,10 @@
             <th>Sala</th>
             <th>Data</th>
             <th>Horario Inicio</th>
-            <th>Esgotada</th>
+            @if ($showEsgotada)
+                <th>Esgotada</th>
+                <th class="button-icon-col"></th>
+            @endif
             @if ($showDetail)
                 <th class="button-icon-col"></th>
             @endif
@@ -14,8 +17,6 @@
             @if ($showDelete)
                 <th class="button-icon-col"></th>
             @endif
-
-
             @if ($showMenageSession ?? false)
                 <th class="button-icon-col"></th>
             @endif
