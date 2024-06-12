@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class SalasController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Sala::class, 'sala');
+    }
     /**
      * Display a listing of the resource.
      */

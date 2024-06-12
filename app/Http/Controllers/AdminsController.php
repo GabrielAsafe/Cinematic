@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Storage;
 
 class adminsController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, 'admin');
+    }
     /**
      * Display a listing of the resource.
      */

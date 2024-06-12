@@ -9,9 +9,11 @@
 @endsection
 
 @section('main')
-    <p><a class="btn btn-success" href="{{ route('filmes.create') }}"><i class="fas fa-plus"></i> &nbsp;Criar novo
-            filmes</a></p>
-    <hr>
+    @can('create', \App\Models\Filme::class)
+        <p><a class="btn btn-success" href="{{ route('filmes.create') }}"><i class="fas fa-plus"></i> &nbsp;Criar novo
+                filmes</a></p>
+        <hr>
+    @endcan
     <form method="GET" action="{{ route('filmes.index') }}">
         <div class="d-flex justify-content-between">
             <div class="flex-grow-1 pe-2">
@@ -76,21 +78,26 @@
                     <td>{{ $filme->generoRef->nome }}</td>
                     <td>{{ $filme->ano }}</td>
                     <td>{{ $filme->sumario }}</td>
-
-                    <td class="button-icon-col"><a class="btn btn-secondary"
-                            href="{{ route('filmes.show', ['filme' => $filme]) }}">
-                            <i class="fas fa-eye"></i></a></td>
-                    <td class="button-icon-col"><a class="btn btn-dark"
-                            href="{{ route('filmes.edit', ['filme' => $filme]) }}">
-                            <i class="fas fa-edit"></i></a></td>
-                    <td class="button-icon-col">
-                        <form method="POST" action="{{ route('filmes.destroy', ['filme' => $filme]) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" name="delete" class="btn btn-danger">
-                                <i class="fas fa-trash"></i></button>
-                        </form>
-                    </td>
+                    @can('view', $filme)
+                        <td class="button-icon-col"><a class="btn btn-secondary"
+                                href="{{ route('filmes.show', ['filme' => $filme]) }}">
+                                <i class="fas fa-eye"></i></a></td>
+                    @endcan
+                    @can('update', $filme)
+                        <td class="button-icon-col"><a class="btn btn-dark"
+                                href="{{ route('filmes.edit', ['filme' => $filme]) }}">
+                                <i class="fas fa-edit"></i></a></td>
+                    @endcan
+                    @can('delete', $filme)
+                        <td class="button-icon-col">
+                            <form method="POST" action="{{ route('filmes.destroy', ['filme' => $filme]) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" name="delete" class="btn btn-danger">
+                                    <i class="fas fa-trash"></i></button>
+                            </form>
+                        </td>
+                    @endcan
                 </tr>
             @endforeach
         </tbody>

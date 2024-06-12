@@ -80,7 +80,7 @@
 
     @php
         $showMenageSession = false;
-        {{if (Auth::check() && Auth::user()->tipo == 'A') {
+        {{if (Auth::check() && Auth::user()->tipo == 'F') {
             $showMenageSession = true;
         }}}
 

@@ -4,6 +4,7 @@
             <th>Sala</th>
             <th>Data</th>
             <th>Horario Inicio</th>
+            <th>Esgotada</th>
             @if ($showDetail)
                 <th class="button-icon-col"></th>
             @endif
@@ -22,20 +23,25 @@
 
     </thead>
     <tbody>
-       @foreach ($sessoes as $sessao)
+        @foreach ($sessoes as $sessao)
             <tr>
                 <td>{{ $sessao->salaRef->nome }}</td>
                 <td>{{ $sessao->data }}</td>
                 <td>{{ $sessao->horario_inicio }}</td>
-
-                @if ($showDetail)
+                @if ($sessao->bilhetes->count() == $sessao->salaRef->lugares->count())
+                    <td>
+                        <p>&#x2714;</p>
+                    </td>
+                @else
+                    <td>
+                        <p>&#x2716;</p>
+                    </td>
+                @endif
+                @if ($showDetail && $sessao->bilhetes->count() != $sessao->salaRef->lugares->count())
                     <td class="button-icon-col"><a class="btn btn-secondary"
-
                             href="{{ route('sessoes.getLugaresVazios', ['sessaoId' => $sessao]) }}">
                             <i class="fas fa-eye"></i></a></td>
                 @endif
-
-
                 @if ($showMenageSession)
                     <td class="button-icon-col"><a class="btn btn-dark"
                             href="{{ route('sessoes.validarBilhetes', ['sessao' => $sessao->id]) }}">
@@ -46,7 +52,8 @@
                     <td class="button-icon-col"><a class="btn btn-dark"
                             href="{{ route('sessoes.edit', ['sessao' => $sessao]) }}">
                             <i class="fas fa-edit"></i></a></td>
-                @endif <!--essa linha não vai ser executara pois em filmes.show essa variável está a false-->
+                @endif
+                <!--essa linha não vai ser executara pois em filmes.show essa variável está a false-->
                 @if ($showDelete)
                     <td class="button-icon-col">
                         <form method="POST" action="{{ route('sessoes.destroy', ['sessao' => $sessao]) }}">
@@ -56,7 +63,8 @@
                                 <i class="fas fa-trash"></i></button>
                         </form>
                     </td>
-                @endif <!--essa linha não vai ser executara pois em filmes.show essa variável está a false-->
+                @endif
+                <!--essa linha não vai ser executara pois em filmes.show essa variável está a false-->
 
             </tr>
         @endforeach

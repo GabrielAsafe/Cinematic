@@ -15,11 +15,14 @@ use Illuminate\Support\Facades\Storage;
 
 class FilmesController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Filme::class, 'filme');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
-
     {
         $generos = Genero::all();
         $filterByGenero = $request->genero_code ?? '';
@@ -40,7 +43,7 @@ class FilmesController extends Controller
             //return $filmeId;
             $filmeQuery->whereIntegerInRaw('id', $filmeId);
         }
-        if($filterbySumario !== ''){
+        if ($filterbySumario !== '') {
             $filmeId = Filme::where('sumario', 'like', "%$filterbySumario%")->pluck('id');
             $filmeQuery->whereIntegerInRaw('id', $filmeId);
         }
@@ -87,8 +90,6 @@ class FilmesController extends Controller
      */
     public function show(Filme $filme)
     {
-
-
 
         $generos = Genero::all();
         return view('filmes.show', compact('filme', 'generos'));

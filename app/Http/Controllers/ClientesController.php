@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Storage;
 
 class ClientesController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Cliente::class, 'cliente');
+    }
     /**
      * Display a listing of the resource.
      */

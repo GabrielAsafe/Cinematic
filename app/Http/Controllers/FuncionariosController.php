@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Storage;
 
 class FuncionariosController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, 'funcionario');
+    }
     /**
      * Display a listing of the resource.
      */
