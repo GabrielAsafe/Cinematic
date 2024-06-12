@@ -18,10 +18,12 @@
                 @include('users.shared.fields', ['user' => $cliente->user, 'readonlyData' => true])
                 @include('clientes.shared.fields', ['cliente' => $cliente, 'readonlyData' => true])
                 <div class="my-1 d-flex justify-content-end">
+                    @can('delete', $cliente)
                     <button type="button" name="delete" class="btn btn-danger" data-bs-toggle="modal"
                         data-bs-target="#confirmationModal">
                         Apagar cliente
                     </button>
+                    @endcan
                     <a href="{{ route('clientes.edit', ['cliente' => $cliente]) }}" class="btn btn-secondary ms-3">
                         Alterar Perfil
                     </a>
