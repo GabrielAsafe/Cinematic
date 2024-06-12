@@ -4,7 +4,7 @@
             <th>Sala</th>
             <th>Data</th>
             <th>Horario Inicio</th>
-            <th>Esgotada</th>
+            <th>Estado</th>
             @if ($showDetail)
                 <th class="button-icon-col"></th>
             @endif
@@ -30,11 +30,11 @@
                 <td>{{ $sessao->horario_inicio }}</td>
                 @if ($sessao->bilhetes->count() == $sessao->salaRef->lugares->count())
                     <td>
-                        <p>&#x2714;</p>
+                        <p>Esgotado</p>
                     </td>
                 @else
                     <td>
-                        <p>&#x2716;</p>
+                        <p>Não Esgotado</p>
                     </td>
                 @endif
                 @if ($showDetail && $sessao->bilhetes->count() != $sessao->salaRef->lugares->count())
