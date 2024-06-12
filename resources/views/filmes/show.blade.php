@@ -28,10 +28,12 @@
                 'generos' => $generos,
                 'readonlyData' => true,
             ])
-            <div class="my-4 d-flex justify-content-end">
-                <a href="{{ route('filmes.edit', ['filme' => $filme]) }}" class="btn btn-primary ms-3">Alterar Filme</a>
-                <!--botão de alterar filme-->
-            </div> 
+            @can('update', $filme)
+                <div class="my-4 d-flex justify-content-end">
+                    <a href="{{ route('filmes.edit', ['filme' => $filme]) }}" class="btn btn-primary ms-3">Alterar Filme</a>
+                    <!--botão de alterar filme-->
+                </div>
+            @endcan
         </div>
         <div class="ps-2 mt-5 mt-md-1 d-flex mx-auto flex-column align-items-center justify-content-between"
             style="min-width:260px; max-width:260px;">
@@ -61,8 +63,8 @@
             'showDelete' => true,
             'showMenageSession' => $showMenageSession,
             'showEsgotada' => true,
-            'showSelect' => false
+            'showSelect' => false,
         ])
-        </div>
+    </div>
 
-    @endsection
+@endsection
