@@ -70,7 +70,6 @@ class ClientesController extends Controller
             $user->tipo = 'C';
             $user->name = $formData['name'];
             $user->email = $formData['email'];
-            $user->bloqueado = $formData['bloqueado'];
             $user->save();
             if ($request->hasFile('file_foto')) {
                 if ($user->foto_url) {
@@ -82,10 +81,8 @@ class ClientesController extends Controller
             }
             return $cliente;
         });
-        $url = route('clientes.show', ['cliente' => $cliente]);
-        $htmlMessage = "Cliente <a href='$url'>#{$cliente->id}</a>
-                        <strong>\"{$cliente->user->name}\"</strong> foi alterado com sucesso!";
-        return redirect()->route('clientes.index')
+        $htmlMessage = "O Perfil foi alterado com sucesso!";
+        return redirect()->route('home')
             ->with('alert-msg', $htmlMessage)
             ->with('alert-type', 'success');
     }
