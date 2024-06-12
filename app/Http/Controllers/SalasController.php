@@ -47,22 +47,30 @@ class SalasController extends Controller
 
         $quantidade = $request['quantidade'];
 
-        for ($i = 1; $i <= $quantidade; $i++) {
-            $fila = chr(64 + ceil($i / 10)); // ceil avança para o integer + próximo
-            $posicao = ($i - 1) % 10 + 1; // 1 - 1 = 0 %10 = 0 +1 = 1 | 2 -1 = 1 %10 = 1 +1 = 2
-
-            // Create the lugar
-            $newSala->lugares()->create([
-                'fila' => $fila,
-                'posicao' => $posicao,
-            ]);
+        if(!isset($quantidade)){
+            $quantidade = 0;
         }
+
+        $this->criarLugares($newSala, $quantidade);
 
         $url = route('salas.show', ['sala' => $newSala]);
         $htmlMessage = "Sala <a href='$url'>#{$newSala->id}</a><strong>\"{$newSala->nome}\"</strong> foi criada com sucesso!";
         return redirect()->route('salas.index')
             ->with('alert-msg', $htmlMessage)
             ->with('alert-type', 'success');
+    }
+
+    public function criarLugares(Sala $sala, int $quantidade){
+
+        for ($i = 1; $i <= $quantidade; $i++) {
+            $fila = chr(64 + ceil($i / 20)); // ceil avança para o integer + próximo
+            $posicao = ($i - 1) % 20 + 1; // 1 - 1 = 0 % 20 = 0 + 1 = 1 | 2 - 1 = 1 % 20 = 1 + 1 = 2
+
+            $sala->lugares()->create([
+                'fila' => $fila,
+                'posicao' => $posicao,
+            ]);
+        }
     }
 
     /**
@@ -116,4 +124,6 @@ class SalasController extends Controller
             ->with('alert-msg', $htmlMessage)
             ->with('alert-type', $alertType);
     }
+
+
 }

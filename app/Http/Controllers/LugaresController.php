@@ -32,16 +32,40 @@ class LugaresController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(LugarRequest $request)
+    public function store(Request $request)
     {
-        $newLugar = Lugar::create(array_merge($request->validated(), ['sala_id' => $request['sala_id']]));
         $sala = Sala::find($request['sala_id']);
+        $quantidade = $request['quantidade'];
 
-        $htmlMessage = "Lugar <strong>\"{$newLugar->fila}{$newLugar->posicao}\"</strong> foi criado com sucesso!";
-        return redirect()->route('salas.edit',['sala' => $sala])
+
+        $ultimoLugar = $sala->lugares()->orderBy('fila', 'desc')->orderBy('posicao', 'desc')->first();
+
+        if ($ultimoLugar) {
+            $ultimaFila = ord($ultimoLugar->fila) - 64;
+            $ultimaPosicao = $ultimoLugar->posicao;
+            $start = ($ultimaFila - 1) * 20 + $ultimaPosicao;
+        } else {
+            $start = 0;
+        }
+
+        for ($i = $start + 1; $i <= $start + $quantidade; $i++) {
+            $fila = chr(64 + ceil($i / 20));
+            $posicao = ($i - 1) % 20 + 1;
+
+            // Create the lugar
+            $sala->lugares()->create([
+                'fila' => $fila,
+                'posicao' => $posicao,
+            ]);
+        }
+
+        $htmlMessage = "<strong>{$quantidade}</strong> lugares foram criados com sucesso!";
+        return redirect()->route('salas.edit', ['sala' => $sala])
             ->with('alert-msg', $htmlMessage)
             ->with('alert-type', 'success');
     }
+
+
 
     /**
      * Display the specified resource.

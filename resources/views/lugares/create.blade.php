@@ -16,31 +16,10 @@
             <div class="flex-grow-1 pe-2">
                 <input type="hidden" name="sala_id" value="{{ $sala_id }}">
                 <div class="mb-3 form-floating">
-                    <select class="form-select @error('fila') is-invalid @enderror" name="fila" id="inputFila">
-                        <option value="">Selecione uma fila</option>
-                        @for ($i = 65; $i <= 90; $i++)
-                            <option value="{{ chr($i) }}" {{ old('fila') == chr($i) ? 'selected' : '' }}>
-                                {{ chr($i) }}</option>
-                        @endfor
-                    </select>
-                    <label for="inputFila" class="form-label">Fila</label>
-                    @error('fila')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <div class="mb-3 form-floating">
-                    <select class="form-select @error('posicao') is-invalid @enderror" name="posicao" id="inputPosicao">
-                        <option value="">Selecione uma posição</option>
-                        @for ($i = 1; $i <= 10; $i++)
-                            <option value="{{ $i }}" {{ old('posicao') == $i ? 'selected' : '' }}>
-                                {{ $i }}</option>
-                        @endfor
-                    </select>
-                    <label for="inputPosicao" class="form-label">Posição</label>
-                    @error('posicao')
+                    <input type="number" class="form-control @error('quantidade') is-invalid @enderror" name="quantidade"
+                        id="inputQuantidade">
+                    <label for="inputQuantidade" class="form-label">Quantidade de Lugares</label>
+                    @error('quantidade')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
