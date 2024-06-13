@@ -170,13 +170,15 @@ class adminsController extends Controller
         }
         if ($admin->bloqueado == 1) {
             $admin->bloqueado = 0;
+            $estado = "desbloqueado";
         } else {
             $admin->bloqueado = 1;
+            $estado = "bloqueado";
         }
         $admin->save();
 
         return redirect()->route('admins.index', ['admin' => $admin])
-            ->with('alert-msg', 'Admin "' . $admin->name . '" foi bloqueado!')
+            ->with('alert-msg', 'Admin "' . $admin->name . '" foi ' . $estado . '!')
             ->with('alert-type', 'success');
     }
 }

@@ -14,12 +14,15 @@ class SalaRequest extends FormRequest
     {
         return [
             'nome' => 'required',
+            'quantidade' => 'sometimes|numeric|min:0',
         ];
     }
     public function messages(): array
     {
         return [
             'nome.required' => 'O nome é obrigatório',
+            'quantidade.numeric' => 'A quantidade deve ser um número',
+            'quantidade.min' => 'A quantidade não pode ser menor que 0',
         ];
     }
 }

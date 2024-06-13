@@ -131,13 +131,15 @@ class ClientesController extends Controller
     {
         if ($cliente->user->bloqueado == 1) {
             $cliente->user->bloqueado = 0;
+            $estado = "desbloqueado";
         } else {
             $cliente->user->bloqueado = 1;
+            $estado = "bloqueado";
         }
         $cliente->user->save();
 
         return redirect()->route('clientes.index', ['cliente' => $cliente])
-            ->with('alert-msg', 'Cliente "' . $cliente->user->name . '" foi bloqueado!')
+            ->with('alert-msg', 'Cliente "' . $cliente->user->name . '" foi ' . $estado . '!')
             ->with('alert-type', 'success');
     }
 }

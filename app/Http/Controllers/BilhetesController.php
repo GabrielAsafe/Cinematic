@@ -10,10 +10,7 @@ use App\Models\Recibo;
 use App\Models\Sala;
 use App\Models\Sessao;
 use Dompdf\Dompdf;
-use Illuminate\Http\Request;
-use PhpParser\Node\Expr\Cast\Object_;
 use Illuminate\Support\Facades\Auth;
-use function Symfony\Component\String\b;
 
 // Add this line
 
@@ -44,7 +41,7 @@ class BilhetesController extends Controller
     public function show($id)
     {
         $bilhete = Bilhete::findOrFail($id);
-        $sessao=Sessao::find($bilhete->sessao_id);
+        $sessao = Sessao::find($bilhete->sessao_id);
 
         $filme = Filme::find($sessao->filme_id);
         $sala = Sala::find($sessao->sala_id);
@@ -52,20 +49,20 @@ class BilhetesController extends Controller
         $recibo = Recibo::find($bilhete->recibo_id);
 
 
-        return view('bilhetes.show', ['recibo' => $recibo, 'bilhete' => $bilhete,
+        return view('bilhetes.show', [
+            'recibo' => $recibo, 'bilhete' => $bilhete,
             'fila' => $lugar->fila, 'posicao' => $lugar->posicao,
             'nome_sala' => $sala->nome, 'titulo' => $filme->titulo,
-            'sessao'=>$sessao
+            'sessao' => $sessao
         ])->render();
 
-        return view('bilhetes.show', compact('bilhete','sessao','filme','sala','lugar','recibo','fila','posicao','nome_sala'));
+        return view('bilhetes.show', compact('bilhete', 'sessao', 'filme', 'sala', 'lugar', 'recibo', 'fila', 'posicao', 'nome_sala'));
     }
 
 
-// Generate PDF
+    // Generate PDF
     public static function createPDF(Bilhete $bilhete)
     {
-
         //podia ser de boas mas o corno pede essas merdas aqui para a sub-section do bilhete
         $sessao = Sessao::find($bilhete->sessao_id);
         $filme = Filme::find($sessao->filme_id);
@@ -74,30 +71,41 @@ class BilhetesController extends Controller
         $recibo = Recibo::find($bilhete->recibo_id);
 
 
-       $QRC=  QRcodeController::generateCode($bilhete->id);
+        $QRC =  QRcodeController::generateCode($bilhete->id);
 
-
-
-
+        $user = Auth::user();
+        $photoUrl = $user->fullPhotoUrl;
 
         //envio para a view os dados que vão ser renderizados
-        $html = view('mail.pdf', ['recibo' => $recibo, 'bilhete' => $bilhete,
-            'fila' => $lugar->fila, 'posicao' => $lugar->posicao,
-            'nome_sala' => $sala->nome, 'titulo' => $filme->titulo,
-            'sessao'=>$sessao, 'qrCode' =>$QRC
+        $html = view('mail.pdf', [
+            'recibo' => $recibo,
+            'bilhete' => $bilhete,
+            'fila' => $lugar->fila,
+            'posicao' => $lugar->posicao,
+            'nome_sala' => $sala->nome,
+            'titulo' => $filme->titulo,
+            'sessao' => $sessao,
+            'qrCode' => $QRC,
+            'photoUrl' => $photoUrl
         ])->render();
-
-        //a biblioteca de pdf é uma merda. não renderiza as imagens então to a retornar ela direto
-        return $html;
 
 
         //crio o pdf. nem adianta procurar pq não tem documentação
-        $dompdf = new Dompdf();
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
-        $dompdf->render();
-        return $dompdf->stream('bilhete.pdf', ['Attachment' => false]);
+        $dompdf = new Dompdf(); // Instancia um novo objeto Dompdf
+        $options = $dompdf->getOptions(); // Obtém as opções atuais do Dompdf
+
+        $options->set('isHtml5ParserEnabled', true); // Habilita o parser HTML5
+        $options->set('isRemoteEnabled', true); // Permite carregar recursos remotos (como imagens) no PDF
+
+        $dompdf->setOptions($options); // Aplica as opções configuradas ao objeto Dompdf
+
+        $dompdf->loadHtml($html); // Carrega o HTML que será utilizado para gerar o PDF
+
+        $dompdf->setPaper('A4', 'portrait'); // Define o tamanho do papel do PDF como A4 no modo retrato (portrait)
+
+        $dompdf->render(); // Renderiza o PDF com base no HTML fornecido
+
+        return $dompdf->stream('bilhete.pdf', ['Attachment' => true]); // Retorna o PDF renderizado para ser visualizado no navegador com o nome 'bilhete.pdf' e opção de download ativada
+
     }
-
-
 }

@@ -40,7 +40,7 @@
 <body>
 <div class="ticket">
     <div class="d-flex align-items-center mb-3">
-        <img src="{{ asset(Auth::user()->fullPhotoUrl) }}" alt="(Avatar)" class="bg-dark rounded-circle mr-3" width="45" height="45">
+        <img src="{{ $photoUrl }}" alt="(Avatar)" class="bg-dark rounded-circle mr-3" width="45" height="45">
 
         <h5>{{ Auth::user()->name }}</h5>
     </div>

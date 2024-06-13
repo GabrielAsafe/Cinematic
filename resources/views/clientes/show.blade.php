@@ -24,9 +24,11 @@
                         Apagar cliente
                     </button>
                     @endcan
+                    @can('update', $cliente)
                     <a href="{{ route('clientes.edit', ['cliente' => $cliente]) }}" class="btn btn-secondary ms-3">
                         Alterar Perfil
                     </a>
+                    @endcan
                 </div>
             </div>
             <div class="ps-2 mt-5 mt-md-1 d-flex mx-auto flex-column align-items-center justify-content-between"

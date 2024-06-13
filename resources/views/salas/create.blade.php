@@ -20,7 +20,7 @@
                 ])
                 <div class="mb-3 form-floating">
                     <input type="number" class="form-control @error('quantidade') is-invalid @enderror" name="quantidade"
-                        id="inputQuantidade">
+                        id="inputQuantidade" value="0">
                     <label for="inputQuantidade" class="form-label">Quantidade de Lugares</label>
                     @error('quantidade')
                         <div class="invalid-feedback">

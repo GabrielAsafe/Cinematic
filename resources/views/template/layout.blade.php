@@ -17,10 +17,10 @@
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
         <a class="navbar-brand " href="{{ route('home') }}">
-            <img src="/img/logo.png" alt="Logo" class="bg-primary" width="140" height="52">
+            <img src="/img/logo.png" alt="Logo" class="bg-dark" width="140" height="52">
         </a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-3 me-lg-0" id="sidebarToggle" href="#"><i
@@ -82,7 +82,7 @@
     </nav> <!-- merdas do loging-->
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark bg-primary" id="sidenavAccordion">
+            <nav class="sb-sidenav accordion sb-sidenav-dark bg-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <a class="nav-link {{ Route::currentRouteName() == 'filmes.index' ? 'active' : '' }}"
@@ -99,7 +99,7 @@
                                 data-bs-target="#collapseCurricular" aria-expanded="false"
                                 aria-controls="collapseCurricular">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Usuários
+                                Utilizadores
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseCurricular" aria-labelledby="headingOne"

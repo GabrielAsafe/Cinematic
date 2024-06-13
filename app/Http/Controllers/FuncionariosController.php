@@ -161,14 +161,16 @@ class FuncionariosController extends Controller
     {
         if ($funcionario->bloqueado == 1) {
             $funcionario->bloqueado = 0;
+            $estado = "desbloqueado";
         } else {
             $funcionario->bloqueado = 1;
+            $estado = "bloqueado";
         }
 
         $funcionario->save();
 
         return redirect()->route('funcionarios.index', ['funcionario' => $funcionario])
-            ->with('alert-msg', 'Funcionario "' . $funcionario->name . '" foi bloqueado!')
+            ->with('alert-msg', 'Funcionario "' . $funcionario->name . '" foi ' . $estado . '!')
             ->with('alert-type', 'success');
     }
 }

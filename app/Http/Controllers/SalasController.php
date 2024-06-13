@@ -51,10 +51,6 @@ class SalasController extends Controller
 
         $quantidade = $request['quantidade'];
 
-        if(!isset($quantidade)){
-            $quantidade = 0;
-        }
-
         $this->criarLugares($newSala, $quantidade);
 
         $url = route('salas.show', ['sala' => $newSala]);
