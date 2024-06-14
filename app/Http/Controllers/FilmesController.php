@@ -228,4 +228,8 @@ class FilmesController extends Controller
             ->with('alert-msg', 'Cartaz do filme "' . $filme->titulo . '" foi removido!')
             ->with('alert-type', 'success');
     }
+
+    public function estatistica (Filme $filme) : RedirectResponse {
+
+    }
 }

@@ -14,6 +14,7 @@ use App\Http\Controllers\LugaresController;
 use App\Http\Controllers\RecibosController;
 use App\Http\Controllers\SalasController;
 use App\Http\Controllers\SessoesController;
+use App\Http\Controllers\EstatisticaController;
 use Illuminate\Support\Facades\Auth;
 
 use App\Mail\MyTestEmail;
@@ -43,6 +44,7 @@ Route::post('filmes/{filme}/novaSessao', [SessoesController::class, 'store'])->n
 Route::get('filmes/{filme}/editarSessao', [SessoesController::class, 'edit'])->name('filmes.sessao.edit');
 Route::put('filmes/{filme}/editarSessao', [SessoesController::class, 'update'])->name('filmes.sessao.update');
 Route::delete('/filmes/{filme}/apagarSessao/{sessao}', [SessoesController::class, 'destroy'])->name('filmes.sessao.destroy');
+Route::get('/estatisticas', [EstatisticaController::class, 'index'])->name('estatisticas.index');
 
 Route::get('/sessoes/{sessaoId}/lugares-vazios', [SessoesController::class, 'getLugaresVazios'])->name('sessoes.getLugaresVazios');
 Route::get('/sessoes/validarBilhetes/{sessao}', [SessoesController::class, 'validarBilhetes'])->name('sessoes.validarBilhetes');
