@@ -118,6 +118,13 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-house"></i></div>
                                 Salas
                             </a>
+
+
+                            <a class="nav-link {{ Route::currentRouteName() == 'configuracao.index' ? 'active' : '' }}"
+                               href="{{ route('configuracao.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fab fa-amazon-pay"></i></div>
+                                Preço bilhete
+                            </a>
                         @endif
                         <!-- essa parte deveria aparecer para todos-->
 

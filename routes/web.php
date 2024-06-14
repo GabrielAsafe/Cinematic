@@ -3,6 +3,7 @@
 use App\Http\Controllers\adminsController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ConfigurationController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\BilhetesController;
@@ -58,6 +59,9 @@ Route::resource('recibos', RecibosController::class);//tem todos os comandos de 
 Route::resource('salas', SalasController::class);//tem todos os comandos de crud associados
 
 Route::resource('sessoes', SessoesController::class);//tem todos os comandos de crud associados
+
+
+Route::resource('configuracao', ConfigurationController::class);//tem todos os comandos de crud associados
 
 
 Auth::routes(['verify' => true]);

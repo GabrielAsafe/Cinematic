@@ -11,7 +11,7 @@
 @endsection
 
 @section('main')
-    <form id="form_filme" novalidate class="needs-validation" method="POST"
+    <form id="form_sala" novalidate class="needs-validation" method="POST"
         action="{{ route('salas.update', ['sala' => $sala]) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -24,7 +24,7 @@
                 ])
 
                 <div class="my-1 d-flex justify-content-start">
-                    <button type="submit" class="btn btn-primary" name="ok" id="form_filme">Guardar
+                    <button type="submit" class="btn btn-primary" name="ok" id="form_sala">Guardar
                         Alterações</button>
                     <a href="{{ route('salas.index', ['sala' => $sala]) }}" class="btn btn-secondary ms-3">Cancelar</a>
                 </div>
