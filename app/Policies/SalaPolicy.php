@@ -11,7 +11,7 @@ class SalaPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
         return $user->tipo === 'A';
     }
@@ -19,7 +19,7 @@ class SalaPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Sala $sala): bool
+    public function view(?User $user, Sala $sala): bool
     {
         return $user->tipo === 'A';
     }

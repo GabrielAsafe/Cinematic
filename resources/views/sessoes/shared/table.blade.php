@@ -60,11 +60,14 @@
                     <i class="fa fa-address-card"></i></a></td>
             @endif
 
+            @can('update', $filme)
             @if ($showEdit)
             <td class="button-icon-col"><a class="btn btn-dark" href="{{ route('filmes.sessao.update', ['filme' => $filme]) }}">
                     <i class="fas fa-edit"></i></a></td>
             @endif
+            @endcan
             <!--essa linha não vai ser executara pois em filmes.show essa variável está a false-->
+            @can('delete', $filme)
             @if ($showDelete)
             <td class="button-icon-col">
                 <form method="POST" action="{{ route('filmes.sessao.destroy', ['filme' => $filme, 'sessao' => $sessao]) }}">
@@ -75,6 +78,7 @@
                 </form>
             </td>
             @endif
+            @endcan
 
         </tr>
         @endforeach

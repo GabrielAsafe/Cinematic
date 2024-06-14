@@ -20,7 +20,7 @@
             'showDelete' => false,
             'showMenageSession' => false,
             'showEsgotada' => false,
-            'showSelect' => true
+            'showSelect' => false
         ])
     <form method="POST" action="{{ route('filmes.sessao.store', ['filme' => $filme]) }}" enctype="multipart/form-data">
         @csrf

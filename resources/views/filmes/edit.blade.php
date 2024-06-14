@@ -24,6 +24,7 @@
 
                 <div class="my-1 d-flex justify-content-start">
                     <button type="submit" class="btn btn-primary" name="ok" id="form_filme">Guardar Alterações</button>
+                    <a href="{{ route('filmes.sessao.create', ['filme' => $filme]) }}" class="btn btn-secondary ms-3">Criar nova sessão</a>
                     <a href="{{ route('filmes.index', ['filme' => $filme]) }}" class="btn btn-secondary ms-3">Cancelar</a>
                 </div>
             </div>

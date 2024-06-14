@@ -18,6 +18,11 @@ use Illuminate\Support\Facades\DB;
 class SessoesController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->authorizeResource(Filme::class, 'filme');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -40,8 +45,6 @@ class SessoesController extends Controller
         //print_r($formData);
         //die();
         //Sessao::create($formData);
-
-        $this->criarLugares($newSala, $quantidade);
 
         $url = route('filmes.show', ['filme' => $filme]);
         $htmlMessage = "Sessão <a href='$url'>#{$newSessao->id}</a><strong>\"{$filme->titulo}\"</strong> foi criada com sucesso!";
